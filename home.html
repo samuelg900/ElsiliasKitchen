@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="home.css">
+
+    <title>Home</title>
+
+    
+    <script src="home_script.js"></script>
+</head>
+
+<body>
+<div class="body_content">
+     <div class="backgroud_container">
+        <img src="homepic.png">
+    </div>
+
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+
+        <div class="image_viewer_window" id="image_viewer_window">
+            <img class="image_viewer" src="">
+            <div class="image_icon_container">
+                <span class="close_icon" onclick="closeImageViewer()" alt="close">&times;</span>
+            </div>
+        </div>
+
+        <script>
+                        function closeImageViewer() {
+                const imageViewer = document.getElementById('image_viewer_window');
+                imageViewer.style.display = 'none';
+            }
+
+            function openImageViewer(imageSrc) {
+                document.querySelector('.image_viewer').src = imageSrc;
+                document.getElementById('image_viewer_window').style.display = 'block';
+
+            }
+
+            window.addEventListener('keydown', function (event) {
+
+                // Example: Close modal with Escape key
+                if (event.key === 'Escape') {
+                    if (document.getElementById('image_viewer_window').style.display === 'block') {
+                        document.getElementById('image_viewer_window').style.display = 'none';
+                    }
+                }
+            });
+
+        </script>
+        
+
+    <script>
+
+        const menuItems = [
+    {
+        img: "moro.png",
+        name: "Moro",
+        desc: "More de guandules verdes.",
+        type: "Arroz"
+    },
+    {
+        img: "arrozconbacon.png",
+        name: "Arroz Con Bacon",
+        desc: "Arroz blaco con bacon y pimientos.",
+        type: "Arroz"
+    },
+    {
+        img: "pernil.png",
+        name: "Pernil",
+        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        type: "Carne"
+    },
+    
+    {
+        img: "polloconvegetales.png",
+        name: "Pollo con Vegetales",
+        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        type: "Carne"
+    },
+    
+    {
+        img: "polloguisado.png",
+        name: "Pollo Guisado",
+        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        type: "Carne"
+    },
+
+    {
+        img: "pollohorneado.png",
+        name: "Pollo Horneado",
+        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        type: "Carne"
+    },
+    {
+        img: "picadera.png",
+        name: "Picadera",
+        desc: "Traditional Dominican stew with meat, root vegetables, and spices.",
+        type: "Picadera"
+    },
+    {
+        img: "pastadecoditos.png",
+        name: "Pasta de Coditos Con Pollo",
+        desc: "Pasta de coditos con pollo y vegetales.",
+        type: "Pasta"
+    },
+    {
+        img: "pica.png",
+        name:"Picadera 2",
+        desc: "Pasta de coditos con pollo y vegetales.",
+        type: "Picadera"
+    },
+    {
+        img: "macaronisalad.png",
+        name:"Macaroni Salad",
+        desc: "Pasta de coditos con pollo y vegetales.",
+        type: "Pasta"
+    },
+    {
+        img: "arrozblanco.png",
+        name:"Arroz Blanco",
+        desc: "Pasta de coditos con pollo y vegetales.",
+        type: "Arroz"
+    }
+];
+
+</script>
+
+    <div class="menu" id="menu">
+            <h1>Arroz</h1>
+            <script>makeMenu(menuItems,"menu", "Arroz");</script>
+            <h1>Carne</h1>
+            <script>makeMenu(menuItems,"menu", "Carne");</script>
+            <h1>Pasta</h1>
+            <script>makeMenu(menuItems,"menu", "Pasta");</script>
+            <h1>Picadera</h1>
+            <script>makeMenu(menuItems,"menu", "Picadera");</script>
+    </div>
+
+</body>
+
+</html>
