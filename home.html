@@ -15,8 +15,14 @@
 
 <body>
 <div class="body_content">
+
+    <div class="top_nav">
+       <span class="material-symbols-outlined cart_icon">shopping_cart</span> 
+    </div>
+
+
      <div class="backgroud_container">
-        <img src="homepic.png">
+        <img src="banner.png">
     </div>
 
     <br>
@@ -54,94 +60,181 @@
 
         </script>
         
-
+<!-- https://www.figma.com/community/file/1294173080512093987/food-website-design -->
     <script>
 
         const menuItems = [
     {
-        img: "moro.png",
+        img: "1moro.png",
         name: "Moro",
-        desc: "More de guandules verdes.",
+        desc: "Yellow rice cooked with pigeon peas",
         type: "Arroz"
     },
     {
-        img: "arrozconbacon.png",
+        img: "1arrozconbacon.png",
         name: "Arroz Con Bacon",
-        desc: "Arroz blaco con bacon y pimientos.",
+        desc: "White rice with bacon",
         type: "Arroz"
     },
     {
-        img: "pernil.png",
+        img: "1pernil.png", /*-----------------*/
         name: "Pernil",
-        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        desc: "Slow-roasted pork shoulder, seasoned with garlic, oregano, and citrus, cooked until tender with crispy skin",
         type: "Carne"
     },
     
     {
-        img: "polloconvegetales.png",
-        name: "Pollo con Vegetales",
-        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        img: "1polloconvegetales.png",
+        name: "Pollo Con Vegetales",
+        desc: "Diced chicken with vegetables",
         type: "Carne"
     },
     
     {
-        img: "polloguisado.png",
+        img: "1polloguisado.png",
         name: "Pollo Guisado",
-        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        desc: "Chicken stewed in a tomato-based sauce",
         type: "Carne"
     },
 
     {
-        img: "pollohorneado.png",
+        img: "1pollohorneado.png",
         name: "Pollo Horneado",
-        desc: "Twice-fried green plantains served with garlic dipping sauce.",
+        desc: "Oven-roasted chicken",
         type: "Carne"
     },
     {
-        img: "picadera.png",
+        img: "1picadera.png",
         name: "Picadera",
-        desc: "Traditional Dominican stew with meat, root vegetables, and spices.",
+        desc: "Assortment of mini empanadas, kibbeh, and etc",
         type: "Picadera"
     },
     {
-        img: "pastadecoditos.png",
+        img: "1pastadecoditos.png",
         name: "Pasta de Coditos Con Pollo",
-        desc: "Pasta de coditos con pollo y vegetales.",
+        desc: "Macaroni pasta with chicken",
         type: "Pasta"
     },
     {
-        img: "pica.png",
+        img: "1pica.png",
         name:"Picadera 2",
-        desc: "Pasta de coditos con pollo y vegetales.",
+        desc: "Assortment of empanadas, potatoes balls with beef, and etc",
         type: "Picadera"
     },
     {
-        img: "macaronisalad.png",
+        img: "1macaronihamsalad.png",
         name:"Macaroni Salad",
-        desc: "Pasta de coditos con pollo y vegetales.",
+        desc: "Macaroni salad with ham",
         type: "Pasta"
     },
     {
-        img: "arrozblanco.png",
+        img: "1arrozblanco.png",
         name:"Arroz Blanco",
-        desc: "Pasta de coditos con pollo y vegetales.",
+        desc: "Steamed white rice, light and fluffy",
         type: "Arroz"
+    },
+    {
+        img: "1maiz.png",
+        name:"Arroz Con Maiz",
+        desc: "Yellow rice with corn",
+        type: "Arroz"
+    },
+    {
+        img: "1yuca.png",
+        name:"Yuca",
+        desc: "Boiled cassava topped with pickled red onions",
+        type: "Viveres"
+    },    
+    {
+        img: "1picadera3.png",
+        name:"Picadera 3",
+        desc: "Assortment of mini empanadas, kippeh, sausages, chicken, chulitos and tostones",
+        type: "Picadera"
+    },
+    {
+        img: "1yuca2.png",
+        name:"Yuca 2",
+        desc: "Boiled cassava topped with pickled red onions",
+        type: "Viveres"
     }
 ];
 
 </script>
 
+    <!-- <style>
+        .item_container{
+            /* display: flex;
+            flex-direction: row; */
+    display: grid;
+    grid-template-columns: auto auto auto;
+        }
+
+    </style> -->
+
 
     <div class="menu" id="menu">
-            <h1>Arroz</h1>
-            <script>makeMenu(menuItems,"menu", "Arroz");</script>
-            <h1>Carne</h1>
-            <script>makeMenu(menuItems,"menu", "Carne");</script>
-            <h1>Pasta</h1>
-            <script>makeMenu(menuItems,"menu", "Pasta");</script>
-            <h1>Picadera</h1>
-            <script>makeMenu(menuItems,"menu", "Picadera");</script>
-    </div>
+  <section class="category">
+    <h1>Arroz</h1>
+    <div class="tempContainer" id="menu-arroz"></div>
+  </section>
+
+  <section class="category">
+    <h1>Carne</h1>
+    <div class="tempContainer" id="menu-carne"></div>
+  </section>
+
+  <section class="category">
+    <h1>Pasta</h1>
+    <div class="tempContainer" id="menu-pasta"></div>
+  </section>
+
+  <section class="category">
+    <h1>Picadera</h1>
+    <div class="tempContainer" id="menu-picadera"></div>
+  </section>
+
+  <section class="category">
+    <h1>Viveres</h1>
+    <div class="tempContainer" id="menu-viveres"></div>
+  </section>
+</div>
+
+
+<script>
+  makeMenu(menuItems, "menu-arroz", "Arroz");
+  makeMenu(menuItems, "menu-carne", "Carne");
+  makeMenu(menuItems, "menu-pasta", "Pasta");
+  makeMenu(menuItems, "menu-picadera", "Picadera");
+  makeMenu(menuItems, "menu-viveres", "Viveres");
+</script>
+
+<!-- 
+    <div class="menu" id="menu">
+        <h1>Arroz</h1>
+        <div class="tempContainer">
+        <script>makeMenu(menuItems,"menu", "Arroz");</script>
+        </div>
+
+        <h1>Carne</h1>            
+        <div class="tempContainer">
+        <script>makeMenu(menuItems,"menu", "Carne");</script>
+        </div>
+
+        <h1>Pasta</h1>
+        <div class="tempContainer">
+        <script>makeMenu(menuItems,"menu", "Pasta");</script>
+        </div>
+
+        <h1>Picadera</h1>
+        <div class="tempContainer">
+        <script>makeMenu(menuItems,"menu", "Picadera");</script>
+        </div>
+
+        <h1>Viveres</h1>
+        <div class="tempContainer">
+        <script>makeMenu(menuItems,"menu", "Viveres");</script>
+        </div>
+    </div> -->
 
 </body>
 

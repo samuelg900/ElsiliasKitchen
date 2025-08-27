@@ -1,78 +1,131 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #F8F8F8;
+    /* background-color: #cecece; */
+    background-color: #f1f8fb;
     min-width: 400px;
+    justify-items: center;
 }
 
 .body_content {
+    width: 100%;
     max-width: 1200px;
-    /* min-width: 460px; */
 }
 
 .backgroud_container {
+    display: flex;
     max-height: 500px;
-    overflow: hidden;
+    overflow:hidden;
 }
 
 .backgroud_container img {
     width: 100%;
+    object-fit: cover;
 }
 
 /* Menu layout */
 .menu {
-    display: grid;
-      grid-template-columns: auto auto auto;
-  gap: 20px;
-    max-width: 800px;
+    max-width: 86%;
     margin: 20px auto;
     padding: 0 20px;
 }
 
+    .top_nav{
+        width: 100%;
+        height: 54px;
+        max-width: 1200px;
+        background-color: rgb(42, 42, 42);
+        display: block;
+        position: fixed;
+        z-index: 3;
+    }
+
+
+.material-symbols-outlined {
+  color: rgb(190, 190, 190);
+}
+
+.cart_icon {
+        font-size: 28px;
+        float: right;
+        margin: 13px;
+        cursor: pointer;
+    }
+
+.category {
+  margin-bottom: 32px;
+}
+
+/* .tempContainer{
+
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-self: center;
+    background-color: green;
+    
+    max-width: 800px;
+} */
+
+.tempContainer {
+  display: grid;
+  
+    /* grid-template-columns: auto auto auto; */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 40px;
+}
+
 .menu h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+  margin: 50px auto;
+  color: #333;
+  text-align: center;
+  font-size: 48px;
 }
 
 .menu-item {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     background: #FFFFFF;
-    /* width: 100%; */
+    position: relative;
     margin-bottom: 15px;
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
 }
 
 .menu-item img {
     width: 100%;
-    /* height: 100%; */
+    border-radius: 16px 16px 0 0;
     object-fit: contain;
-        transition: 1s ease;
+    transition: 1s ease;
 }
-
 
 .menu-item img:hover {
     cursor: pointer;
-    scale: 0.95;
-    transition: scale 0.5s ease;
+    /* scale: 1.05;
+    transition: scale 0.5s ease; */
 }
 
 .menu-item-content {
-    padding: 10px;
+    margin-inline: 20px;
     flex: 1;
 }
 
 .menu-item-content h3 {
-    margin: 0 0 5px 0;
+    color: #ba783b; /* Red */
+    margin: 15px 0 0 0;
+    font-size: 26px;
 }
 
 .menu-item-content p {
-    margin: 0 0 10px 0;
-    font-size: 0.9em;
+    /* margin: 15px 0 0 0; */
+    padding-bottom: 30px;
+    font-size: 18px;
     color: #555;
 }
 
@@ -143,6 +196,10 @@ body {
 
 .checkboxDiv {
     display: flex;
+    position: absolute;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
 }
 
 .checkboxMinus,
@@ -159,8 +216,9 @@ body {
 
 .checkboxInput {
     width: 15px;
+    height: 18px;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 16px;
     margin-inline: 4px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -172,34 +230,38 @@ body {
     opacity: 0.5;
 }
 
+.clearButton{
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-left: 10px !important;
+    text-decoration: underline;
+    /* margin-left: 15px; */
+}
+
 
 @media screen and (max-width: 600px) {
 
     .menu {
-        padding: 0 10px;
+        padding: 0 20px;
+        /* margin: 0 10px; */
+        padding-bottom: 100px;
+    }
+
+    .tempContainer{
+        gap: 50px;
     }
 
 
-/* .menu-item {
-    display: flex;
-    background: white;
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-} */
-
-     .menu-item {
-        height: 200px;
-        /* width: fit-content; */
+    .menu-item {
+        width: 90%;
+        margin: auto;
     }
+
 
     .menu-item img {
-        /* align-self: center; */
-        transform: rotate(90deg);
-
-      width: 200px; /* Ensure image takes full width of container */
-      height: 100%; /* Ensure image takes full height of container */
+      
+      width: 100%; /* Ensure image takes full width of container */
+      height: fit-content; /* Ensure image takes full height of container */
       object-fit: contain; /* Scales down to fit, maintains aspect ratio */
       /* max-width: 200px;
       min-width: 200px; */

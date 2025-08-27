@@ -23,8 +23,13 @@
 
 function makeMenu(menuItems, menuContainerId, type) {
     const menuContainer = document.getElementById(menuContainerId);
+    // menuContainer.className = "tempContainer";
     // menuContainer.innerHTML = ''; // Clear existing content
     let count = 0;
+
+    
+    
+  const frag = document.createDocumentFragment();
 
     menuItems.forEach(item => {
 
@@ -65,24 +70,45 @@ function makeMenu(menuItems, menuContainerId, type) {
             plusSpan.className = 'checkboxPlus';
             plusSpan.textContent = '+';
 
+            const clear_text = document.createElement('p');
+            clear_text.className = 'clearButton';
+            clear_text.innerHTML = 'clear';
+            clear_text.style.display='none';
+
             checkboxdiv.appendChild(minusSpan);
             checkboxdiv.appendChild(input);
             checkboxdiv.appendChild(plusSpan);
+            checkboxdiv.appendChild(clear_text);
+
+            clear_text.addEventListener('click', () => {
+                input.value = 0;
+                clear_text.style.display='none';
+            });
+
 
             //click event listeners
             plusSpan.addEventListener('click', () => {
                 input.value = (parseInt(input.value) === 3) ? 3 : parseInt(input.value) + 1;
+                  if(parseInt(input.value) !== 0)
+                    clear_text.style.display='block';
+                  else
+                    clear_text.style.display='none';
             });
 
             minusSpan.addEventListener('click', () => {
                 input.value = (parseInt(input.value) === 0) ? 0 : parseInt(input.value) - 1;
+                if(parseInt(input.value) !== 0)
+                    clear_text.style.display='block';
+                  else
+                    clear_text.style.display='none';
             });
 
             menuItem.appendChild(img);
             content.appendChild(checkboxdiv);
             menuItem.appendChild(content);
-            menuContainer.appendChild(menuItem);
+            frag.appendChild(menuItem);
         }
     });
 
+    menuContainer.appendChild(frag);
 }
