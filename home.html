@@ -6,6 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat" rel="stylesheet">
 
     <title>Home</title>
 
@@ -14,16 +18,43 @@
 </head>
 
 <body>
+    
+    <div class="top_nav">
+        <div id="cart_num_id" class="num_of_orders">0</div>
+        <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span> 
+    </div> 
+     <div id="cart_contents_id" class="cart-dropdown">
+        <!-- add stuff here -->
+    </div>
+
+    <script> 
+        function openCartContents(){
+           let cart = document.getElementById("cart_contents_id");
+            if (cart.style.display === "block") {
+                cart.style.display = "none";
+            } else {
+                cart.style.display = "block";
+            }
+        }
+    </script>
+
+    <div class="conig" style="max-height: 500px; overflow: hidden;">
+        <img class="ig" style="width: 100%;" src="banner2.png">
+        <div class="p_container">
+            <p class="syncopate-bold">Elsilia's<br>Kitcken</p>
+            <p class="caveat">Comida deliciosa y Dominicana<br>de mi casa a la suya</p>
+        </div>
+    </div>
+
+
+    <script>
+        let numOfOrders=0; 
+    </script>
+
+
+
 <div class="body_content">
 
-    <div class="top_nav">
-       <span class="material-symbols-outlined cart_icon">shopping_cart</span> 
-    </div>
-
-
-     <div class="backgroud_container">
-        <img src="banner.png">
-    </div>
 
     <br>
     <br>
@@ -156,6 +187,30 @@
         name:"Yuca 2",
         desc: "Boiled cassava topped with pickled red onions",
         type: "Viveres"
+    },
+    {
+        img: "1spaghetti.png",
+        name:"Spaghetti",
+        desc: "Spaghetti with stewed ham",
+        type: "Pasta"
+    },    
+    {
+        img: "1salad.png",
+        name:"Green Salad",
+        desc: "Filler text: Assortment of mini empanadas, kippeh, sausages, chicken, chulitos and tostones",
+        type: "Pasta"
+    },
+    {
+        img: "1ribs.png",
+        name:"BBQ Ribs",
+        desc: "Filler text: Boiled cassava topped with pickled red onions",
+        type: "Carne"
+    },
+    {
+        img: "3coditos.png",
+        name:"Coditos 3",
+        desc: "Filler text: Spaghetti with stewed ham",
+        type: "Pasta"
     }
 ];
 
@@ -207,6 +262,10 @@
   makeMenu(menuItems, "menu-picadera", "Picadera");
   makeMenu(menuItems, "menu-viveres", "Viveres");
 </script>
+
+
+
+<p style="text-align: center; margin-block: 50px;">Cada bandeja es suficiente para aproximadamente 35-38 personas</p>
 
 <!-- 
     <div class="menu" id="menu">

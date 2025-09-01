@@ -81,14 +81,34 @@ function makeMenu(menuItems, menuContainerId, type) {
             checkboxdiv.appendChild(clear_text);
 
             clear_text.addEventListener('click', () => {
-                input.value = 0;
                 clear_text.style.display='none';
+                numOfOrders -= input.value;
+                input.value = 0;
+                let cartNum = document.getElementById('cart_num_id');
+                 if(cartNum.classList.contains("active") && numOfOrders == 0){
+                    cartNum.classList.remove("active");
+                  }
+                  cartNum.innerHTML = numOfOrders;
             });
 
 
             //click event listeners
             plusSpan.addEventListener('click', () => {
-                input.value = (parseInt(input.value) === 3) ? 3 : parseInt(input.value) + 1;
+                // input.value = (parseInt(input.value) === 3) ? 3 : parseInt(input.value) + 1;
+                if(parseInt(input.value) === 3){
+                  input.value = 3;
+                }else{
+                  input.value =parseInt(input.value) + 1;
+                  numOfOrders += 1;
+                   //add active class
+                  let cartNum = document.getElementById('cart_num_id');
+                  if(!cartNum.classList.contains("active")){
+                    cartNum.classList.add("active");
+                  }
+                    cartNum.innerHTML= numOfOrders;
+                 
+                }
+
                   if(parseInt(input.value) !== 0)
                     clear_text.style.display='block';
                   else
@@ -96,7 +116,20 @@ function makeMenu(menuItems, menuContainerId, type) {
             });
 
             minusSpan.addEventListener('click', () => {
-                input.value = (parseInt(input.value) === 0) ? 0 : parseInt(input.value) - 1;
+                // input.value = (parseInt(input.value) === 0) ? 0 : parseInt(input.value) - 1;
+                 if(parseInt(input.value) === 0){
+                  input.value = 0;
+                }else{
+                  input.value = parseInt(input.value) - 1;
+                  numOfOrders -= 1;
+                  //remove? active class
+                    let cartNum = document.getElementById('cart_num_id');
+                  if(numOfOrders == 0 && cartNum.classList.contains("active")){
+                    cartNum.classList.remove("active");
+                  }
+                    cartNum.innerHTML= numOfOrders;
+                }
+
                 if(parseInt(input.value) !== 0)
                     clear_text.style.display='block';
                   else
