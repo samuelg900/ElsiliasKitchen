@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -13,52 +12,322 @@
 
     <title>Home</title>
 
-    
+
     <script src="home_script.js"></script>
 </head>
 
 <body>
-    
-    <div class="top_nav">
-        <div id="cart_num_id" class="num_of_orders">0</div>
-        <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span> 
-    </div> 
-     <div id="cart_contents_id" class="cart-dropdown">
-        <!-- add stuff here -->
-    </div>
 
-    <script> 
-        function openCartContents(){
-           let cart = document.getElementById("cart_contents_id");
-            if (cart.style.display === "block") {
-                cart.style.display = "none";
+           <script>
+
+            //--------------
+
+            let cart = [];
+
+            function addToCart(id, name, image, pan_size, price, cart_button, fullpan, halfpan) {
+               
+                    
+                    if(pan_size == 2)
+                        id +=10000;
+
+                    // console.log(pan_size);
+                    // console.log(id);
+
+
+                if(cart.find(i => i.id === id)){
+                 return false;   
+                //     if(item.quantity + how_many_items == 3)
+                //         item.quantity = 3;
+                //     else if(item.quantity + how_many_items < 3)
+                //         item.quantity += how_many_items;
+                //     else{
+                //         //limited to 3 per item
+                //         return false;
+                //     }
+                }
+                // else{
+                    //first add
+                    cart.push({id, name, image, quantity: 1, pan_size, price, cart_button,fullpan, halfpan});
+                    // return true;
+                // }
+
+                // cart_button.classList.add('disableAddToCart');
+                
+                return true;
+
+
+
+                // if (item) {
+                //     if (item.quantity < 3) {
+                //         item.quantity++;
+                //     }
+                //     else{
+                //         //max quantity reached
+                //         return false;
+                //     }
+                // } else {
+                //     cart.push({id, name, image, quantity: 1 });
+                // }
+
+                // return true;
+            }
+
+
+            ///TODO: could be repurposed as clear from cart draw
+               function decreaseFromCart(id, name, image) {
+                const item = cart.find(i => i.id === id);
+
+                if (item) {
+                    if (item.quantity == 1) {
+                        cart = cart.filter(i => i.id !== id);
+                    }
+                    else{
+                        item.quantity--;
+                    }
+                }
+                else{
+                    //can't decrease item any more
+                    return false;
+                }
+
+                return true;
+            }
+
+
+            function clearFromCart(id){
+                
+                const pan_item = cart.find(i => i.id === id);
+                if(pan_item){
+
+                    if(pan_item.cart_button.classList.contains('disableAddToCart')) //it should
+                        
+                    if((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active')))
+                        pan_item.cart_button.classList.remove('disableAddToCart');
+
+                    // if(pan_item.pan_size == 1 && pan_item.cart_button.classList.contains('disableAddToCartFull'))
+                    //     pan_item.cart_button.classList.remove('disableAddToCartFull');
+                    // else if(pan_item.pan_size == 2 && pan_item.cart_button.classList.contains('disableAddToCartHalf'))
+                    //     pan_item.cart_button.classList.remove('disableAddToCartHalf');
+
+                // orderTotal -= pan_item.quantity * pan_item.price;
+                cart = cart.filter(i => i.id !== id);
+                renderCart();
+                }
+            }
+
+            //=============
+
+            </script>
+
+    <script>
+        function openCartContents() {
+
+            let carty = document.getElementById("cart_contents_id");
+
+            if (carty.style.display === "block") {
+                carty.style.display = "none";
             } else {
-                cart.style.display = "block";
+                carty.style.display = "block";
+
+                if (cart.length === 0) {
+                    document.getElementsByClassName("cart-container").item(0).style.display = "block";
+                    document.getElementsByClassName("cartContent").item(0).style.display = "none";
+                } else {
+
+                    // renderCart();
+
+                    document.getElementsByClassName("cart-container").item(0).style.display = "none";
+                    document.getElementsByClassName("cartContent").item(0).style.display = "block";
+                }
             }
         }
     </script>
 
+    <script>
+
+function updateTotal() {
+  let newTotal = 0;
+  let cartCounter = 0;
+  cart.forEach(item => {
+    newTotal += item.quantity * item.price;
+    cartCounter += item.quantity;
+  });
+
+    document.getElementById('total_of_order_id').innerHTML = `Total: $${newTotal}`;
+
+  if(cart.length != 0)
+    document.getElementById('cart_num_id').innerHTML = cartCounter;
+  else{
+    document.getElementById('cart_num_id').style.display = 'none';
+    document.getElementsByClassName("cart-container").item(0).style.display = "block";
+    document.getElementsByClassName("cartContent").item(0).style.display = "none";
+    return;
+  }
+  
+}
+
+
+        function renderCart() {
+  const cartDiv = document.getElementById('cartItemsId');
+  cartDiv.innerHTML = ''; // clear old items
+
+  cart.forEach(item => {
+
+    // Create the outer container
+    let container = document.createElement('div');
+    container.className = 'cartItemContainter';
+
+    // Left picture div
+    let left = document.createElement('div');
+    left.className = 'leftpic';
+
+    let img = document.createElement('img');
+    img.src = item.image;
+    img.alt = item.name;
+
+    let img2 = document.createElement('img');
+    img2.src = item.image;
+
+    if (item.pan_size == 2) {
+      img2.classList.add('blurred');
+      left.appendChild(img2);
+    }
+    left.appendChild(img);
+
+    // Right name/qty div
+    let right = document.createElement('div');
+    right.className = 'rightname';
+    right.style.position = "relative";
+
+    let nameP = document.createElement('p');
+    nameP.textContent = item.name;
+
+    let pane_size = document.createElement('p');
+    pane_size.classList.add('pan_text');
+    pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+
+    let qtyP = document.createElement('p');
+    qtyP.textContent = `Qty: ${item.quantity}`;
+    qtyP.style.fontSize = "14px";
+    qtyP.style.position = "absolute";
+    qtyP.style.bottom = "0";
+
+    const cartMinusSign = document.createElement('span');
+    cartMinusSign.className = 'cartMinusSign';
+    cartMinusSign.textContent = '\u2212';
+
+    const cartTrashIcon = document.createElement('span');
+    cartTrashIcon.className = 'material-symbols-outlined cartTrashIcon';
+    cartTrashIcon.textContent = 'delete';
+
+    const cartPlusSign = document.createElement('span');
+    cartPlusSign.className = 'cartPlusSign';
+    cartPlusSign.textContent = '\u002b';
+
+    const cartPlusMinusDiv = document.createElement('div');
+    cartPlusMinusDiv.className = 'cartPlusMinusDiv';
+    cartPlusMinusDiv.appendChild(cartMinusSign);
+    cartPlusMinusDiv.appendChild(cartTrashIcon);
+    cartPlusMinusDiv.appendChild(cartPlusSign);
+
+
+    cartMinusSign.addEventListener('click', () => {
+        
+        if(item.quantity === 1){
+            clearFromCart(item.id);
+            container.remove();
+        }else{
+            // item.quantity--;
+            --item.quantity;
+            qtyP.textContent = `Qty: ${item.quantity}`;
+            // renderCart();
+        }
+        updateTotal();
+    });
+
+
+    cartPlusSign.addEventListener('click', () => {
+        
+        if(item.quantity < 3){
+            ++item.quantity
+            qtyP.textContent = `Qty: ${item.quantity}`;
+            // renderCart();
+        }
+        updateTotal();
+    });
+
+    cartTrashIcon.addEventListener('click', () => { 
+        clearFromCart(item.id)
+        container.remove();
+        updateTotal();
+    });
+
+
+    right.appendChild(nameP);
+    right.appendChild(pane_size);
+    right.appendChild(qtyP);
+    right.appendChild(cartPlusMinusDiv);
+
+    // Put it all together
+    container.appendChild(left);
+    container.appendChild(right);
+
+    // Add to cart div
+    cartDiv.appendChild(container);
+  });
+
+  updateTotal();
+ 
+}
+    </script>
+
+
+    <div class="top_nav">
+        <h3 style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: aliceblue;">
+            Elsilia's Kitchen</h3>
+        <div id="cart_num_id">0</div>
+        <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span>
+    </div>
+
+    <div id="cart_contents_id">
+        <div class="cartContent">
+            <div class="cartItems" id="cartItemsId">
+            </div>
+        </div>
+        <div class="cart-container">
+            <div id="nothing_in_cart">Cart is empty</div>
+        </div>
+        <div class="checkout">
+            <p id="total_of_order_id">Total: $0</p>
+            <button id="checkoutBtn">Checkout</button>
+        </div>
+
+
+    </div>
+
+
     <div class="conig" style="max-height: 500px; overflow: hidden;">
-        <img class="ig" style="width: 100%;" src="banner2.png">
+        <img class="ig" style="width: 100%;" src="banner.png">
         <div class="p_container">
-            <p class="syncopate-bold">Elsilia's<br>Kitcken</p>
+            <p class="syncopate-bold">Elsilia's<br>Kitchen</p>
             <p class="caveat">Comida deliciosa y Dominicana<br>de mi casa a la suya</p>
         </div>
     </div>
 
 
     <script>
-        let numOfOrders=0; 
+        let numOfOrders = 0; 
+        let orderTotal = 0;
     </script>
 
 
 
-<div class="body_content">
+    <div class="body_content">
 
 
-    <br>
-    <br>
-    <br>
+        <br>
+        <br>
+        <br>
 
         <div class="image_viewer_window" id="image_viewer_window">
             <img class="image_viewer" src="">
@@ -68,7 +337,7 @@
         </div>
 
         <script>
-                        function closeImageViewer() {
+            function closeImageViewer() {
                 const imageViewer = document.getElementById('image_viewer_window');
                 imageViewer.style.display = 'none';
             }
@@ -90,210 +359,48 @@
             });
 
         </script>
-        
-<!-- https://www.figma.com/community/file/1294173080512093987/food-website-design -->
-    <script>
 
-        const menuItems = [
-    {
-        img: "1moro.png",
-        name: "Moro",
-        desc: "Yellow rice cooked with pigeon peas",
-        type: "Arroz"
-    },
-    {
-        img: "1arrozconbacon.png",
-        name: "Arroz Con Bacon",
-        desc: "White rice with bacon",
-        type: "Arroz"
-    },
-    {
-        img: "1pernil.png", /*-----------------*/
-        name: "Pernil",
-        desc: "Slow-roasted pork shoulder, seasoned with garlic, oregano, and citrus, cooked until tender with crispy skin",
-        type: "Carne"
-    },
-    
-    {
-        img: "1polloconvegetales.png",
-        name: "Pollo Con Vegetales",
-        desc: "Diced chicken with vegetables",
-        type: "Carne"
-    },
-    
-    {
-        img: "1polloguisado.png",
-        name: "Pollo Guisado",
-        desc: "Chicken stewed in a tomato-based sauce",
-        type: "Carne"
-    },
+        <!-- https://www.figma.com/community/file/1294173080512093987/food-website-design -->
+ 
 
-    {
-        img: "1pollohorneado.png",
-        name: "Pollo Horneado",
-        desc: "Oven-roasted chicken",
-        type: "Carne"
-    },
-    {
-        img: "1picadera.png",
-        name: "Picadera",
-        desc: "Assortment of mini empanadas, kibbeh, and etc",
-        type: "Picadera"
-    },
-    {
-        img: "1pastadecoditos.png",
-        name: "Pasta de Coditos Con Pollo",
-        desc: "Macaroni pasta with chicken",
-        type: "Pasta"
-    },
-    {
-        img: "1pica.png",
-        name:"Picadera 2",
-        desc: "Assortment of empanadas, potatoes balls with beef, and etc",
-        type: "Picadera"
-    },
-    {
-        img: "1macaronihamsalad.png",
-        name:"Macaroni Salad",
-        desc: "Macaroni salad with ham",
-        type: "Pasta"
-    },
-    {
-        img: "1arrozblanco.png",
-        name:"Arroz Blanco",
-        desc: "Steamed white rice, light and fluffy",
-        type: "Arroz"
-    },
-    {
-        img: "1maiz.png",
-        name:"Arroz Con Maiz",
-        desc: "Yellow rice with corn",
-        type: "Arroz"
-    },
-    {
-        img: "1yuca.png",
-        name:"Yuca",
-        desc: "Boiled cassava topped with pickled red onions",
-        type: "Viveres"
-    },    
-    {
-        img: "1picadera3.png",
-        name:"Picadera 3",
-        desc: "Assortment of mini empanadas, kippeh, sausages, chicken, chulitos and tostones",
-        type: "Picadera"
-    },
-    {
-        img: "1yuca2.png",
-        name:"Yuca 2",
-        desc: "Boiled cassava topped with pickled red onions",
-        type: "Viveres"
-    },
-    {
-        img: "1spaghetti.png",
-        name:"Spaghetti",
-        desc: "Spaghetti with stewed ham",
-        type: "Pasta"
-    },    
-    {
-        img: "1salad.png",
-        name:"Green Salad",
-        desc: "Filler text: Assortment of mini empanadas, kippeh, sausages, chicken, chulitos and tostones",
-        type: "Pasta"
-    },
-    {
-        img: "1ribs.png",
-        name:"BBQ Ribs",
-        desc: "Filler text: Boiled cassava topped with pickled red onions",
-        type: "Carne"
-    },
-    {
-        img: "3coditos.png",
-        name:"Coditos 3",
-        desc: "Filler text: Spaghetti with stewed ham",
-        type: "Pasta"
-    }
-];
+        <div class="menu" id="menu">
+            <section class="category">
+                <h1>Rice</h1>
+                <div class="tempContainer" id="menu-arroz"></div>
+            </section>
 
-</script>
+            <section class="category">
+                <h1>Meat</h1>
+                <div class="tempContainer" id="menu-carne"></div>
+            </section>
 
-    <!-- <style>
-        .item_container{
-            /* display: flex;
-            flex-direction: row; */
-    display: grid;
-    grid-template-columns: auto auto auto;
-        }
+            <section class="category">
+                <h1>Pasta</h1>
+                <div class="tempContainer" id="menu-pasta"></div>
+            </section>
 
-    </style> -->
+            <section class="category">
+                <h1>Roots</h1>
+                <div class="tempContainer" id="menu-viveres"></div>
+            </section>
+            
+            <section class="category">
+                <h1>Finger Food</h1>
+                <div class="tempContainer" id="menu-picadera"></div>
+            </section>
 
-
-    <div class="menu" id="menu">
-  <section class="category">
-    <h1>Arroz</h1>
-    <div class="tempContainer" id="menu-arroz"></div>
-  </section>
-
-  <section class="category">
-    <h1>Carne</h1>
-    <div class="tempContainer" id="menu-carne"></div>
-  </section>
-
-  <section class="category">
-    <h1>Pasta</h1>
-    <div class="tempContainer" id="menu-pasta"></div>
-  </section>
-
-  <section class="category">
-    <h1>Picadera</h1>
-    <div class="tempContainer" id="menu-picadera"></div>
-  </section>
-
-  <section class="category">
-    <h1>Viveres</h1>
-    <div class="tempContainer" id="menu-viveres"></div>
-  </section>
-</div>
-
-
-<script>
-  makeMenu(menuItems, "menu-arroz", "Arroz");
-  makeMenu(menuItems, "menu-carne", "Carne");
-  makeMenu(menuItems, "menu-pasta", "Pasta");
-  makeMenu(menuItems, "menu-picadera", "Picadera");
-  makeMenu(menuItems, "menu-viveres", "Viveres");
-</script>
-
-
-
-<p style="text-align: center; margin-block: 50px;">Cada bandeja es suficiente para aproximadamente 35-38 personas</p>
-
-<!-- 
-    <div class="menu" id="menu">
-        <h1>Arroz</h1>
-        <div class="tempContainer">
-        <script>makeMenu(menuItems,"menu", "Arroz");</script>
         </div>
 
-        <h1>Carne</h1>            
-        <div class="tempContainer">
-        <script>makeMenu(menuItems,"menu", "Carne");</script>
-        </div>
 
-        <h1>Pasta</h1>
-        <div class="tempContainer">
-        <script>makeMenu(menuItems,"menu", "Pasta");</script>
-        </div>
+        <script>
+            getJsonData();
+        </script>
 
-        <h1>Picadera</h1>
-        <div class="tempContainer">
-        <script>makeMenu(menuItems,"menu", "Picadera");</script>
-        </div>
 
-        <h1>Viveres</h1>
-        <div class="tempContainer">
-        <script>makeMenu(menuItems,"menu", "Viveres");</script>
-        </div>
-    </div> -->
+
+        <p style="text-align: center; margin-block: 50px;">Cada bandeja es suficiente para aproximadamente 35-38
+            personas</p>
+
 
 </body>
 
