@@ -18,9 +18,15 @@
 
 <body>
 
-           <script>
+<script>
+    function changeLanguage(){
+        const ball = document.getElementById('ball_id');
+        ball.classList.toggle("moveRight");
+    }
+</script>
+    
 
-            //--------------
+           <script>
 
             let cart = [];
 
@@ -35,41 +41,12 @@
 
 
                 if(cart.find(i => i.id === id)){
-                 return false;   
-                //     if(item.quantity + how_many_items == 3)
-                //         item.quantity = 3;
-                //     else if(item.quantity + how_many_items < 3)
-                //         item.quantity += how_many_items;
-                //     else{
-                //         //limited to 3 per item
-                //         return false;
-                //     }
+                    return false;   
                 }
-                // else{
-                    //first add
                     cart.push({id, name, image, quantity: 1, pan_size, price, cart_button,fullpan, halfpan});
-                    // return true;
-                // }
 
-                // cart_button.classList.add('disableAddToCart');
-                
                 return true;
 
-
-
-                // if (item) {
-                //     if (item.quantity < 3) {
-                //         item.quantity++;
-                //     }
-                //     else{
-                //         //max quantity reached
-                //         return false;
-                //     }
-                // } else {
-                //     cart.push({id, name, image, quantity: 1 });
-                // }
-
-                // return true;
             }
 
 
@@ -104,12 +81,6 @@
                     if((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active')))
                         pan_item.cart_button.classList.remove('disableAddToCart');
 
-                    // if(pan_item.pan_size == 1 && pan_item.cart_button.classList.contains('disableAddToCartFull'))
-                    //     pan_item.cart_button.classList.remove('disableAddToCartFull');
-                    // else if(pan_item.pan_size == 2 && pan_item.cart_button.classList.contains('disableAddToCartHalf'))
-                    //     pan_item.cart_button.classList.remove('disableAddToCartHalf');
-
-                // orderTotal -= pan_item.quantity * pan_item.price;
                 cart = cart.filter(i => i.id !== id);
                 renderCart();
                 }
@@ -130,14 +101,15 @@
                 carty.style.display = "block";
 
                 if (cart.length === 0) {
-                    document.getElementsByClassName("cart-container").item(0).style.display = "block";
-                    document.getElementsByClassName("cartContent").item(0).style.display = "none";
+
+                    document.getElementById('nothing_in_cart').style.display = 'block'; 
+                    document.getElementById('cartItemsId').style.display = 'none';
+
                 } else {
 
-                    // renderCart();
+                     document.getElementById('nothing_in_cart').style.display = 'none'; 
+                    document.getElementById('cartItemsId').style.display = 'block';
 
-                    document.getElementsByClassName("cart-container").item(0).style.display = "none";
-                    document.getElementsByClassName("cartContent").item(0).style.display = "block";
                 }
             }
         }
@@ -159,8 +131,10 @@ function updateTotal() {
     document.getElementById('cart_num_id').innerHTML = cartCounter;
   else{
     document.getElementById('cart_num_id').style.display = 'none';
-    document.getElementsByClassName("cart-container").item(0).style.display = "block";
-    document.getElementsByClassName("cartContent").item(0).style.display = "none";
+
+       document.getElementById('nothing_in_cart').style.display = 'block'; 
+       document.getElementById('cartItemsId').style.display = 'none';
+
     return;
   }
   
@@ -283,6 +257,16 @@ function updateTotal() {
 
 
     <div class="top_nav">
+
+     <div class="languageContainer">
+        <img src="DR_flag.png" alt="">
+
+        <div class="switchLanguage" onclick="changeLanguage()">
+             <div class="switchBall" id="ball_id"></div>
+        </div>
+        <img src="USA_flag.png" alt="">
+     </div>
+        
         <h3 style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: aliceblue;">
             Elsilia's Kitchen</h3>
         <div id="cart_num_id">0</div>
@@ -291,11 +275,9 @@ function updateTotal() {
 
     <div id="cart_contents_id">
         <div class="cartContent">
+            <div id="nothing_in_cart">Cart is empty</div>
             <div class="cartItems" id="cartItemsId">
             </div>
-        </div>
-        <div class="cart-container">
-            <div id="nothing_in_cart">Cart is empty</div>
         </div>
         <div class="checkout">
             <p id="total_of_order_id">Total: $0</p>

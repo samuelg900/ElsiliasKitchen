@@ -73,7 +73,7 @@ body {
     font-weight: bold;
     font-style: normal;
     /* font-size: 24px; */
-    font-size: 2.5vw;
+    font-size: 4.5vw;
     margin: 0;
 }
 
@@ -208,11 +208,6 @@ body {
     flex-direction: column;
 }
 
-.cart-container {
-  height: 90%;
-  background-color: #c8c8c8;
-}
-
 .cartContent {
     display: block;
     flex: 1; 
@@ -220,7 +215,7 @@ body {
     overscroll-behavior: contain;
     width: 100%;
     height:90%;
-    height:fit-content;
+    /* height:fit-content; */
 
     z-index: 1;
     box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
@@ -229,10 +224,10 @@ body {
 }
 
 #nothing_in_cart{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(241, 240, 240);
+    display: block;
+    justify-self: center;
+    align-content: center;
+    /* background-color: rgb(241, 240, 240); */
     height:100%; 
 }
 
@@ -264,7 +259,7 @@ body {
 .portionButton{
     background-color: #ffad5057;
     color: orange;
-    font-size: 10px;
+    font-size: 15px;
     border: none;
     border-radius: 80px;
 }
@@ -295,10 +290,12 @@ body {
 .checkout {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
     height: 10%;
+    min-height: fit-content;
     z-index: 4;
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc;   */
     box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3);
     border-radius: 0 0 0 10px;
     padding: 10px 15px;
@@ -369,7 +366,7 @@ body {
 }
 
 .menu-item-content {
-    margin: 15px;
+    margin: 10px;
     flex: 1;
 }
 
@@ -379,9 +376,48 @@ body {
     margin: 0;
     font-size: 24px;
 }
+        .languageContainer{
+            
+            position: relative;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* width: fit-content; */
+            margin: 16px 0 0 13px;
+            gap: 4px;
+            height: 20px;
+            z-index: 999;
+        }
+
+        .languageContainer img{
+            height: 10px;
+        }
+
+        .switchLanguage{
+            
+            background: white;
+            height: 100%;
+            
+            aspect-ratio: 1.6/1;
+            border-radius: 25px;
+        }
+
+        .switchBall{
+            height: 100%;
+            aspect-ratio: 1/1;
+            background: rgb(70, 178, 70);
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+            transform: translateX(0);
+        }
+
+        .switchBall.moveRight{
+        transform: translateX(60%);
+    }
 
 .menu-item-content p {
-    margin: 10px 0 0 0;
+    margin: 10px 0 5px 0;
     font-size: 18px;
     color: #555;
 }
@@ -563,19 +599,19 @@ body {
     } */
 
     .menu-item-content h3 {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .menu-item-content p {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .syncopate-bold {
-        font-size: 7vw;
+        font-size: 10vw;
     }
 
     .caveat{
-        font-size: 3.5vw;
+        font-size: 5vw;
     }
 
 }
