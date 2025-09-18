@@ -63,7 +63,8 @@ body {
     font-weight: 700;
     font-style: normal;
     /* font-size: 50px; */
-    font-size: 5vw;
+    font-size: 5em;
+    /* font-size: max(50pt,5em); */
     margin: 0;
 }
 
@@ -72,8 +73,10 @@ body {
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
+    width: 100%;
     /* font-size: 24px; */
-    font-size: 4.5vw;
+    font-size: 2.5em;
+    /* font-size: min(5vw,90px); */
     margin: 0;
 }
 
@@ -248,7 +251,7 @@ body {
 
 .pan_button_div button{
 
-    height: 40px;
+    height: 46px;
     /* width: 90px; */
     padding: 0;
     width: 100%;
@@ -269,7 +272,7 @@ body {
 }
 
 .addtocartButton{
-    height: 40px;
+    height: 46px;
     width: 100%;
     background-color: #64afff;
     color: white;
@@ -366,6 +369,7 @@ body {
 }
 
 .menu-item-content {
+    /* min-height: 200px; */
     margin: 10px;
     flex: 1;
 }
@@ -412,9 +416,10 @@ body {
             transform: translateX(0);
         }
 
-        .switchBall.moveRight{
+        .switchBall.changeToSpanish{
         transform: translateX(60%);
     }
+
 
 .menu-item-content p {
     margin: 10px 0 5px 0;
@@ -556,6 +561,7 @@ body {
     font-size: 18px;
     color: rgba(0, 0, 0, 0.7);
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -563,6 +569,12 @@ body {
 .checkboxPlus:hover {
     opacity: 0.5;
 } */
+
+#disclaimerTextId{
+    text-align: center; 
+    margin-block: 40px;
+    margin-inline: 5px;
+}
 
 
 @media screen and (max-width: 600px) {
@@ -607,11 +619,17 @@ body {
     }
 
     .syncopate-bold {
-        font-size: 10vw;
+        /* font-size: 10vw; */
+        font-size: 3em;
+        /* font-size: max(50pt,3em); */
+
     }
 
     .caveat{
-        font-size: 5vw;
+        /* font-size: 5vw; */
+        
+    font-size: 1.5em;
+    /* font-size: max(26pt,1.5em); */
     }
 
 }

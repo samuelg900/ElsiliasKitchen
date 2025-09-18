@@ -19,53 +19,28 @@
 <body>
 
 <script>
+
+    //refresh content
     function changeLanguage(){
         const ball = document.getElementById('ball_id');
-        ball.classList.toggle("moveRight");
+        ball.classList.toggle("changeToSpanish");
+        updateLayout();
     }
 </script>
     
-
            <script>
 
             let cart = [];
 
-            function addToCart(id, name, image, pan_size, price, cart_button, fullpan, halfpan) {
+            function addToCart(id, name, sp_name, image, pan_size, price, cart_button, fullpan, halfpan) {
                
-                    
-                    if(pan_size == 2)
-                        id +=10000;
-
-                    // console.log(pan_size);
-                    // console.log(id);
-
+                if(pan_size == 2)
+                    id +=10000;
 
                 if(cart.find(i => i.id === id)){
                     return false;   
                 }
-                    cart.push({id, name, image, quantity: 1, pan_size, price, cart_button,fullpan, halfpan});
-
-                return true;
-
-            }
-
-
-            ///TODO: could be repurposed as clear from cart draw
-               function decreaseFromCart(id, name, image) {
-                const item = cart.find(i => i.id === id);
-
-                if (item) {
-                    if (item.quantity == 1) {
-                        cart = cart.filter(i => i.id !== id);
-                    }
-                    else{
-                        item.quantity--;
-                    }
-                }
-                else{
-                    //can't decrease item any more
-                    return false;
-                }
+                    cart.push({id, name, sp_name, image, quantity: 1, pan_size, price, cart_button,fullpan, halfpan});
 
                 return true;
             }
@@ -85,8 +60,6 @@
                 renderCart();
                 }
             }
-
-            //=============
 
             </script>
 
@@ -140,8 +113,10 @@ function updateTotal() {
   
 }
 
-
         function renderCart() {
+            if(cart.length == 0)
+                return;
+
   const cartDiv = document.getElementById('cartItemsId');
   cartDiv.innerHTML = ''; // clear old items
 
@@ -178,7 +153,14 @@ function updateTotal() {
 
     let pane_size = document.createElement('p');
     pane_size.classList.add('pan_text');
-    pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+
+    if(document.getElementById('ball_id').classList.contains('changeToSpanish')){
+        pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
+        nameP.textContent = item.sp_name;
+    }
+    else
+        pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+
 
     let qtyP = document.createElement('p');
     qtyP.textContent = `Qty: ${item.quantity}`;
@@ -259,12 +241,11 @@ function updateTotal() {
     <div class="top_nav">
 
      <div class="languageContainer">
-        <img src="DR_flag.png" alt="">
-
+        <img src="USA_flag.png" alt="">
         <div class="switchLanguage" onclick="changeLanguage()">
              <div class="switchBall" id="ball_id"></div>
         </div>
-        <img src="USA_flag.png" alt="">
+        <img src="DR_flag.png" alt="">
      </div>
         
         <h3 style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: aliceblue;">
@@ -287,12 +268,11 @@ function updateTotal() {
 
     </div>
 
-
     <div class="conig" style="max-height: 500px; overflow: hidden;">
         <img class="ig" style="width: 100%;" src="banner.png">
         <div class="p_container">
             <p class="syncopate-bold">Elsilia's<br>Kitchen</p>
-            <p class="caveat">Comida deliciosa y Dominicana<br>de mi casa a la suya</p>
+            <p class="caveat">Delicious Dominican food, from our home to yours</p>
         </div>
     </div>
 
@@ -380,8 +360,7 @@ function updateTotal() {
 
 
 
-        <p style="text-align: center; margin-block: 50px;">Cada bandeja es suficiente para aproximadamente 35-38
-            personas</p>
+        <p id="disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
 
 
 </body>
