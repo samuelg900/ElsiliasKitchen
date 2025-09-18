@@ -1,8 +1,6 @@
 
   const yoloArray = [];
 
-
-
   function titlesFunc(){
 let titles = document.querySelectorAll('h1');
 
@@ -179,9 +177,6 @@ function makeMenu(menuItems, menuContainerId, type) {
            pan_button_div.appendChild(full_pan_button);
            pan_button_div.appendChild(half_pan_button);
 
-          // //  pan_button_div.appendChild(checkboxdiv);
-          //  pan_button_div.appendChild(checkboxdiv);
-           
            content.appendChild(pan_button_div);
            content.appendChild(add_to_cart_button);
              
