@@ -12,14 +12,14 @@ titles.forEach(title => {
       case 'Arroz':
         title.textContent = 'Rice';
         break;
-      case 'Meat':
-        title.textContent = 'Carne';
+      case 'Meats':
+        title.textContent = 'Carnes';
         break;
-      case 'Carne':
-        title.textContent = 'Meat';
+      case 'Carnes':
+        title.textContent = 'Meats';
         break;
-      case 'Pasta':
-        title.textContent = 'Pasta';
+      case 'Pastas':
+        title.textContent = 'Pastas';
         break;
       case 'Roots':
         title.textContent = 'Viveres';
