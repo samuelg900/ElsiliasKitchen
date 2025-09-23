@@ -9,11 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Caveat" rel="stylesheet">
-
+    
+    <link rel="icon" type="image/png" href="tab_logo.png">
+ 
     <title>Home</title>
 
-
     <script src="home_script.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -76,15 +79,19 @@
                 if (cart.length === 0) {
 
                     document.getElementById('nothing_in_cart').style.display = 'block'; 
-                    document.getElementById('cartItemsId').style.display = 'none';
+                    document.getElementById('cartItemsId').style.display = 'none'; 
+                    document.getElementById('checkoutBtn').classList.remove('enabled');
+
 
                 } else {
 
-                     document.getElementById('nothing_in_cart').style.display = 'none'; 
+                    document.getElementById('nothing_in_cart').style.display = 'none'; 
                     document.getElementById('cartItemsId').style.display = 'block';
+                    document.getElementById('checkoutBtn').classList.add('enabled');
 
                 }
             }
+
         }
     </script>
 
@@ -100,13 +107,16 @@ function updateTotal() {
 
     document.getElementById('total_of_order_id').innerHTML = `Total: $${newTotal}`;
 
-  if(cart.length != 0)
+  if(cart.length != 0){
     document.getElementById('cart_num_id').innerHTML = cartCounter;
+    document.getElementById('checkoutBtn').classList.add('enabled');
+  }
   else{
     document.getElementById('cart_num_id').style.display = 'none';
 
        document.getElementById('nothing_in_cart').style.display = 'block'; 
        document.getElementById('cartItemsId').style.display = 'none';
+       document.getElementById('checkoutBtn').classList.remove('enabled');
 
     return;
   }
@@ -235,8 +245,73 @@ function updateTotal() {
   updateTotal();
  
 }
+
     </script>
 
+    <script>
+
+function closeQRWindow(){
+    document.getElementById('qrcode-div-id').style.display = 'none';
+}
+
+
+function createQRLink(){
+    let qr_str = 'https://samuelg900.github.io/ElsiliasKitchen/home.html/#' + cart.length + '/';
+    let pansize;
+
+    cart.forEach(item => {
+
+        if(item.pan_size == 1)
+            pansize = 'f';
+        else
+            pansize = 'h';
+    
+        qr_str += item.id + pansize + item.quantity + '/'; 
+
+    });
+
+    // console.log(qr_str + '@');
+    return qr_str += '@';
+
+}
+
+
+function getQRDateTime(){    
+
+    const date = new Date();
+    // document.getElementById('currentDateId').innerHTML = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} `;
+    document.getElementById('currentDateId').innerHTML = `${date.toDateString()} <br> ${date.toLocaleTimeString()}`;
+
+}
+
+// stage/state -- if back is pressed
+
+
+function checkoutBtnFunc(){
+
+    if(cart.length === 0) return;
+
+    // createQRLink();
+
+    document.getElementById('qrcode-div-id').style.display='flex';
+
+    document.getElementById("qrcode").innerHTML='';
+
+    let qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: createQRLink(),
+                    width: 256,
+                    height: 256,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.L
+                });
+
+    getQRDateTime();
+
+    openCartContents();
+
+}
+    </script>
 
     <div class="top_nav">
 
@@ -262,7 +337,7 @@ function updateTotal() {
         </div>
         <div class="checkout">
             <p id="total_of_order_id">Total: $0</p>
-            <button id="checkoutBtn">Checkout</button>
+            <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
         </div>
 
 
@@ -291,7 +366,7 @@ function updateTotal() {
         <br>
         <br>
 
-        <div class="image_viewer_window" id="image_viewer_window">
+        <div id="image_viewer_window">
             <img class="image_viewer" src="">
             <div class="image_icon_container">
                 <span class="close_icon" onclick="closeImageViewer()" alt="close">&times;</span>
@@ -300,14 +375,12 @@ function updateTotal() {
 
         <script>
             function closeImageViewer() {
-                const imageViewer = document.getElementById('image_viewer_window');
-                imageViewer.style.display = 'none';
+                document.getElementById('image_viewer_window').style.display = 'none';
             }
 
             function openImageViewer(imageSrc) {
                 document.querySelector('.image_viewer').src = imageSrc;
                 document.getElementById('image_viewer_window').style.display = 'block';
-
             }
 
             window.addEventListener('keydown', function (event) {
@@ -358,10 +431,27 @@ function updateTotal() {
             getJsonData();
         </script>
 
-
-
         <p id="disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
 
+        <div id="qrcode-div-id">  
+            <span id="currentDateId"></span>
+            <span class="close_qrcode_window" onclick="closeQRWindow()">&times;</span>
+            <h1>Elsilia's Kitchen Order</h1>
+            <div id="qrcode"></div>
+            <p>Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order date</p>
+            <button id="save-qr-button">Save QR Code</button>
+        </div>
+
+        <script>
+        function generatePdf() {
+            const doc = new jspdf.jsPDF();
+            doc.text("Hello, this is a generated PDF!", 10, 10);
+            doc.save("myDocument.pdf");
+        }
+    </script>
+    <button onclick="generatePdf()">Generate PDF</button>
+
+    </div>
 
 </body>
 

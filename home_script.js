@@ -46,17 +46,15 @@ function updateLayout(){
 
  let index = 0;
   if(document.getElementById('ball_id').classList.contains('changeToSpanish')){
-
-     document.getElementsByClassName('caveat')[0].textContent = 'Comida deliciosa y Dominicana de mi casa a la suya';
+    document.getElementsByClassName('caveat')[0].textContent = 'Comida deliciosa y Dominicana de mi casa a la suya';
     document.getElementById('nothing_in_cart').textContent = 'El carrito está vacío';
     document.getElementById('disclaimerTextId').innerHTML = 'Cada bandeja entera es suficiente para aproximadamente 35-38 personas';
-
+    document.getElementById('checkoutBtn').innerHTML = 'Finalizar';
 
 titlesFunc();
 
     
     for (let item of menu_item) {
-      
       item.querySelector('h3').innerHTML = yoloArray[index+1];
       item.querySelector('p').textContent = yoloArray[index+3];
       let buttons = item.querySelectorAll('button');
@@ -68,10 +66,11 @@ titlesFunc();
     }
   }
   else{ //english
-     document.getElementsByClassName('caveat')[0].textContent = 'Delicious Dominican food, from our home to yours';
+    document.getElementsByClassName('caveat')[0].textContent = 'Delicious Dominican food, from our home to yours';
     document.getElementById('nothing_in_cart').innerHTML = 'Cart is empty';
     document.getElementById('disclaimerTextId').innerHTML = 'Each whole pan is enough for approximately 35-38 people';
-
+    document.getElementById('checkoutBtn').innerHTML = 'Checkout';
+    
     
    titlesFunc();
 
@@ -112,8 +111,8 @@ function makeMenu(menuItems, menuContainerId, type) {
             img.addEventListener('click', () => openImageViewer(item.image_link));
 
             const content = document.createElement('div');
-            content.className = 'menu-item-content en';
-            content.innerHTML = `<h3>${item.name_english} <a>(${item.name_spanish})</a> </h3><p>${item.description_english}</p> `;
+            content.className = 'menu-item-content';
+            content.innerHTML = `<h3>${item.name_english} </h3><p>${item.description_english}</p> `;
 
             let enName = item.name_english;
             let spName = item.name_spanish;
