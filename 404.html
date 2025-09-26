@@ -47,7 +47,7 @@
             data.forEach(i =>{allItems.push(i);})
              getItemsNames();
              renderCart();
-            //  getQRCode();
+             getQRCode();
 
         })
         .catch(error => {
@@ -166,8 +166,11 @@ function getItemsNames(){
 window.onload = function() {
 
     //  const str = "https://samuelg900.github.io/ElsiliasKitchen/home.html/#2/00202f1/10203h1/@"
-
-    const hash = window.location.hash; 
+    const str = window.location.href;
+    // const hash = window.location.hash; 
+    let hash = str.slice(55, str.length);
+    // console.log(h);
+    // console.log(str);
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
 
