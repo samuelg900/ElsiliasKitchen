@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body>items.json
 
 <!-- <h1> 404 Page.... to do later</h1> -->
 
@@ -267,17 +267,17 @@ window.onload = function() {
     // getJsonData();
     //         console.log(allItems);
 
-    // const str = "https://samuelg900.github.io/ElsiliasKitchen/404.html/#3/00100f1/00101f1/10101h1/@"
-    const str = window.location.href;
+     const str = "https://samuelg900.github.io/ElsiliasKitchen/home.html/#2/00202f1/10203h1/@"
+    // const str = window.location.href;
 
-    console.log(str);
+    
     
     // const hash = window.location.hash; // e.g. "#3/00100f1/00101f1/10101h1/@"
 
     // console.log(hash);
     let h = str.slice(55, str.length);
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
-
+console.log(h);
 // console.log(regex);
     const match = regex.exec(h);
 // console.log(match);
