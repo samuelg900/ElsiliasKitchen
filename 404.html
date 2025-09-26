@@ -131,7 +131,7 @@
 <script>
     const allItems = [];
     function getJsonData() {
-    fetch('./items.json')
+    fetch('items.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -269,7 +269,7 @@ window.onload = function() {
     
     // const hash = window.location.hash; // e.g. "#3/00100f1/00101f1/10101h1/@"
 
-    let h = str.slice(55, str.length);
+    let h = str.slice(54, str.length);
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
 
     const match = regex.exec(h);
