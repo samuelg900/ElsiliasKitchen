@@ -482,7 +482,6 @@ body {
     margin: 10px auto;
     /* margin: 15px; */
     background-color: #fffffffc;
-    z-index: 1;
     border-radius: 20px;
     box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3);
 
