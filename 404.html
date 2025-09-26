@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="404.css">
+    <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -63,7 +63,7 @@
              document.getElementById("qrcode").innerHTML = '';
 
             let qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: "window.location.href",
+                text: window.location.href,
                 width: 256,
                 height: 256,
                 colorDark: "#000000",
