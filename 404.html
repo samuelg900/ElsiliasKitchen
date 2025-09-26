@@ -63,7 +63,7 @@
              document.getElementById("qrcode").innerHTML = '';
 
             let qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href,
+                text: window.location.href.replace("home.html/", "home.html"),
                 width: 256,
                 height: 256,
                 colorDark: "#000000",
