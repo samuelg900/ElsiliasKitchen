@@ -187,7 +187,6 @@ function makeMenu(menuItems, menuContainerId, type) {
 
                 if(full_pan_button.classList.contains('active')){
 
-
                   if(add_to_cart_button.classList.contains('disableAddToCart') == false){
 
                     if(addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, add_to_cart_button, full_pan_button, half_pan_button) == true){
@@ -206,9 +205,7 @@ function makeMenu(menuItems, menuContainerId, type) {
                     return;
 
                 }
-                else if(half_pan_button.classList.contains('active')){
-
-                
+                else if(half_pan_button.classList.contains('active')){        
 
                   if(add_to_cart_button.classList.contains('disableAddToCart') == false){
               

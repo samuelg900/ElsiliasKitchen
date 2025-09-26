@@ -4,18 +4,328 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- <title>My Order</title> -->
-    <title>Home</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+<title>My Order</title>
 
 </head>
 
 <body>
 
-<h1> 404 Page.... to do later</h1>
+<!-- <h1> 404 Page.... to do later</h1> -->
+
+
+    <div id="qrcode-div-id">
+        <h3>Elsilia's Kitchen Order</h3>
+        <div id="qrcode"></div>
+    </div>
+
+  <div id="cart_contents_id">
+        <div class="cartContent">
+            <div class="cartItems" id="cartItemsId">
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+
+        #qrcode{
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        #qrcode-div-id{
+            display: flex;
+            justify-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h3{
+            text-align: center;
+        }
+
+        #cart_contents_id {
+
+  width: 100%;
+  height: 80%;
+  /* overflow-y: auto;  */
+  flex-direction: column; 
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.cartContent {
+    display: block;
+    flex: 1; 
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    width: 100%;
+    height:90%;
+    z-index: 1;
+    /* box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    /* animation: kf_cart_expand 0.5s; */
+}
+
+.cartItems {
+  width: 100%;
+}
+    
+
+        .cartItemContainter {
+                display: flex;
+                flex-direction: row;
+                position: relative;
+                width: 90%;
+                height: 70px;
+                margin: 15px 10px 0 15px;
+                padding: 0 0 10px 0;
+                border-bottom: 1px solid rgb(134, 134, 134);
+             }
+
+
+            .leftpic {
+                flex: 1;
+                /* position: relative;  */
+            }
+
+            .leftpic img {
+                width: auto;
+                height: 100%;
+                overflow: hidden;
+
+                object-fit: contain;
+                border-radius: 5px;
+            }
+
+            .rightname {
+                flex: 3;
+                margin-left: 10px;
+            }
+
+            .rightname p {
+                margin: 0;
+            }
+
+
+    .blurred {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 87% !important; /* TODO: 'fix'/solve this problem later*/
+        filter: grayscale(100%) brightness(50%);
+        clip-path: inset(0 0 0 50%);
+        }
+
+    </style>
+
+
+<script>
+    const allItems = [];
+    function getJsonData() {
+    fetch('items.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // allItems = data;
+
+            data.forEach(i =>{allItems.push(i);})
+             getItemsNames();
+             renderCart();
+             getQRCode();
+
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        })
+
+}
+</script>
+
+    <script>
+
+        function getQRCode(){
+             document.getElementById("qrcode").innerHTML = '';
+
+            let qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
+
+        }
+
+        let cart = [];
+        
+        function renderCart() {
+            if (cart.length === 0)
+                return;
+
+            const cartDiv = document.getElementById('cartItemsId');
+            console.log(cartDiv);
+            cartDiv.innerHTML = ''; // clear old items
+
+            cart.forEach(item => {
+
+                // Create the outer container
+                let container = document.createElement('div');
+                container.className = 'cartItemContainter';
+
+                // Left picture div
+                let left = document.createElement('div');
+                left.className = 'leftpic';
+
+                let img = document.createElement('img');
+                img.src = item.image_url;
+                img.alt = item.name;
+
+                let img2 = document.createElement('img');
+                img2.src = item.image_url;
+
+
+                if (item.pan_size[0] === 'H') {
+                console.log(item.pan_size[0]);
+                    img2.classList.add('blurred');
+                    left.appendChild(img2);
+                }
+                left.appendChild(img);
+
+                // Right name/qty div
+                let right = document.createElement('div');
+                right.className = 'rightname';
+                right.style.position = "relative";
+
+                let nameP = document.createElement('p');
+                nameP.textContent = item.name;
+
+                let pane_size = document.createElement('p');
+                pane_size.classList.add('pan_text');
+
+                pane_size.textContent = item.pan_size[0] === 'H' ? "Half Pan" : "Full Pan";
+
+                let qtyP = document.createElement('p');
+                qtyP.textContent = `Qty: ${item.quantity}`;
+                qtyP.style.fontSize = "14px";
+                qtyP.style.position = "absolute";
+                qtyP.style.bottom = "0";
+
+                right.appendChild(nameP);
+                right.appendChild(pane_size);
+                right.appendChild(qtyP);
+
+                // Put it all together
+                container.appendChild(left);
+                container.appendChild(right);
+
+                // Add to cart div
+                cartDiv.appendChild(container);
+            });
+
+        }
+
+    </script>
+
+    <script>
+
+function getItemsNames(){
+    cart.forEach(item =>{
+
+        const it = allItems.find(i => i.id === item.id);
+
+        if(it){
+                item.name = it.name_english;
+                item.image_url = it.image_link;
+        }else{//not found
+                return false;
+        }
+
+    });
+
+    return true;
+}
+
+
+
+
+window.onload = function() {
+
+    // getJsonData();
+    //         console.log(allItems);
+
+    const str = "https://samuelg900.github.io/ElsiliasKitchen/404.html/#3/00100f1/00101f1/10101h1/@"
+    // const hash = window.location.hash; // e.g. "#3/00100f1/00101f1/10101h1/@"
+
+    // console.log(hash);
+    let h = str.slice(54, str.length);
+    const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
+
+// console.log(regex);
+    const match = regex.exec(h);
+// console.log(match);
+
+// image,name, pansize, quantity
+// cart.push({ id, name, sp_name, image, quantity: 1, pan_size, price, cart_button, fullpan, halfpan });
+
+
+if (match) {
+        const count = parseInt(match[1], 10);   // number of items
+        const itemsStr = match[2];              // whole "00100f1/.../"
+        const items = itemsStr.split('/').filter(Boolean); // ["00100f1", "00101f1", "10101h1"]
+    const blank_name = "";
+    const image_url = "";
+        // ✅ Build summary
+        let summaryHtml = `<h2>Order Summary</h2><ul>`;
+        items.forEach(item => {
+            let id = parseInt(item.slice(0,5));    // "00100"
+            if(id > 10000)
+                id -= 10000;
+            const pan_size = item[5] === 'f' ? "Full Pan" : "Half Pan";
+            const quantity = item[6];           // "1"
+            summaryHtml += `<li>Item ID: ${id}, Size: ${pan_size}, Qty: ${quantity}</li>`;
+        // console.log(parseInt(id));
+        cart.push({id, blank_name, pan_size, quantity, image_url});
+        
+        });
+        summaryHtml += `</ul>`;
+
+            getJsonData();
+
+//         if(getItemsNames()===false){
+           
+//  document.body.innerHTML = "<h2>Page not found</h2>";
+//             return;
+//         }
+//         else{
+//         }
+
+
+        // document.body.innerHTML = summaryHtml;
+
+        // Optional: sanity check — does count match actual number of items?
+        if (items.length !== count) {
+            document.body.innerHTML = "<h2>Invalid order link.</h2>";
+        }
+    } else {
+        // ❌ Not a valid QR link → show default 404
+        document.body.innerHTML = "<h2>Page not found</h2>";
+    }
+}
+</script>
 
 </body>
 

@@ -9,327 +9,316 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Caveat" rel="stylesheet">
-    
-    <link rel="icon" type="image/png" href="tab_logo.png">
- 
+
+    <link rel="icon" type="image/png" href="tab_logo.png" />
+
     <title>Home</title>
 
     <script src="home_script.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js"></script>
+
 </head>
 
-<body>
+<body id="bod">
 
-<script>
+    <script>
 
-    //refresh content
-    function changeLanguage(){
-        const ball = document.getElementById('ball_id');
-        ball.classList.toggle("changeToSpanish");
-        updateLayout();
-    }
-</script>
-    
-           <script>
+        //refresh content
+        function changeLanguage() {
+            const ball = document.getElementById('ball_id');
+            ball.classList.toggle("changeToSpanish");
+            updateLayout();
+        }
+    </script>
 
-            let cart = [];
+    <script>
 
-            function addToCart(id, name, sp_name, image, pan_size, price, cart_button, fullpan, halfpan) {
-               
-                if(pan_size == 2)
-                    id +=10000;
+        let cart = [];
 
-                if(cart.find(i => i.id === id)){
-                    return false;   
-                }
-                    cart.push({id, name, sp_name, image, quantity: 1, pan_size, price, cart_button,fullpan, halfpan});
+        function addToCart(id, name, sp_name, image, pan_size, price, cart_button, fullpan, halfpan) {
 
-                return true;
+            if (pan_size == 2)
+                id += 10000;
+
+            if (cart.find(i => i.id === id)) {
+                return false;
             }
+            cart.push({id, name, sp_name, image, quantity: 1, pan_size, price, cart_button, fullpan, halfpan });
+
+            return true;
+        }
 
 
-            function clearFromCart(id){
-                
-                const pan_item = cart.find(i => i.id === id);
-                if(pan_item){
+        function clearFromCart(id) {
 
-                    if(pan_item.cart_button.classList.contains('disableAddToCart')) //it should
-                        
-                    if((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active')))
+            const pan_item = cart.find(i => i.id === id);
+            if (pan_item) {
+
+                if (pan_item.cart_button.classList.contains('disableAddToCart')) //it should
+
+                    if ((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active')))
                         pan_item.cart_button.classList.remove('disableAddToCart');
 
                 cart = cart.filter(i => i.id !== id);
                 renderCart();
-                }
             }
+        }
 
-            </script>
+    </script>
 
     <script>
         function openCartContents() {
-
-            let carty = document.getElementById("cart_contents_id");
-
-            if (carty.style.display === "block") {
-                carty.style.display = "none";
-            } else {
-                carty.style.display = "block";
-
+            document.querySelector('.cart').classList.toggle('open');
+            
                 if (cart.length === 0) {
 
-                    document.getElementById('nothing_in_cart').style.display = 'block'; 
-                    document.getElementById('cartItemsId').style.display = 'none'; 
+                    document.getElementById('nothing_in_cart').style.display = 'block';
+                    document.getElementById('cartItemsId').style.display = 'none';
                     document.getElementById('checkoutBtn').classList.remove('enabled');
 
 
                 } else {
 
-                    document.getElementById('nothing_in_cart').style.display = 'none'; 
+                    document.getElementById('nothing_in_cart').style.display = 'none';
                     document.getElementById('cartItemsId').style.display = 'block';
                     document.getElementById('checkoutBtn').classList.add('enabled');
 
                 }
+        }
+    </script>
+
+    <script>
+
+        function updateTotal() {
+            let newTotal = 0;
+            let cartCounter = 0;
+            cart.forEach(item => {
+                newTotal += item.quantity * item.price;
+                cartCounter += item.quantity;
+            });
+
+            document.getElementById('total_of_order_id').innerHTML = `Total: $${newTotal}`;
+
+            if (cart.length != 0) {
+                document.getElementById('cart_num_id').innerHTML = cartCounter;
+                document.getElementById('checkoutBtn').classList.add('enabled');
+            }
+            else {
+                document.getElementById('cart_num_id').style.display = 'none';
+
+                document.getElementById('nothing_in_cart').style.display = 'block';
+                document.getElementById('cartItemsId').style.display = 'none';
+                document.getElementById('checkoutBtn').classList.remove('enabled');
+
+                return;
             }
 
         }
-    </script>
-
-    <script>
-
-function updateTotal() {
-  let newTotal = 0;
-  let cartCounter = 0;
-  cart.forEach(item => {
-    newTotal += item.quantity * item.price;
-    cartCounter += item.quantity;
-  });
-
-    document.getElementById('total_of_order_id').innerHTML = `Total: $${newTotal}`;
-
-  if(cart.length != 0){
-    document.getElementById('cart_num_id').innerHTML = cartCounter;
-    document.getElementById('checkoutBtn').classList.add('enabled');
-  }
-  else{
-    document.getElementById('cart_num_id').style.display = 'none';
-
-       document.getElementById('nothing_in_cart').style.display = 'block'; 
-       document.getElementById('cartItemsId').style.display = 'none';
-       document.getElementById('checkoutBtn').classList.remove('enabled');
-
-    return;
-  }
-  
-}
 
         function renderCart() {
-            if(cart.length == 0)
+            if (cart.length == 0)
                 return;
 
-  const cartDiv = document.getElementById('cartItemsId');
-  cartDiv.innerHTML = ''; // clear old items
+            const cartDiv = document.getElementById('cartItemsId');
+            cartDiv.innerHTML = ''; // clear old items
 
-  cart.forEach(item => {
+            cart.forEach(item => {
 
-    // Create the outer container
-    let container = document.createElement('div');
-    container.className = 'cartItemContainter';
+                // Create the outer container
+                let container = document.createElement('div');
+                container.className = 'cartItemContainter';
 
-    // Left picture div
-    let left = document.createElement('div');
-    left.className = 'leftpic';
+                // Left picture div
+                let left = document.createElement('div');
+                left.className = 'leftpic';
 
-    let img = document.createElement('img');
-    img.src = item.image;
-    img.alt = item.name;
+                let img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.name;
 
-    let img2 = document.createElement('img');
-    img2.src = item.image;
+                let img2 = document.createElement('img');
+                img2.src = item.image;
 
-    if (item.pan_size == 2) {
-      img2.classList.add('blurred');
-      left.appendChild(img2);
-    }
-    left.appendChild(img);
+                if (item.pan_size == 2) {
+                    img2.classList.add('blurred');
+                    left.appendChild(img2);
+                }
+                left.appendChild(img);
 
-    // Right name/qty div
-    let right = document.createElement('div');
-    right.className = 'rightname';
-    right.style.position = "relative";
+                // Right name/qty div
+                let right = document.createElement('div');
+                right.className = 'rightname';
+                right.style.position = "relative";
 
-    let nameP = document.createElement('p');
-    nameP.textContent = item.name;
+                let nameP = document.createElement('p');
+                nameP.textContent = item.name;
 
-    let pane_size = document.createElement('p');
-    pane_size.classList.add('pan_text');
+                let pane_size = document.createElement('p');
+                pane_size.classList.add('pan_text');
 
-    if(document.getElementById('ball_id').classList.contains('changeToSpanish')){
-        pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
-        nameP.textContent = item.sp_name;
-    }
-    else
-        pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
-
-
-    let qtyP = document.createElement('p');
-    qtyP.textContent = `Qty: ${item.quantity}`;
-    qtyP.style.fontSize = "14px";
-    qtyP.style.position = "absolute";
-    qtyP.style.bottom = "0";
-
-    const cartMinusSign = document.createElement('span');
-    cartMinusSign.className = 'cartMinusSign';
-    cartMinusSign.textContent = '\u2212';
-
-    const cartTrashIcon = document.createElement('span');
-    cartTrashIcon.className = 'material-symbols-outlined cartTrashIcon';
-    cartTrashIcon.textContent = 'delete';
-
-    const cartPlusSign = document.createElement('span');
-    cartPlusSign.className = 'cartPlusSign';
-    cartPlusSign.textContent = '\u002b';
-
-    const cartPlusMinusDiv = document.createElement('div');
-    cartPlusMinusDiv.className = 'cartPlusMinusDiv';
-    cartPlusMinusDiv.appendChild(cartMinusSign);
-    cartPlusMinusDiv.appendChild(cartTrashIcon);
-    cartPlusMinusDiv.appendChild(cartPlusSign);
+                if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
+                    pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
+                    nameP.textContent = item.sp_name;
+                }
+                else
+                    pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
 
 
-    cartMinusSign.addEventListener('click', () => {
-        
-        if(item.quantity === 1){
-            clearFromCart(item.id);
-            container.remove();
-        }else{
-            // item.quantity--;
-            --item.quantity;
-            qtyP.textContent = `Qty: ${item.quantity}`;
-            // renderCart();
+                let qtyP = document.createElement('p');
+                qtyP.textContent = `Qty: ${item.quantity}`;
+                qtyP.style.fontSize = "14px";
+                qtyP.style.position = "absolute";
+                qtyP.style.bottom = "0";
+
+                const cartMinusSign = document.createElement('span');
+                cartMinusSign.className = 'cartMinusSign';
+                cartMinusSign.textContent = '\u2212';
+
+                const cartTrashIcon = document.createElement('span');
+                cartTrashIcon.className = 'material-symbols-outlined cartTrashIcon';
+                cartTrashIcon.textContent = 'delete';
+
+                const cartPlusSign = document.createElement('span');
+                cartPlusSign.className = 'cartPlusSign';
+                cartPlusSign.textContent = '\u002b';
+
+                const cartPlusMinusDiv = document.createElement('div');
+                cartPlusMinusDiv.className = 'cartPlusMinusDiv';
+                cartPlusMinusDiv.appendChild(cartMinusSign);
+                cartPlusMinusDiv.appendChild(cartTrashIcon);
+                cartPlusMinusDiv.appendChild(cartPlusSign);
+
+
+                cartMinusSign.addEventListener('click', () => {
+
+                    if (item.quantity === 1) {
+                        clearFromCart(item.id);
+                        container.remove();
+                    } else {
+                        // item.quantity--;
+                        --item.quantity;
+                        qtyP.textContent = `Qty: ${item.quantity}`;
+                        // renderCart();
+                    }
+                    updateTotal();
+                });
+
+
+                cartPlusSign.addEventListener('click', () => {
+
+                    if (item.quantity < 3) {
+                        ++item.quantity
+                        qtyP.textContent = `Qty: ${item.quantity}`;
+                        // renderCart();
+                    }
+                    updateTotal();
+                });
+
+                cartTrashIcon.addEventListener('click', () => {
+                    clearFromCart(item.id)
+                    container.remove();
+                    updateTotal();
+                });
+
+
+                right.appendChild(nameP);
+                right.appendChild(pane_size);
+                right.appendChild(qtyP);
+                right.appendChild(cartPlusMinusDiv);
+
+                // Put it all together
+                container.appendChild(left);
+                container.appendChild(right);
+
+                // Add to cart div
+                cartDiv.appendChild(container);
+            });
+
+            updateTotal();
+
         }
-        updateTotal();
-    });
-
-
-    cartPlusSign.addEventListener('click', () => {
-        
-        if(item.quantity < 3){
-            ++item.quantity
-            qtyP.textContent = `Qty: ${item.quantity}`;
-            // renderCart();
-        }
-        updateTotal();
-    });
-
-    cartTrashIcon.addEventListener('click', () => { 
-        clearFromCart(item.id)
-        container.remove();
-        updateTotal();
-    });
-
-
-    right.appendChild(nameP);
-    right.appendChild(pane_size);
-    right.appendChild(qtyP);
-    right.appendChild(cartPlusMinusDiv);
-
-    // Put it all together
-    container.appendChild(left);
-    container.appendChild(right);
-
-    // Add to cart div
-    cartDiv.appendChild(container);
-  });
-
-  updateTotal();
- 
-}
 
     </script>
 
     <script>
 
-function closeQRWindow(){
-    document.getElementById('qrcode-div-id').style.display = 'none';
-}
+        function closeQRWindow() {
+            document.getElementById('qrcode-div-background-id').style.display = 'none';
+        }
 
 
-function createQRLink(){
-    let qr_str = 'https://samuelg900.github.io/ElsiliasKitchen/home.html/#' + cart.length + '/';
-    let pansize;
+        function createQRLink() {
+            // let qr_str = 'https://samuelg900.github.io/ElsiliasKitchen/home.html/#' + cart.length + '/';
+            let qr_str = 'http://127.0.0.1:5500/home.html/#' + cart.length + '/';
+            
+            let pansize;
 
-    cart.forEach(item => {
+            cart.forEach(item => {
 
-        if(item.pan_size == 1)
-            pansize = 'f';
-        else
-            pansize = 'h';
-    
-        qr_str += item.id + pansize + item.quantity + '/'; 
+                if (item.pan_size == 1)
+                    pansize = 'f';
+                else
+                    pansize = 'h';
 
-    });
+                qr_str += String(item.id).padStart(5,'0') + pansize + item.quantity + '/';
 
-    // console.log(qr_str + '@');
-    return qr_str += '@';
+            });
+        console.log(qr_str + '@');
+            return qr_str += '@';
 
-}
-
-
-function getQRDateTime(){    
-
-    const date = new Date();
-    // document.getElementById('currentDateId').innerHTML = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} `;
-    document.getElementById('currentDateId').innerHTML = `${date.toDateString()} <br> ${date.toLocaleTimeString()}`;
-
-}
-
-// stage/state -- if back is pressed
+        }
 
 
-function checkoutBtnFunc(){
+        function getQRDateTime() {
+            const date = new Date();
+            document.getElementById('currentDateId').innerHTML = `${date.toDateString()} <br> ${date.toLocaleTimeString()}`;
+        }
 
-    if(cart.length === 0) return;
+        // TODO: stage/state -- if back is pressed
 
-    // createQRLink();
 
-    document.getElementById('qrcode-div-id').style.display='flex';
+        function checkoutBtnFunc() {
 
-    document.getElementById("qrcode").innerHTML='';
+            if (cart.length === 0) return;
 
-    let qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: createQRLink(),
-                    width: 256,
-                    height: 256,
-                    colorDark : "#000000",
-                    colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.L
-                });
+            document.getElementById('qrcode-div-background-id').style.display = 'block';
 
-    getQRDateTime();
+            document.getElementById("qrcode").innerHTML = '';
 
-    openCartContents();
+            let qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: createQRLink(),
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
 
-}
+            getQRDateTime();
+
+            // openCartContents();
+
+        }
     </script>
 
     <div class="top_nav">
 
-     <div class="languageContainer">
-        <div class="switchLanguage" onclick="changeLanguage()">
-        <img class="usa" src="USA_flag.png" alt="">
-             <div class="switchBall" id="ball_id"></div>
-        <img class="dr" src="DR_flag.png" alt="">
+        <div class="languageContainer">
+            <div class="switchLanguage" onclick="changeLanguage()">
+                <img class="usa" src="USA_flag.png" alt="">
+                <div class="switchBall" id="ball_id"></div>
+                <img class="dr" src="DR_flag.png" alt="">
+            </div>
         </div>
-     </div>
-        
+
         <h3 style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%); color: aliceblue;">
             Elsilia's Kitchen</h3>
         <div id="cart_num_id">0</div>
         <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span>
     </div>
 
-    <div id="cart_contents_id">
+    <div class="cart" id="cart_contents_id">
         <div class="cartContent">
             <div id="nothing_in_cart">Cart is empty</div>
             <div class="cartItems" id="cartItemsId">
@@ -339,8 +328,6 @@ function checkoutBtnFunc(){
             <p id="total_of_order_id">Total: $0</p>
             <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
         </div>
-
-
     </div>
 
     <div class="conig" style="max-height: 500px; overflow: hidden;">
@@ -353,18 +340,13 @@ function checkoutBtnFunc(){
 
 
     <script>
-        let numOfOrders = 0; 
+        let numOfOrders = 0;
         let orderTotal = 0;
     </script>
 
 
 
     <div class="body_content">
-
-
-        <br>
-        <br>
-        <br>
 
         <div id="image_viewer_window">
             <img class="image_viewer" src="">
@@ -396,7 +378,7 @@ function checkoutBtnFunc(){
         </script>
 
         <!-- https://www.figma.com/community/file/1294173080512093987/food-website-design -->
- 
+
 
         <div class="menu" id="menu">
             <section class="category">
@@ -418,7 +400,7 @@ function checkoutBtnFunc(){
                 <h1>Roots</h1>
                 <div class="tempContainer" id="menu-viveres"></div>
             </section>
-            
+
             <section class="category">
                 <h1>Finger Food</h1>
                 <div class="tempContainer" id="menu-picadera"></div>
@@ -433,23 +415,88 @@ function checkoutBtnFunc(){
 
         <p id="disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
 
-        <div id="qrcode-div-id">  
-            <span id="currentDateId"></span>
-            <span class="close_qrcode_window" onclick="closeQRWindow()">&times;</span>
-            <h1>Elsilia's Kitchen Order</h1>
-            <div id="qrcode"></div>
-            <p>Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order date</p>
-            <button id="save-qr-button">Save QR Code</button>
+        <div id="qrcode-div-background-id">
+            <div id="qrcode-div-id">
+                <span id="currentDateId"></span>
+                <span class="close_qrcode_window" onclick="closeQRWindow()">&times;</span>
+                <h1>Elsilia's Kitchen Order</h1>
+                <div id="qrcode"></div>
+                <p>Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order
+                    date</p>
+                <button id="save-qr-button" onclick="generatePdf()">Save QR Code</button>
+            </div>
         </div>
 
         <script>
-        function generatePdf() {
-            const doc = new jspdf.jsPDF();
-            doc.text("Hello, this is a generated PDF!", 10, 10);
-            doc.save("myDocument.pdf");
-        }
-    </script>
-    <button onclick="generatePdf()">Generate PDF</button>
+            function generatePdf() {
+                const doc = new jspdf.jsPDF();
+                // doc.text("Hello, this is a generated PDF!", 10, 10);
+
+
+
+                const imgWidth = 80;  // desired width in PDF
+                const imgHeight = 80; // desired height in PDF
+
+                // Get page dimensions
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+
+                // Calculate center position
+                const x = (pageWidth - imgWidth) / 2;
+                const y = (pageHeight - imgHeight) / 2;
+
+                //Browser with show (to devs) a 'deprecated feature used' warning for XMLHttpRequest when addImage is called.
+                //I believe this happens due to a jspdf library call for loading the image file synchronously. It's fine- it all still works 
+                doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 60, 90);
+                doc.addImage("pep.png", "PNG", pageWidth * 0.7, pageHeight * 0.26, 40, 40);
+                doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.55, 50, 50);
+                doc.addImage("plan.png", "PNG", pageWidth * 0.503, pageHeight * 0.7, 100, 100);
+
+
+                doc.setFontSize(16);
+                doc.setFont("Times", "normal");
+                doc.text(document.getElementById('currentDateId').textContent, 5, 8);
+
+                doc.setFont("Times", "Bold");
+                doc.setFontSize(36);
+
+                doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 30, { align: "center" });
+
+                doc.addImage("logo_for_pdf.png", "PNG", pageWidth - 44, 0, 40, 26.7);
+
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 0);
+                doc.text("ELSILIA'S KITCHEN", pageWidth - 23.5, 26, { align: "center" });
+
+                let canvas = document.getElementById('qrcode').querySelector("canvas");
+
+                // Create an <img> element with it
+                let qr_img = new Image();
+                qr_img.src = canvas.toDataURL("image/png");
+
+                doc.addImage(qr_img, "PNG", x, y, imgWidth, imgHeight);
+
+                doc.setFontSize(16);
+                doc.setFont("times", "normal");
+
+                doc.text("Please save and send this page to Elsa to get", pageWidth / 2, y + imgHeight + 34, { align: "center" });
+                doc.text("confirmation on your order and set up an order date.", pageWidth / 2, y + imgHeight + 40, { align: "center" });
+
+
+                doc.setFont("times", "bolditalic");
+
+
+                doc.text("This page alone is not a confi", (pageWidth / 2) - 25, y + imgHeight + 70, { align: "center" });
+
+                doc.setTextColor(255, 255, 255);
+                doc.text("rmation of any order.", (pageWidth / 2) + 34.5, y + imgHeight + 70, { align: "center" });
+
+                const str = document.getElementById('currentDateId').textContent;
+
+                doc.save("Elsilia Kitchen - " + str + ".pdf");
+
+            }
+        </script>
 
     </div>
 
