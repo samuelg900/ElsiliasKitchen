@@ -270,6 +270,7 @@ window.onload = function() {
     // const hash = window.location.hash; // e.g. "#3/00100f1/00101f1/10101h1/@"
 
     let h = str.slice(54, str.length);
+    console.log(h);
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
 
     const match = regex.exec(h);
