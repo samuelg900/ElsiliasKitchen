@@ -271,6 +271,10 @@ window.onload = function() {
 
     let h = str.slice(54, str.length);
     console.log(h);
+    console.log(str);
+
+    console.log(window.location.hash);
+
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
 
     const match = regex.exec(h);
