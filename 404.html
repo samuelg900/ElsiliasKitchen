@@ -165,8 +165,8 @@ function getItemsNames(){
 window.onload = function() {
 
     //  const str = "https://samuelg900.github.io/ElsiliasKitchen/home.html/#2/00202f1/10203h1/@"
-     const hash = "#9/00100f1/10101h1/00200f1/10202h1/00204f1/10300h1/10301h1/00302f1/00601f1/@"; 
-    // const hash = window.location.hash; 
+    //  const hash = "#9/00100f1/10101h1/00200f1/10202h1/00204f1/10300h1/10301h1/00302f1/00601f1/@"; 
+    const hash = window.location.hash; 
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
 
