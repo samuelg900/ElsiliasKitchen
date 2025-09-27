@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <!-- <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css"> -->
+    <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="icon" type="image/png" href="tab_logo.png" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
@@ -15,9 +17,6 @@
 </head>
 
 <body>
-
-<!-- <h1> 404 Page.... to do later</h1> -->
-
 
     <div id="qrcode-div-id">
         <h2>Elsilia's Kitchen Order</h2>
@@ -63,7 +62,7 @@
              document.getElementById("qrcode").innerHTML = '';
 
             let qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href.replace("home.html/", "home.html"),
+                text: window.location.href,
                 width: 256,
                 height: 256,
                 colorDark: "#000000",
@@ -166,11 +165,8 @@ function getItemsNames(){
 window.onload = function() {
 
     //  const str = "https://samuelg900.github.io/ElsiliasKitchen/home.html/#2/00202f1/10203h1/@"
-    const str = "window.location.href";
+     const hash = "#9/00100f1/10101h1/00200f1/10202h1/00204f1/10300h1/10301h1/00302f1/00601f1/@"; 
     // const hash = window.location.hash; 
-    let hash = str.slice(55, str.length);
-    // console.log(h);
-    // console.log(str);
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
 
@@ -194,7 +190,7 @@ if (match) {
         });
         summaryHtml += `</ul>`;
 
-            // getJsonData();
+            getJsonData();
 
 //         if(getItemsNames()===false){
            
