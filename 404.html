@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css">
+     <!-- <link rel="stylesheet" href="404.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -18,14 +19,16 @@
 
 <body>
 
-    <div id="qrcode-div-id">
-        <h2>Elsilia's Kitchen Order</h2>
-        <div id="qrcode"></div>
-    </div>
+    <div class="main_container">
+        <div id="qrcode-div-id">
+            <h2>Elsilia's Kitchen Order</h2>
+            <div id="qrcode"></div>
+        </div>
 
-  <div id="cart_contents_id">
-        <div class="cartContent">
-            <div class="cartItems" id="cartItemsId">
+        <div id="cart_contents_id">
+            <div class="cartContent">
+                <div class="cartItems" id="cartItemsId">
+                </div>
             </div>
         </div>
     </div>
@@ -164,8 +167,8 @@ function getItemsNames(){
 
 window.onload = function() {
 
-    //  const str = "https://samuelg900.github.io/ElsiliasKitchen/home.html/#2/00202f1/10203h1/@"
-    //  const hash = "#9/00100f1/10101h1/00200f1/10202h1/00204f1/10300h1/10301h1/00302f1/00601f1/@"; 
+   
+    // const hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00302f2/00601f1/@"; 
     const hash = window.location.hash; 
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
