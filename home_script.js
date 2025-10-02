@@ -189,30 +189,34 @@ circleButton.addEventListener('click', () => {
 
         if (full_pan_button.classList.contains('active')) {
 
-          if (circleButton.classList.contains('itemWasAdded') == false) {
+          if (circleButton.classList.contains('itemWasAdded') === false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, circleButton, full_pan_button, half_pan_button) == true) {
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, circleButton, full_pan_button, half_pan_button) === true) {
               circleButton.classList.toggle('itemWasAdded');
+
+              //Needed?
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
             }
           }
           else{ //remove item from cart
+            
              (clearFromCart(item.id)==true);         
           }   
 
         }
         else if (half_pan_button.classList.contains('active')) {
 
-          if (circleButton.classList.contains('itemWasAdded') == false) {
+          if (circleButton.classList.contains('itemWasAdded') === false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, full_pan_button, half_pan_button) == true) {
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, full_pan_button, half_pan_button) === true) {
               circleButton.classList.toggle('itemWasAdded');
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
             }
           }
           else{ //remove item from cart
+            // console.log(item.id + 10000);
              (clearFromCart(item.id + 10000)==true);
           }   
 

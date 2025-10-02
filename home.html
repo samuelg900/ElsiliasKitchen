@@ -41,31 +41,48 @@
             if (pan_size === 2)
                 id += 10000;
 
-            if (cart.find(i => i.id === id)) {
+            if (cart.find(i => i.id === id))
                 return false;
-            }
-            cart.push({id, name, sp_name, image, quantity: 1, pan_size, price, cart_button, fullpan, halfpan });
-
             
+            cart.push({id, name, sp_name, image, quantity: 1, pan_size, price, cart_button, fullpan, halfpan});
+
             return true;
         }
 
 
+        function minusClearFromCart(id) {
+
+            const cart_item = cart.find(i => i.id === id);
+            if (cart_item) {
+                cart_item.cart_button.classList.toggle('itemWasAdded');
+                cart = cart.filter(i => i.id !== id);
+                renderCart();
+                updateTotal();
+            }
+        }
+
+
+
         function clearFromCart(id) {
 
-            const pan_item = cart.find(i => i.id === id);
-            if (pan_item) {
+            console.log(id);
 
-                // if (pan_item.cart_button.classList.contains('itemWasAdded')) //it should
+            const cart_item = cart.find(i => i.id === id);
+            console.log(cart_item);
+            if (cart_item) {
 
-                if ((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active'))){
-                    pan_item.cart_button.classList.toggle('itemWasAdded');
-                    
-                    cart = cart.filter(i => i.id !== id);
-                    renderCart();
-
-                    return true;
-                }
+                //remove item from cart
+                cart = cart.filter(i => i.id !== id);
+                renderCart();
+                updateTotal();
+                
+                //change add to cart icon if needed
+                if(cart_item.cart_button.classList.contains('itemWasAdded'))
+                    if((cart_item.pan_size == 1 && cart_item.fullpan.classList.contains('active')) || (cart_item.pan_size == 2 && cart_item.halfpan.classList.contains('active'))){
+                        cart_item.cart_button.classList.toggle('itemWasAdded');
+                    }
+                
+                return true;
             }
 
             return false;
@@ -204,15 +221,18 @@
                 cartMinusSign.addEventListener('click', () => {
 
                     if (item.quantity === 1) {
+                        // --item.quantity;
+
+                        // minusClearFromCart(item.id);
                         clearFromCart(item.id);
-                        container.remove();
+                        // container.remove();
+                        // renderCart();
                     } else {
-                        // item.quantity--;
                         --item.quantity;
                         qtyP.textContent = `Qty: ${item.quantity}`;
                         // renderCart();
                     }
-                    updateTotal();
+                     updateTotal();
                 });
 
 
@@ -226,10 +246,10 @@
                     updateTotal();
                 });
 
-                cartTrashIcon.addEventListener('click', () => {
-                    clearFromCart(item.id)
-                    container.remove();
-                    updateTotal();
+                cartTrashIcon.addEventListener('click', () => {                    
+                    clearFromCart(item.id);
+                    // container.remove();
+                    // renderCart();
                 });
 
 
