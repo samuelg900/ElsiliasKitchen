@@ -58,9 +58,9 @@ function updateLayout() {
       item.querySelector('h3').innerHTML = yoloArray[index + 1];
       item.querySelector('p').textContent = yoloArray[index + 3];
       let buttons = item.querySelectorAll('button');
-      buttons[0].innerHTML = 'ENTERA - $' + `${yoloArray[index + 4]}`;
-      buttons[1].innerHTML = 'MEDIA - $' + `${yoloArray[index + 5]}`;
-      buttons[2].innerHTML = 'AÑADIR AL CARRITO';
+      buttons[1].innerHTML = 'ENTERA - $' + `${yoloArray[index + 4]}`;
+      buttons[2].innerHTML = 'MEDIA - $' + `${yoloArray[index + 5]}`;
+      // buttons[2].innerHTML = 'AÑADIR AL CARRITO';
 
       index += 6;
     }
@@ -78,9 +78,9 @@ function updateLayout() {
       item.querySelector('h3').innerHTML = yoloArray[index];
       item.querySelector('p').textContent = yoloArray[index + 2];
       let buttons = item.querySelectorAll('button');
-      buttons[0].innerHTML = 'WHOLE - $' + `${yoloArray[index + 4]}`;
-      buttons[1].innerHTML = 'HALF - $' + `${yoloArray[index + 5]}`;
-      buttons[2].innerHTML = 'ADD TO CART';
+      buttons[1].innerHTML = 'WHOLE - $' + `${yoloArray[index + 4]}`;
+      buttons[2].innerHTML = 'HALF - $' + `${yoloArray[index + 5]}`;
+      // buttons[2].innerHTML = 'ADD TO CART';
 
       index += 6;
     }
@@ -114,6 +114,16 @@ function makeMenu(menuItems, menuContainerId, type) {
       content.className = 'menu-item-content';
       content.innerHTML = `<h3>${item.name_english} </h3><p>${item.description_english}</p> `;
 
+      const circleButton = document.createElement('button');
+      circleButton.className = 'cirButton';
+      circleButton.innerHTML="+";
+
+
+      const circleBut = document.createElement('button');
+      circleBut.className = 'cirButton';
+      circleBut.style="width:70px;height:70px; top:-190px;"
+      circleBut.innerHTML="+";
+      
       let enName = item.name_english;
       let spName = item.name_spanish;
       let enDesc = item.description_english;
@@ -131,14 +141,9 @@ function makeMenu(menuItems, menuContainerId, type) {
       full_pan_button.classList.add('active');
       full_pan_button.innerHTML = 'WHOLE - $' + `${item.full_pan_cost}`;
 
-
       const half_pan_button = document.createElement('button');
       half_pan_button.className = 'portionButton';
       half_pan_button.innerHTML = 'HALF - $' + `${item.half_pan_cost}`;
-
-      const add_to_cart_button = document.createElement('button');
-      add_to_cart_button.className = 'addtocartButton';
-      add_to_cart_button.innerHTML = 'ADD TO CART';
 
       full_pan_button.addEventListener('click', () => {
         if (half_pan_button.classList.contains('active')) {
@@ -146,11 +151,12 @@ function makeMenu(menuItems, menuContainerId, type) {
           full_pan_button.classList.add('active');
         }
 
-        if (cart.find(i => i.id === item.id) === undefined && add_to_cart_button.classList.contains('disableAddToCart')) {
-          add_to_cart_button.classList.remove('disableAddToCart');
+        if (cart.find(i => i.id === item.id) === undefined && circleButton.classList.contains('itemWasAdded')) {
+              circleButton.classList.toggle('itemWasAdded');
+          
         }
-        else if (cart.find(i => i.id === item.id) && add_to_cart_button.classList.contains('disableAddToCart') == false) {
-          add_to_cart_button.classList.add('disableAddToCart');
+        else if (cart.find(i => i.id === item.id) && circleButton.classList.contains('itemWasAdded') == false) {
+              circleButton.classList.toggle('itemWasAdded');
         }
 
       });
@@ -162,57 +168,53 @@ function makeMenu(menuItems, menuContainerId, type) {
         }
 
 
-        if (cart.find(i => i.id === (item.id + 10000)) === undefined && add_to_cart_button.classList.contains('disableAddToCart')) {
-
-          add_to_cart_button.classList.remove('disableAddToCart')
+        if (cart.find(i => i.id === (item.id + 10000)) === undefined && circleButton.classList.contains('itemWasAdded')) {
+              circleButton.classList.toggle('itemWasAdded');
         }
-        else if (cart.find(i => i.id === (item.id + 10000)) && add_to_cart_button.classList.contains('disableAddToCart') == false) {
-          add_to_cart_button.classList.add('disableAddToCart')
+        else if (cart.find(i => i.id === (item.id + 10000)) && circleButton.classList.contains('itemWasAdded') == false) {
+              circleButton.classList.toggle('itemWasAdded');
         }
 
       });
 
-
       pan_button_div.appendChild(full_pan_button);
       pan_button_div.appendChild(half_pan_button);
 
+      content.appendChild(circleButton);
       content.appendChild(pan_button_div);
-      content.appendChild(add_to_cart_button);
+
 
       // --------------
-
-
-      add_to_cart_button.addEventListener('click', () => {
-
+circleButton.addEventListener('click', () => {
 
         if (full_pan_button.classList.contains('active')) {
 
-          if (add_to_cart_button.classList.contains('disableAddToCart') == false) {
+          if (circleButton.classList.contains('itemWasAdded') == false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, add_to_cart_button, full_pan_button, half_pan_button) == true) {
-              add_to_cart_button.classList.add('disableAddToCart');
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, circleButton, full_pan_button, half_pan_button) == true) {
+              circleButton.classList.toggle('itemWasAdded');
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
-
             }
           }
-
-          else
-            return;
+          else{ //remove item from cart
+             (clearFromCart(item.id)==true);         
+          }   
 
         }
         else if (half_pan_button.classList.contains('active')) {
 
-          if (add_to_cart_button.classList.contains('disableAddToCart') == false) {
+          if (circleButton.classList.contains('itemWasAdded') == false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, add_to_cart_button, full_pan_button, half_pan_button) == true) {
-              add_to_cart_button.classList.add('disableAddToCart');
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, full_pan_button, half_pan_button) == true) {
+              circleButton.classList.toggle('itemWasAdded');
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
             }
           }
-          else
-            return;
+          else{ //remove item from cart
+             (clearFromCart(item.id + 10000)==true);
+          }   
 
         }
         else {
@@ -224,8 +226,7 @@ function makeMenu(menuItems, menuContainerId, type) {
         document.getElementById('cart_num_id').innerHTML = cart.length;
         renderCart(); //maybe do on cart open
 
-      });
-
+});
 
       menuItem.appendChild(img);
       menuItem.appendChild(content);

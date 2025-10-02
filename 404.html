@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css">
-     <!-- <link rel="stylesheet" href="404.css"> -->
+    <!-- <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css"> -->
+    <script src="debug.js"></script>
+    
+    <script> setUp404Debug(); </script>
+    
+    <!-- <link rel="stylesheet" href="404.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -167,9 +171,13 @@ function getItemsNames(){
 
 window.onload = function() {
 
-   
-    // const hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00302f2/00601f1/@"; 
-    const hash = window.location.hash; 
+    let hash;
+
+   if(DEBUG_MODE === DEBUG.NO)
+        hash = window.location.hash;
+    else
+        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00302f2/00601f1/@";  
+
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
 

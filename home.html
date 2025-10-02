@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="tab_logo.png" />
-
+<script src="debug.js"></script>
     <title>Home</title>
 
     <script src="home_script.js"></script>
@@ -38,7 +38,7 @@
 
         function addToCart(id, name, sp_name, image, pan_size, price, cart_button, fullpan, halfpan) {
 
-            if (pan_size == 2)
+            if (pan_size === 2)
                 id += 10000;
 
             if (cart.find(i => i.id === id)) {
@@ -56,14 +56,19 @@
             const pan_item = cart.find(i => i.id === id);
             if (pan_item) {
 
-                if (pan_item.cart_button.classList.contains('disableAddToCart')) //it should
+                // if (pan_item.cart_button.classList.contains('itemWasAdded')) //it should
 
-                    if ((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active')))
-                        pan_item.cart_button.classList.remove('disableAddToCart');
+                if ((pan_item.pan_size == 1 && pan_item.fullpan.classList.contains('active')) || (pan_item.pan_size == 2 && pan_item.halfpan.classList.contains('active'))){
+                    pan_item.cart_button.classList.toggle('itemWasAdded');
+                    
+                    cart = cart.filter(i => i.id !== id);
+                    renderCart();
 
-                cart = cart.filter(i => i.id !== id);
-                renderCart();
+                    return true;
+                }
             }
+
+            return false;
         }
 
     </script>
@@ -118,8 +123,13 @@
         }
 
         function renderCart() {
-            if (cart.length == 0)
+            if (cart.length == 0){
+                document.getElementById('nothing_in_cart').style.display = 'block';
+                document.getElementById('cartItemsId').style.display = 'none';
+                document.getElementById('checkoutBtn').classList.remove('enabled');
+                updateTotal();
                 return;
+            }
 
             const cartDiv = document.getElementById('cartItemsId');
             cartDiv.innerHTML = ''; // clear old items
@@ -250,8 +260,13 @@
 
 
         function createQRLink() {
-            let qr_str = 'https://samuelg900.github.io/ElsiliasKitchen/404.html#' + cart.length + '/';
-            // let qr_str = 'http://127.0.0.1:5500/home.html/#' + cart.length + '/';
+
+            let qr_str;
+
+            if(DEBUG_MODE == DEBUG.NO)
+                qr_str = 'https://samuelg900.github.io/ElsiliasKitchen/404.html#' + cart.length + '/';
+            else
+                qr_str = 'http://127.0.0.1:5500/home.html/#' + cart.length + '/';
             
             let pansize;
 
@@ -416,6 +431,8 @@
         </script>
 
         <p id="disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
+        
+        <p id="disclaimerTextId" style="font-size: 13px;">For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used, please click <a href="original_images.html">here</a></p>
 
         <div id="qrcode-div-background-id">
             <div id="qrcode-div-id">
