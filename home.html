@@ -34,6 +34,18 @@
 
     <script>
 
+
+     window.addEventListener('beforeunload', function (e) {
+        if(cart.length > 0){
+            
+            // i believe this is needed for modern browsers
+            e.preventDefault(); 
+
+            //chrome requires the returnValue to be set (this is for old browsers)
+            e.returnValue = 'Cart is not empty. Are you sure you want to leave?'; 
+        }
+});
+
         let cart = [];
 
         function addToCart(id, name, sp_name, image, pan_size, price, cart_button, fullpan, halfpan) {
@@ -52,10 +64,7 @@
 
         function clearFromCart(id) {
 
-            console.log(id);
-
             const cart_item = cart.find(i => i.id === id);
-            console.log(cart_item);
             if (cart_item) {
 
                 //remove item from cart
@@ -65,9 +74,7 @@
                 
                 //change add to cart icon if needed
                 if(cart_item.cart_button.classList.contains('itemWasAdded'))
-                    if((cart_item.pan_size == 1 && cart_item.fullpan.classList.contains('active')) || (cart_item.pan_size == 2 && cart_item.halfpan.classList.contains('active'))){
-                        cart_item.cart_button.classList.toggle('itemWasAdded');
-                    }
+                    if((cart_item.pan_size == 1 && cart_item.fullpan.classList.contains('active')) || (cart_item.pan_size == 2 && cart_item.halfpan.classList.contains('active')))                        cart_item.cart_button.classList.toggle('itemWasAdded');
                 
                 return true;
             }
@@ -213,6 +220,12 @@
                         --item.quantity;
                         qtyP.textContent = `Qty: ${item.quantity}`;
                     }
+
+                    if(item.quantity < 3)
+                            cartPlusSign.style = "color:black;"
+                        else
+                            cartPlusSign.style = "color:#00000050;"
+
                      updateTotal();
                 });
 
@@ -222,8 +235,16 @@
                     if (item.quantity < 3) {
                         ++item.quantity
                         qtyP.textContent = `Qty: ${item.quantity}`;
-                    }
-                    updateTotal();
+                         updateTotal();
+                       
+                        if(item.quantity === 3)
+                            cartPlusSign.style = "color:#00000050;"
+                        else
+                            cartPlusSign.style = "color:black;"
+                       
+                    }else{
+                        
+                    } 
                 });
 
                 cartTrashIcon.addEventListener('click', () => {                    
@@ -515,6 +536,11 @@
             }
         </script>
 
+    </div>
+
+
+    <div class="footer">
+        <!-- <h1>123</h1> -->
     </div>
 
 </body>
