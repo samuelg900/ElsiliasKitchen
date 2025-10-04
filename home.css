@@ -172,6 +172,7 @@ body {
             }
 
             .rightname p {
+                color: #000;
                 margin: 0;
             }
 
@@ -324,7 +325,7 @@ transition: color 2s; */
     /* width: 90%; */
     /* height: 10%; */
     /* min-height: fit-content; */
-    z-index: 3;
+    z-index: 2;
     /* border-top: 1px solid #ccc;   */
     box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3);
     border-radius: 0 0 0 10px;
