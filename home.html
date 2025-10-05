@@ -174,7 +174,8 @@
                 right.style.position = "relative";
 
                 let nameP = document.createElement('p');
-                nameP.textContent = item.name;
+                // nameP.textContent = item.name;
+                nameP.innerHTML=`${item.name}`;
 
                 let pane_size = document.createElement('p');
                 pane_size.classList.add('pan_text');
