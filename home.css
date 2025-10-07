@@ -238,6 +238,8 @@ body {
     justify-self: center;
     align-content: center;
     
+    align-self: center;
+    
   text-align: center; 
     height:100%; 
 }
@@ -427,11 +429,12 @@ transition: color 2s; */
             position: relative;
             float: left;
             display: flex;
+            top: 15px;
             left: 12px;
             justify-content: center;
             align-items: center;
             /* width: fit-content; */
-            margin: 15px 0 0 0;
+            /* margin: 15px 0 0 0; */
             /* margin-block: auto; */
             gap: 4px;
             height: 24px;
@@ -461,11 +464,11 @@ transition: color 2s; */
 
         .switchLanguage{
             display: flex;
-            position: absolute;
+            /* position: absolute; */
             background: white !important;
             /* float: left; */
             /* top: 10px;*/
-            left: 0px; 
+            /* left: 0px;  */
             height: inherit;
             aspect-ratio: 2.5/1;
             border-radius: 50px;
