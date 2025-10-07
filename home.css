@@ -236,12 +236,12 @@ body {
 #nothing_in_cart{
     display: flex;
     justify-self: center;
-    /* align-content: center; */
+    align-content: center;
     
     /* align-self: center; */
     
-  text-align: center; 
-  margin-top: 60%;
+  /* text-align: center;  */
+  margin-top: 50%;
     /* height:100%;  */
 }
 
