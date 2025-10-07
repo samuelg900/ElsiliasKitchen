@@ -420,10 +420,11 @@ transition: color 2s; */
             position: relative;
             float: left;
             display: flex;
+            left: 12px;
             justify-content: center;
             align-items: center;
             /* width: fit-content; */
-            margin: 15px 0 0 12px;
+            margin: 15px 0 0 0;
             /* margin-block: auto; */
             gap: 4px;
             height: 24px;
@@ -456,8 +457,8 @@ transition: color 2s; */
             position: relative;
             background: white !important;
             float: left;
-            top: 10px;
-            left: 20px;
+            /* top: 10px;*/
+            /* left: 6px;  */
             height: 100%;
             aspect-ratio: 2.5/1;
             border-radius: 50px;
