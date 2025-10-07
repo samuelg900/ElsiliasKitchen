@@ -311,7 +311,7 @@ body {
    font-size: 32px;
     cursor: pointer;
     text-align: center;
-    
+    margin: 0 auto;
   transform: rotate(0deg);  
     transition: transform 0.2s ease;
 }
