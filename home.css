@@ -239,7 +239,7 @@ body {
     align-content: center;
     
   text-align: center; 
-margin: auto;
+margin: auto 0;
     height:100%; 
 }
 
