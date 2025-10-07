@@ -229,7 +229,7 @@ body {
 }
 
 #nothing_in_cart{
-    display: block;
+    display: flex;
     justify-self: center;
     align-content: center;
     height:100%; 

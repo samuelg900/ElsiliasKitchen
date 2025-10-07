@@ -117,12 +117,6 @@ function makeMenu(menuItems, menuContainerId, type) {
       const circleButton = document.createElement('button');
       circleButton.className = 'cirButton';
       circleButton.innerHTML="+";
-
-
-      const circleBut = document.createElement('button');
-      circleBut.className = 'cirButton';
-      circleBut.style="width:70px;height:70px; top:-190px;"
-      circleBut.innerHTML="+";
       
       let enName = item.name_english;
       let spName = item.name_spanish;
