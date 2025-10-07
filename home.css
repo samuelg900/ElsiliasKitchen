@@ -237,12 +237,10 @@ body {
     display: flex;
     justify-self: center;
     align-content: center;
-    
-    /* align-self: center; */
-    
+
   /* text-align: center;  */
-  margin-top: 50%;
-    /* height:100%;  */
+  margin-top: 50% auto;
+    height:100%; 
 }
 
 .cartItems {
