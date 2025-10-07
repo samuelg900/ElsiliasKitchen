@@ -461,11 +461,11 @@ transition: color 2s; */
 
         .switchLanguage{
             display: flex;
-            /* position: relative; */
+            position: absolute;
             background: white !important;
             /* float: left; */
             /* top: 10px;*/
-            /* left: 6px;  */
+            left: 0px; 
             height: inherit;
             aspect-ratio: 2.5/1;
             border-radius: 50px;
