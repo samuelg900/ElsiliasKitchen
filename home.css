@@ -238,9 +238,10 @@ body {
     justify-self: center;
     align-content: center;
     
-    align-self: center;
+    /* align-self: center; */
     
-  text-align: center; 
+  /* text-align: center;  */
+  margin: auto;
     height:100%; 
 }
 
@@ -436,6 +437,7 @@ transition: color 2s; */
             /* width: fit-content; */
             /* margin: 15px 0 0 0; */
             /* margin-block: auto; */
+            
             gap: 4px;
             height: 24px;
             z-index: 999;
