@@ -159,6 +159,9 @@ body {
             }
 
             .leftpic img {
+                position: absolute;
+  top: 0;
+  left: 0;
                 width: auto;
                 height: 100%;
                 object-fit: contain;
@@ -166,8 +169,8 @@ body {
             }
 
             .rightname {
-                flex: 3;
-                min-width: 0;
+                flex: 1.2;
+                /* min-width: 0; */
                 margin-left: 10px;
                 /* overflow-wrap: break-word;  */
             }
