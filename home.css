@@ -235,11 +235,10 @@ body {
 
 #nothing_in_cart{
     display: flex;
-    /* justify-self: center; */
+    justify-self: center;
     align-content: center;
     
   text-align: center; 
-margin: auto 0;
     height:100%; 
 }
 
