@@ -454,12 +454,12 @@ transition: color 2s; */
 
         .switchLanguage{
             display: flex;
-            position: relative;
+            /* position: relative; */
             background: white !important;
-            float: left;
+            /* float: left; */
             /* top: 10px;*/
             /* left: 6px;  */
-            height: 100%;
+            height: inherit;
             aspect-ratio: 2.5/1;
             border-radius: 50px;
         }
