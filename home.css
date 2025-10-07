@@ -427,12 +427,12 @@ transition: color 2s; */
 }
         .languageContainer{ 
             position: relative;
-            float: left;
-            display: flex;
+             float: left;
+           /* display: flex; */
             top: 15px;
             left: 12px;
-            justify-content: center;
-            align-items: center;
+            /* justify-content: center;
+            align-items: center; */
             /* width: fit-content; */
             /* margin: 15px 0 0 0; */
             /* margin-block: auto; */
@@ -450,7 +450,6 @@ transition: color 2s; */
         }
 
         .usa{
-
             left: 4px;
             top:23%;
             border-radius: 3px;
