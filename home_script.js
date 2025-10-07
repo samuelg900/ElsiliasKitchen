@@ -67,7 +67,7 @@ function updateLayout() {
   }
   else { //english
     document.getElementsByClassName('caveat')[0].textContent = 'Delicious Dominican food, from our home to yours';
-    document.getElementById('nothing_in_cart').innerHTML = 'Cart is empty';
+    document.getElementById('nothing_in_cart').innerHTML = 'Cart is emptyy';
     document.getElementById('disclaimerTextId').innerHTML = 'Each whole pan is enough for approximately 35-38 people';
     document.getElementById('checkoutBtn').innerHTML = 'Checkout';
 
