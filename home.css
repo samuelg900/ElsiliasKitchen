@@ -234,11 +234,12 @@ body {
 }
 
 #nothing_in_cart{
-    /* display: flex;
-    justify-self: center;
-    align-content: center; */
+    display: flex;
+    /* justify-self: center; */
+    align-content: center;
     
-  text-align: center;
+  text-align: center; 
+margin: auto;
     height:100%; 
 }
 
