@@ -454,8 +454,10 @@ transition: color 2s; */
         .switchLanguage{
             display: flex;
             position: relative;
-            background-color: white !important;
+            background: white !important;
             float: left;
+            top: 10px;
+            left: 20px;
             height: 100%;
             aspect-ratio: 2.5/1;
             border-radius: 50px;
