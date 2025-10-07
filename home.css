@@ -229,9 +229,11 @@ body {
 }
 
 #nothing_in_cart{
-    display: flex;
+    /* display: flex;
     justify-self: center;
-    align-content: center;
+    align-content: center; */
+    
+  text-align: center;
     height:100%; 
 }
 
