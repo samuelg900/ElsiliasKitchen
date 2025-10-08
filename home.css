@@ -325,6 +325,8 @@ body {
             background-color: white;
             color: black;
             line-height: 1;
+            height: 40px;
+            width: 40px;
             /* The core of the rotation animation! */
             /* Add a transition for smooth movement over 0.4 seconds */
             transition: transform 0.2s ease;
