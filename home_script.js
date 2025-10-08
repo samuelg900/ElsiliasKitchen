@@ -116,7 +116,15 @@ function makeMenu(menuItems, menuContainerId, type) {
 
       const circleButton = document.createElement('button');
       circleButton.className = 'cirButton';
-      circleButton.textContent="+";
+      // circleButton.textContent="+";
+
+    const plusDiv = document.createElement('div');
+    plusDiv.className = 'plus-sign';
+    
+    // Set the content of the div to the plus sign
+    plusDiv.textContent = '+';
+
+    circleButton.appendChild(plusDiv);
       
       let enName = item.name_english;
       let spName = item.name_spanish;
@@ -146,10 +154,12 @@ function makeMenu(menuItems, menuContainerId, type) {
         }
 
         if (cart.find(i => i.id === item.id) === undefined && circleButton.classList.contains('itemWasAdded')) {
+              plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
           
         }
         else if (cart.find(i => i.id === item.id) && circleButton.classList.contains('itemWasAdded') == false) {
+              plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
         }
 
@@ -163,9 +173,11 @@ function makeMenu(menuItems, menuContainerId, type) {
 
 
         if (cart.find(i => i.id === (item.id + 10000)) === undefined && circleButton.classList.contains('itemWasAdded')) {
+              plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
         }
         else if (cart.find(i => i.id === (item.id + 10000)) && circleButton.classList.contains('itemWasAdded') == false) {
+              plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
         }
 
@@ -185,7 +197,8 @@ circleButton.addEventListener('click', () => {
 
           if (circleButton.classList.contains('itemWasAdded') === false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, circleButton, full_pan_button, half_pan_button) === true) {
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 1, item.full_pan_cost, circleButton, plusDiv, full_pan_button, half_pan_button) === true) {
+              plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
 
               //Needed?
@@ -203,7 +216,8 @@ circleButton.addEventListener('click', () => {
 
           if (circleButton.classList.contains('itemWasAdded') === false) {
 
-            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, full_pan_button, half_pan_button) === true) {
+            if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, plusDiv, full_pan_button, half_pan_button) === true) {
+               plusDiv.classList.toggle('itemWasAdded');
               circleButton.classList.toggle('itemWasAdded');
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';

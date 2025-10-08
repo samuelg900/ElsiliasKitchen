@@ -288,6 +288,9 @@ body {
 }
 
 .cirButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute; 
     top: -65px; 
     right: 10px; 
@@ -300,20 +303,39 @@ body {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.566);
    font-size: 32px;
     cursor: pointer;
-    text-align: center;
-    margin: 0 auto;
+    /* text-align: center; */
+    /* margin: 0 auto; */
+    /* padding: 0; */
   transform: rotate(0deg);  
     transition: transform 0.2s ease;
 }
 
 .cirButton.itemWasAdded{
     
-   font-size: 38px;
+   /* font-size: 38px; */
   background-color: #e1968e;
-  /* background-color: black;
-  color: white;
-transition: color 2s; */
-  transform: rotate(135deg);
+  /* transform: rotate(135deg); */
+}
+
+
+ .plus-sign {
+            /* Styling for the plus sign text */
+            font-size: 40px;
+            font-weight: 300; /* Light weight for a cleaner look */
+            background-color: white;
+            color: black;
+            line-height: 1;
+            /* The core of the rotation animation! */
+            /* Add a transition for smooth movement over 0.4 seconds */
+            transition: transform 0.2s ease;
+            /* Start at 0 degrees */
+            transform: rotate(0deg);
+            background: transparent;
+}
+
+.plus-sign.itemWasAdded{
+     /* background-color: #e1968e; */
+     transform: rotate(135deg);
 }
 
 
