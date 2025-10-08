@@ -233,14 +233,14 @@ body {
     /* animation: kf_cart_expand 0.5s; */
 }
 
-#nothing_in_cart{
-    /* display: flex; */
-    /* justify-self: center; */
-    align-content: center;
+.nothing_in_cart{
+    display: flex;
+    justify-content: center;
+    /* align-self: center; */
 
-  text-align: center; 
+  /* text-align: center;  */
   /* overflow: hidden; */
-  /* margin: 50%; */
+  margin: 50% auto;
   /* width: 200px; */
     height:100% 
 }
