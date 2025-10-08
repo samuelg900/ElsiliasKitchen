@@ -106,6 +106,7 @@ function makeMenu(menuItems, menuContainerId, type) {
       menuItem.className = 'menu-item';
 
       const img = document.createElement('img');
+      img.className = 'item_image';
       img.src = item.image_link;
       img.alt = item.name_english;
       img.addEventListener('click', () => openImageViewer(item.image_link));
@@ -122,6 +123,8 @@ function makeMenu(menuItems, menuContainerId, type) {
       const plus = document.createElement('img');
       plus.className = 'plus';
       plus.setAttribute('src','plus.png');
+      // plus.setAttribute("width", "40px");
+      // plus.setAttribute("height", "40px");
       circleButton.appendChild(plus);
       
       let enName = item.name_english;
