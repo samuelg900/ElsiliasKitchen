@@ -122,7 +122,7 @@ function makeMenu(menuItems, menuContainerId, type) {
     plusDiv.className = 'plus-sign';
     
     // Set the content of the div to the plus sign
-    plusDiv.innerHTML = `&#x002B`;
+    plusDiv.innerHTML = '+';
 
     circleButton.appendChild(plusDiv);
       
