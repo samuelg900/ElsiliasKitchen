@@ -287,21 +287,6 @@ body {
     border: 3px solid orange;
 }
 
-.addtocartButton{
-    height: 46px;
-    width: 100%;
-    /* max-width: 600px; */
-    margin-inline: auto;
-    background-color: #4791e1;
-    color: white;
-    aspect-ratio: 3 / 1;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
 .cirButton{
     position: absolute; 
     top: -65px; 
@@ -342,7 +327,7 @@ transition: color 2s; */
     z-index: 2;
     /* border-top: 1px solid #ccc;   */
     /* box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3); */
-    box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: -4px 4px 20px rgba(0, 0, 0, 0.3);
     border-radius: 0 0 0 10px;
     padding: 10px 15px;
     background-color: white;
@@ -627,9 +612,7 @@ transition: color 2s; */
     justify-self: center;
     width: 100%;
     max-width: 900px;
-    height: fit-content;
     z-index: 2;
-    background-color: white;
 }
 
 .close_icon {

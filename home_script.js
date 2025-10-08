@@ -1,5 +1,5 @@
 
-const yoloArray = [];
+const translateArray = [];
 
 function titlesFunc() {
   let titles = document.querySelectorAll('h1');
@@ -55,11 +55,11 @@ function updateLayout() {
 
 
     for (let item of menu_item) {
-      item.querySelector('h3').innerHTML = yoloArray[index + 1];
-      item.querySelector('p').textContent = yoloArray[index + 3];
+      item.querySelector('h3').innerHTML = translateArray[index + 1];
+      item.querySelector('p').textContent = translateArray[index + 3];
       let buttons = item.querySelectorAll('button');
-      buttons[1].innerHTML = 'ENTERA - $' + `${yoloArray[index + 4]}`;
-      buttons[2].innerHTML = 'MEDIA - $' + `${yoloArray[index + 5]}`;
+      buttons[1].innerHTML = 'ENTERA - $' + `${translateArray[index + 4]}`;
+      buttons[2].innerHTML = 'MEDIA - $' + `${translateArray[index + 5]}`;
       // buttons[2].innerHTML = 'AÑADIR AL CARRITO';
 
       index += 6;
@@ -75,11 +75,11 @@ function updateLayout() {
     titlesFunc();
 
     for (let item of menu_item) {
-      item.querySelector('h3').innerHTML = yoloArray[index];
-      item.querySelector('p').textContent = yoloArray[index + 2];
+      item.querySelector('h3').innerHTML = translateArray[index];
+      item.querySelector('p').textContent = translateArray[index + 2];
       let buttons = item.querySelectorAll('button');
-      buttons[1].innerHTML = 'WHOLE - $' + `${yoloArray[index + 4]}`;
-      buttons[2].innerHTML = 'HALF - $' + `${yoloArray[index + 5]}`;
+      buttons[1].innerHTML = 'WHOLE - $' + `${translateArray[index + 4]}`;
+      buttons[2].innerHTML = 'HALF - $' + `${translateArray[index + 5]}`;
       // buttons[2].innerHTML = 'ADD TO CART';
 
       index += 6;
@@ -116,7 +116,7 @@ function makeMenu(menuItems, menuContainerId, type) {
 
       const circleButton = document.createElement('button');
       circleButton.className = 'cirButton';
-      circleButton.innerHTML="+";
+      circleButton.textContent="+";
       
       let enName = item.name_english;
       let spName = item.name_spanish;
@@ -125,7 +125,7 @@ function makeMenu(menuItems, menuContainerId, type) {
       let fPan = item.full_pan_cost;
       let hPan = item.half_pan_cost;
 
-      yoloArray.push(enName, spName, enDesc, spDesc, fPan, hPan);
+      translateArray.push(enName, spName, enDesc, spDesc, fPan, hPan);
 
       const pan_button_div = document.createElement('div');
       pan_button_div.className = "pan_button_div";
