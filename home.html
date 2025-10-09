@@ -357,14 +357,15 @@
 
     <div class="cart" id="cart_contents_id">
         <div class="cartContent">
-            <div id="nothing_in_cart"><p class="nothing_in_cart">Cart is empty</p></div>
+            <div id="nothing_in_cart" class="nothing_in_cart">Cart is empty</div>
             <div class="cartItems" id="cartItemsId">
+        </div>
+            <div class="checkout_div">
+                <p id="total_of_order_id">Total: $0</p>
+                <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
             </div>
         </div>
-        <div class="checkout">
-            <p id="total_of_order_id">Total: $0</p>
-            <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
-        </div>
+        
     </div>
 
     <div class="conig" style="max-height: 500px; overflow: hidden;">
