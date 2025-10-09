@@ -137,8 +137,10 @@ body {
     flex-direction: row;
     position: relative;
     width: 90%;
-    height: 70px;
+    max-width: 430px ;
+    height: 100px;
     margin: 15px 10px 0 15px;
+    margin-inline: auto;
     padding: 0 0 10px 0;
     border-bottom: 1px solid rgb(134, 134, 134);
     overflow: hidden; 
@@ -153,15 +155,15 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    height: 87% !important;
+    height: 87%;
     width: auto;
-    height: 100%;
+    /* height: 100%; */
     object-fit: contain;
     border-radius: 5px;
 }
 
 .rightname {
-    flex: 1.7;
+    flex: 1;
 }
 
 .rightname p {
@@ -190,7 +192,7 @@ body {
   position: fixed;
   top: 53px;
   right: 0;
-  width: 350px;
+  width: 400px;
   height: 0;
   max-height: 400px;
   z-index: 2;
@@ -211,6 +213,7 @@ body {
     height:100%;
     /* height: 400px; */
   position: relative;
+  padding-bottom: 68px;
     /* z-index: 3; */
   border-radius: 0 0 0 10px;
     /* box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3); */
@@ -219,6 +222,8 @@ body {
     box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
     background-color: white;
     /* animation: kf_cart_expand 0.5s; */
+
+    overflow: hidden;
 }
 
 #nothing_in_cart{
@@ -258,7 +263,7 @@ body {
 
 .cartItems {
     overflow-y: auto;
-    padding-bottom: 70px;
+    /* padding-bottom: 70px; */
 }
 
 .pan_button_div{
@@ -376,6 +381,7 @@ body {
 .menu-item-content {
     /* min-height: 200px; */
     display: flex;
+    justify-content: space-between;
     position: relative;
     flex-direction: column;
     /* background: #393939d5; */
@@ -652,6 +658,24 @@ body {
 
 
 @media screen and (max-width: 600px) {
+
+    #cart_contents_id {
+    width: 100%;
+
+    }
+
+    
+.cartContent {
+  border-radius: 0 0 30px 30px;
+}
+
+.leftpic {
+    flex: 1;
+}
+
+.rightname {
+    flex: 1.3;
+}
 
     .menu {
         padding: 0 20px;

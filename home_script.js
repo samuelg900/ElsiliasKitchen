@@ -18,8 +18,11 @@ function titlesFunc() {
       case 'Carnes':
         title.textContent = 'Meats';
         break;
-      case 'Pastas':
-        title.textContent = 'Pastas';
+      case 'Pastas & Salads':
+        title.textContent = 'Pastas y Ensaladas';
+        break;
+      case 'Pastas y Ensaladas':
+        title.textContent = 'Pastas & Salads';
         break;
       case 'Roots':
         title.textContent = 'Viveres';
@@ -257,7 +260,7 @@ function getJsonData() {
     .then(data => {
       makeMenu(data, "menu-arroz", "rice");
       makeMenu(data, "menu-carne", "meat");
-      makeMenu(data, "menu-pasta", "pasta");
+      makeMenu(data, "menu-pasta", "pastas_and_salads");
       makeMenu(data, "menu-viveres", "root_vegetables");
       makeMenu(data, "menu-picadera", "finger_food");
       // updateLayout();
