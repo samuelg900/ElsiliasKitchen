@@ -592,6 +592,7 @@ body {
     justify-self: center;
     width: 100%;
     max-width: 900px;
+    margin: 200px auto;
     z-index: 2;
 }
 
