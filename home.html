@@ -36,7 +36,7 @@
 
 
      window.addEventListener('beforeunload', function (e) {
-        if(cart.length > 0){
+        if(cart.length > 0 && DEBUG_MODE == DEBUG.NO){
             
             // i believe this is needed for modern browsers
             e.preventDefault(); 
@@ -91,13 +91,14 @@
             
                 if (cart.length === 0) {
 
+                    document.getElementById('add_message').style.display = 'none';
                     document.getElementById('nothing_in_cart').style.display = 'block';
                     document.getElementById('cartItemsId').style.display = 'none';
                     document.getElementById('checkoutBtn').classList.remove('enabled');
 
 
                 } else {
-
+                    document.getElementById('add_message').style.display = 'block';
                     document.getElementById('nothing_in_cart').style.display = 'none';
                     document.getElementById('cartItemsId').style.display = 'block';
                     document.getElementById('checkoutBtn').classList.add('enabled');
@@ -124,7 +125,7 @@
             }
             else {
                 document.getElementById('cart_num_id').style.display = 'none';
-
+                document.getElementById('add_message').style.display = 'none';
                 document.getElementById('nothing_in_cart').style.display = 'block';
                 document.getElementById('cartItemsId').style.display = 'none';
                 document.getElementById('checkoutBtn').classList.remove('enabled');
@@ -136,6 +137,11 @@
 
         function renderCart() {
             if (cart.length == 0){
+                document.getElementById("textareaId").value = '';
+                document.getElementById("saveMessageButtonId").style='background-olor:rgba(57, 57, 57, 0.545);';
+                savedMessage = undefined;
+                document.getElementById("add_message").style.color="black";
+                document.getElementById('add_message').style.display = 'none';
                 document.getElementById('nothing_in_cart').style.display = 'block';
                 document.getElementById('cartItemsId').style.display = 'none';
                 document.getElementById('checkoutBtn').classList.remove('enabled');
@@ -308,8 +314,10 @@
 
         function getQRDateTime() {
             const date = new Date();
+            document.getElementById('currentDateId').style='font-size: 16px;'
             document.getElementById('currentDateId').innerHTML = `${date.toDateString()} <br> ${date.toLocaleTimeString()}`;
-        }
+
+        }   
 
         // TODO: stage/state -- if back is pressed
 
@@ -332,6 +340,19 @@
             });
 
             getQRDateTime();
+
+            if(savedMessage != undefined){
+                // const mess = document.createElement('p');
+                // mess.style = "font-size:12px;  font-style: italic; text-align: center; margin: 20px;";
+                // mess
+                // document.getElementById('qrcode-div-id').appendChild(mess);
+
+                document.getElementById('p_for_saved_message').innerHTML = `Notes:<br>${savedMessage}`;
+                document.getElementById('p_for_saved_message').style="display:block; font-size:12px; font-style: italic; text-align: center; margin: 20px; overflow-wrap: break-word; word-break: break-all"
+
+            }
+            else
+                document.getElementById('p_for_saved_message').style.display='none';
 
             document.querySelector('.cart').classList.toggle('open');
             // openCartContents();
@@ -362,8 +383,17 @@
         </div>
             <div class="checkout_div">
                 <p id="total_of_order_id">Total: $0</p>
-                <a>Add message...</a>
+                <a id="add_message" onclick="openAddMessage(3)">Add message...</a>
                 <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
+            </div>
+        </div>
+
+        <div id="saveContainerId">
+            <textarea id="textareaId" placeholder="Add food details if needed..." rows="2" cols="40"></textarea>
+            <div class="save_div">
+                <button id="cancelMessageButtonId" type="button" onclick="openAddMessage(0)">Cancel</button>
+                <p id="labelId" style="color: white;">0/200</p>
+                <button id="saveMessageButtonId" onclick="saveAddedMessage()" type="button">Save</button>
             </div>
         </div>
         
@@ -461,6 +491,7 @@
                 <div id="qrcode"></div>
                 <p>Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order
                     date</p>
+                <p id="p_for_saved_message" style="display:none"></p>
                 <button id="save-qr-button" onclick="generatePdf()">Save QR Code</button>
             </div>
         </div>
@@ -469,8 +500,6 @@
             function generatePdf() {
                 const doc = new jspdf.jsPDF();
                 // doc.text("Hello, this is a generated PDF!", 10, 10);
-
-
 
                 const imgWidth = 80;  // desired width in PDF
                 const imgHeight = 80; // desired height in PDF
@@ -485,11 +514,10 @@
 
                 //Browser with show (to devs) a 'deprecated feature used' warning for XMLHttpRequest when addImage is called.
                 //I believe this happens due to a jspdf library call for loading the image file synchronously. It's fine- it all still works 
-                doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 60, 90);
+                doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 50, 75);
                 doc.addImage("pep.png", "PNG", pageWidth * 0.7, pageHeight * 0.26, 40, 40);
-                doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.55, 50, 50);
+                doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.46, 50, 50);
                 doc.addImage("plan.png", "PNG", pageWidth * 0.503, pageHeight * 0.7, 100, 100);
-
 
                 doc.setFontSize(16);
                 doc.setFont("Times", "normal");
@@ -498,7 +526,7 @@
                 doc.setFont("Times", "Bold");
                 doc.setFontSize(36);
 
-                doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 30, { align: "center" });
+                doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 40, { align: "center" });
 
                 doc.addImage("logo_for_pdf.png", "PNG", pageWidth - 44, 0, 40, 26.7);
 
@@ -512,7 +540,20 @@
                 let qr_img = new Image();
                 qr_img.src = canvas.toDataURL("image/png");
 
-                doc.addImage(qr_img, "PNG", x, y, imgWidth, imgHeight);
+                doc.addImage(qr_img, "PNG", x, y-20, imgWidth, imgHeight);
+
+                if(savedMessage == undefined){
+                    doc.setFontSize(24);
+                    doc.setFont("times", "bold");
+                    doc.text("Thank you for choosing us!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
+                }
+                else{
+                    doc.setFontSize(12);
+                    doc.setFont("times", "italic");
+                    const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
+                    doc.text("Notes:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
+                    doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
+                }
 
                 doc.setFontSize(16);
                 doc.setFont("times", "normal");
@@ -522,8 +563,6 @@
 
 
                 doc.setFont("times", "bolditalic");
-
-
                 doc.text("This page alone is not a confi", (pageWidth / 2) - 25, y + imgHeight + 70, { align: "center" });
 
                 doc.setTextColor(255, 255, 255);
@@ -542,6 +581,82 @@
     <div class="footer">
         <!-- <h1>123</h1> -->
     </div>
+
+    <script>
+
+        let savedMessage = undefined;
+
+        function openAddMessage(option){
+
+            
+                // document.getElementById("saveContainerId").classList.toggle("show");
+
+            // //TODO: replace this with....not showing add message label in the first place
+            // if(cart.length === 0)
+            //     return;
+
+            //cancel
+            if(option == 0) {
+                document.getElementById("saveContainerId").classList.toggle("show");
+            }
+            //save
+            else if(option == 1) {
+                if(document.getElementById("textareaId").value.length > 0)
+                    savedMessage = document.getElementById("textareaId").value;
+                else
+                    savedMessage = undefined;
+                document.getElementById("saveContainerId").classList.toggle("show");
+            }
+            //add message clicked
+            else {
+                if(savedMessage != undefined){
+                   document.getElementById("textareaId").value = savedMessage;
+                }
+                document.getElementById("saveContainerId").classList.toggle("show");
+            }
+        
+
+            // if(savedMessage != undefined)
+            //     document.getElementById("textareaId").value = savedMessage;
+
+            // if(document.getElementById("textareaId").value.length < 1)
+            //     document.getElementById("saveMessageButtonId").style ="background-color: rgba(57, 57, 57, 0.545);";
+        
+            }
+
+        function saveAddedMessage(){
+
+            const message = document.getElementById("textareaId").value;
+
+            if(message.length > 0){
+                savedMessage = message;
+                document.getElementById("add_message").style.color="#4091ee";
+            }
+            else{
+                savedMessage = undefined;
+                document.getElementById("add_message").style.color="black";
+            }
+            openAddMessage(1);
+        }
+
+        const countLabel = document.getElementById("textareaId");
+        countLabel.addEventListener('input', function(event) {
+            
+            if(event.target.textLength == 0)
+                savedMessage = undefined;
+
+            if(event.target.textLength > 200) 
+                event.target.value = event.target.value.substring(0, 200);
+
+            // if(document.getElementById("textareaId").value.length < 1)
+            //     document.getElementById("saveMessageButtonId").style ="background-color: rgba(57, 57, 57, 0.545);";
+            // else if(document.getElementById("textareaId").value.length == 1)
+            //     document.getElementById("saveMessageButtonId").style ="background-color: #6dac63;";
+  
+            document.getElementById("labelId").textContent=`${event.target.textLength}/200`;
+
+        });
+    </script>
 
 </body>
 

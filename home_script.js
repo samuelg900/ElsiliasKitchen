@@ -201,6 +201,8 @@ circleButton.addEventListener('click', () => {
               circleButton.classList.toggle('itemWasAdded');
 
               //Needed?
+              
+              document.getElementById('add_message').style.display = 'block';
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
             }
@@ -217,6 +219,8 @@ circleButton.addEventListener('click', () => {
 
             if (addToCart(item.id, item.name_english, item.name_spanish, item.image_link, 2, item.half_pan_cost, circleButton, full_pan_button, half_pan_button) === true) {
               circleButton.classList.toggle('itemWasAdded');
+              
+              document.getElementById('add_message').style.display = 'block';
               document.getElementById('nothing_in_cart').style.display = 'none';
               document.getElementById('cartItemsId').style.display = 'block';
             }
