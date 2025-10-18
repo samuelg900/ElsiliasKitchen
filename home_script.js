@@ -49,11 +49,20 @@ function updateLayout() {
 
   let index = 0;
   if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
-    document.getElementsByClassName('caveat')[0].textContent = 'Comida deliciosa y Dominicana de mi casa a la suya';
+    document.getElementsByClassName('caveat')[0].innerHTML = `Comida deliciosa y Dominicana,<br> de mi casa a la suya`;
     document.getElementById('nothing_in_cart').textContent = 'El carrito está vacío';
-    document.getElementById('disclaimerTextId').innerHTML = 'Cada bandeja entera es suficiente para aproximadamente 35-38 personas';
+    document.getElementById('size_disclaimerTextId').innerHTML = 'Cada bandeja entera es suficiente para aproximadamente 35-38 personas';
+    document.getElementById('ai_disclaimerTextId').innerHTML = `Para mayor transparencia: Este sitio utilizó imágenes con IA para las imágenes que se muestran en la página. Si desea ver algunas de las imágenes originales recortadas que se utilizan como referencia, haga clic <a href="original_images.html">aquí</a>`;
     document.getElementById('checkoutBtn').innerHTML = 'Finalizar';
-
+    document.getElementById('add_message').textContent = 'Agregar mensaje...';
+    document.getElementById('cancelMessageButtonId').textContent = 'Cancelar';
+    document.getElementById('saveMessageButtonId').textContent = 'Guardar';
+    document.getElementById('textareaId').setAttribute("placeholder", "Agregue detalles si necesario...");
+    document.getElementById('save-qr-button').textContent = 'Guardar código QR';
+    document.getElementById('qrTitleId').textContent = "Orden de Elsilia's Kitchen";
+    document.getElementById('qrTextId').innerHTML= `Por favor guarde y envíe este código QR a <strong>Elsa</strong> para confirmar su pedido y establecer una fecha de orden`;
+    document.getElementById('p_for_saved_message').innerHTML= `Notas:<br>${savedMessage}`;
+    
     titlesFunc();
 
 
@@ -69,12 +78,20 @@ function updateLayout() {
     }
   }
   else { //english
-    document.getElementsByClassName('caveat')[0].textContent = 'Delicious Dominican food, from our home to yours';
+    document.getElementsByClassName('caveat')[0].innerHTML = `Delicious Dominican food,<br> from our home to yours`;
     document.getElementById('nothing_in_cart').innerHTML = 'Cart is empty';
-    document.getElementById('disclaimerTextId').innerHTML = 'Each whole pan is enough for approximately 35-38 people';
+    document.getElementById('size_disclaimerTextId').innerHTML = 'Each whole pan is enough for approximately 35-38 people';
+    document.getElementById('ai_disclaimerTextId').innerHTML = `For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used as a reference, please click <a href="original_images.html">here</a>`;
     document.getElementById('checkoutBtn').innerHTML = 'Checkout';
-
-
+    document.getElementById('add_message').textContent = 'Add message...';
+    document.getElementById('cancelMessageButtonId').textContent = 'Cancel';
+    document.getElementById('saveMessageButtonId').textContent = 'Save';
+    document.getElementById('textareaId').setAttribute("placeholder", "Add food details if needed...");
+    document.getElementById('save-qr-button').textContent = 'Save QR Code';
+    document.getElementById('qrTitleId').textContent = "Elsilia's Kitchen Order";
+    document.getElementById('qrTextId').innerHTML = `Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order`;
+    document.getElementById('p_for_saved_message').innerHTML= `Notes:<br>${savedMessage}`;
+    
     titlesFunc();
 
     for (let item of menu_item) {
@@ -120,14 +137,10 @@ function makeMenu(menuItems, menuContainerId, type) {
 
       const circleButton = document.createElement('button');
       circleButton.className = 'cirButton';
-      // circleButton.innerHTML='&#xFF0B';
-
 
       const plus = document.createElement('img');
       plus.className = 'plus';
       plus.setAttribute('src','plus.png');
-      // plus.setAttribute("width", "40px");
-      // plus.setAttribute("height", "40px");
       circleButton.appendChild(plus);
       
       let enName = item.name_english;

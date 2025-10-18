@@ -490,13 +490,14 @@ transform: translateX(100%);
     /* justify-self: center; */
 } 
 
-#qrcode-div-id h1{
+#qrTitleId{
     text-align: center;
     margin-top: 0;
     margin-bottom:40px;
+    margin-inline: 10px;
 }
 
-#qrcode-div-id p{
+#qrTextId{
     text-align: center;
     margin-top: 40px;
     margin-bottom: 0px;
@@ -633,29 +634,29 @@ transform: translateX(100%);
 #saveContainerId{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     position: fixed;
-     top: 54px;
+     top: 14px;
     right: 0px;
     width: 100%;
     max-width: 430px;
     min-width: 400px;
     height: 0;
-    max-height: 270px;
-    /* padding-top: 0; */
+    max-height: 350px;
+    padding-top: 40px;
     background-color: #94cbe3;
     box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
     /* background-color: #b3b3b3; */
-    border-radius: 0 0 20px 20px;
+    /* border-radius: 0 0 20px 20px; */
     z-index: 4;
     transition: height 0.6s ease;
     overflow: hidden;
 }
 
 #saveContainerId.show {
-    padding-top: 40px;
-     height: 30%;
+    /* padding-top: 40px; */
+     height: 40%;
 }
 
 #cancelMessageButtonId, #saveMessageButtonId{
@@ -663,7 +664,7 @@ transform: translateX(100%);
     height: 40px;
     border-radius: 40px;
     border: none;
-    margin-block: 16px;
+    /* margin-block: 16px; */
     background-color: #e1968e;
     cursor: pointer;
     color: white;
@@ -687,7 +688,7 @@ transform: translateX(100%);
       font-size: 16px;
       max-width: 500px;
       resize: none;
-      border-radius: 8px;
+      /* border-radius: 8px; */
     }
 
 #add_message{
@@ -699,10 +700,10 @@ transform: translateX(100%);
     text-decoration: underline;
 }
 
-#disclaimerTextId{
+.disclaimerText{
     text-align: center; 
     margin-block: 40px;
-    margin-inline: 5px;
+    margin-inline: 10px;
 }
 
 
