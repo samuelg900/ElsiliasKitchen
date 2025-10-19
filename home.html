@@ -38,6 +38,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        animation: load 2s forwards;
         z-index: 5; /* Ensure it's on top */
     }
 
@@ -47,11 +48,27 @@
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        animation: spin 1s linear infinite;
+        animation-iteration-count: 1;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes load {
+        0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    99% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
     }
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
+      0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
     </style>
@@ -59,10 +76,10 @@
 
     <script>
 
- window.onload = function() {
-        document.getElementById('loading-screen').style.display = 'none';
-         document.getElementById('main-content').style.display = 'block'; // Show main content
-    };
+//  window.onload = function() {
+//         document.getElementById('loading-screen').style.display = 'none';
+//          document.getElementById('main-content').style.display = 'block'; // Show main content
+//     };
 
         //refresh content
         function changeLanguage() {
