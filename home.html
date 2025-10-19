@@ -20,9 +20,49 @@
 
 </head>
 
-<body id="bod">
+<body id="main-content">
+
+ <div id="loading-screen">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <style>
+          #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff; /* Or your desired background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5; /* Ensure it's on top */
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #333;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
+
 
     <script>
+
+ window.onload = function() {
+        document.getElementById('loading-screen').style.display = 'none';
+         document.getElementById('main-content').style.display = 'block'; // Show main content
+    };
 
         //refresh content
         function changeLanguage() {
@@ -503,34 +543,33 @@
         <script>
             function generatePdf() {
                 const doc = new jspdf.jsPDF();
-                // doc.text("Hello, this is a generated PDF!", 10, 10);
 
-                const imgWidth = 80;  // desired width in PDF
-                const imgHeight = 80; // desired height in PDF
+                const imgWidth = 80;  //desired width in PDF
+                const imgHeight = 80; //desired height in PDF
 
-                // Get page dimensions
+                //page dimensions
                 const pageWidth = doc.internal.pageSize.getWidth();
                 const pageHeight = doc.internal.pageSize.getHeight();
 
-                // Calculate center position
+                //center position
                 const x = (pageWidth - imgWidth) / 2;
                 const y = (pageHeight - imgHeight) / 2;
 
+                
                 //Browser with show (to devs) a 'deprecated feature used' warning for XMLHttpRequest when addImage is called.
                 //I believe this happens due to a jspdf library call for loading the image file synchronously. It's fine- it all still works 
+
+                //adds decorative images, sets date, logo, and QR code        
                 doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 50, 75);
                 doc.addImage("pep.png", "PNG", pageWidth * 0.7, pageHeight * 0.26, 40, 40);
                 doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.46, 50, 50);
                 doc.addImage("plan.png", "PNG", pageWidth * 0.503, pageHeight * 0.7, 100, 100);
 
                 doc.setFontSize(16);
-                doc.setFont("Times", "normal");
+                doc.setFont("times", "normal");
                 doc.text(document.getElementById('currentDateId').textContent, 5, 8);
 
-
-
                 doc.addImage("logo_for_pdf.png", "PNG", pageWidth - 42, 0, 36, 26.7);
-
                 doc.setFontSize(10);
                 doc.setTextColor(0, 0, 0);
                 doc.text("ELSILIA'S KITCHEN", pageWidth - 23.5, 26, { align: "center" });
@@ -543,15 +582,16 @@
 
                 doc.addImage(qr_img, "PNG", x, y-20, imgWidth, imgHeight);
 
+                                
+                doc.setFont("times", "Bold");
+                doc.setFontSize(36);
+
                 if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
-                    //SPANISH                
-                    doc.setFont("Times", "Bold");
-                    doc.setFontSize(36);
+                    //SPANISH              
                     doc.text("Orden de Elsilia's Kitchen", pageWidth / 2, y - 40, { align: "center" });
 
                     if(savedMessage == undefined){
                         doc.setFontSize(24);
-                        doc.setFont("times", "bold");
                         doc.text("¡Gracias por elegirnos!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
                     }
                     else{
@@ -577,14 +617,11 @@
                     doc.save("Orden de Elsilia Kitchen - " + document.getElementById('currentDateId').textContent + ".pdf");
                 }
                 else{
-                    //ENGLISH                
-                    doc.setFont("Times", "Bold");
-                    doc.setFontSize(36);
+                    //ENGLISH
                     doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 40, { align: "center" });
 
                     if(savedMessage == undefined){
                         doc.setFontSize(24);
-                        doc.setFont("times", "bold");
                         doc.text("Thank you for choosing us!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
                     }
                     else{
@@ -608,7 +645,7 @@
                     doc.text("rmation of any order.", (pageWidth / 2) + 34.5, y + imgHeight + 70, { align: "center" });
 
                     doc.save("Elsilia Kitchen Order - " + document.getElementById('currentDateId').textContent + ".pdf");
-            }
+                }
 
             }
         </script>
