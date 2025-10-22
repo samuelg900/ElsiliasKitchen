@@ -20,58 +20,159 @@
 
 </head>
 
-<body id="main-content">
+<body>
 
- <!-- <div id="loading-screen">
-        <div class="spinner"></div>
-        <p>Loading...</p>
-    </div>
+<div class="loading_div">
+    <img id="e_id" src="logo_e.png"></img>
+    <img id="k_id" src="logo_k.png"></img>
+    <!-- <p id="lett">ELSILIAS'S KITCHEN</p> -->
+</div>
 
-    <style>
-          #loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #ffffff; /* Or your desired background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: load 4s forwards;
-        z-index: 5; /* Ensure it's on top */
+<!-- #lett{
+    
+  position: relative;
+  justify-self: center;
+  top:-40px;
+/* text-align: center; */
+  /* left: 37%; */
+margin-inline: auto;
+font-size: 14px;
+  animation: pmove 1s linear forwards;
+  animation-delay: 2s;
+}
+
+@keyframes pmove {
+    from{
+        top:100%;
     }
-
-    .spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-left-color: #333;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation-iteration-count: 1;
-        animation: spin 2s linear infinite;
+    to {
+        top:52%;
+        /* transform-origin: center; */
+        /* transform: rotate(720deg) translate(-50%, -50%); */
+        transform: rotate(720deg);
+        /* transform:translate(-50%, -50%); */
     }
+} -->
+    
+<style>
+.loading_div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 30;
+    
+  animation: opac 1s linear forwards;
+  animation-delay: 2.5s;
+  /* animation-delay: 1s; */
+}
 
-    @keyframes load {
-        0% {
+@keyframes opac {
+    from{
         opacity: 1;
-        visibility: visible;
     }
-    99% {
-        opacity: 1;
-        visibility: visible;
-    }
-    100% {
+    to {
         opacity: 0;
-        visibility: hidden;
+        /* opacity: 0.3; */
+        display: none;
     }
-    }
+}
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    </style> -->
+#e_id {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  z-index: 100;
+  animation: bezier_curve_moveE 2s linear forwards;
+  /* animation: bezier_curve_moveE 1s linear forwards; */
+}
+
+#k_id {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  z-index: 100;
+  animation: bezier_curve_moveK 2s linear forwards;
+  /* animation: bezier_curve_moveK 1s linear forwards; */
+}
+
+@keyframes bezier_curve_moveE {
+  to {
+    offset-distance: 100%;
+    transform: rotate(-819deg);
+  }
+}
+@keyframes bezier_curve_moveK {
+  to {
+    offset-distance: 100%;
+    transform: rotate(-818deg);
+  }
+}
+</style>
+
+    <script>
+        //-------------
+
+        let pathE;
+        let pathK;
+        //landscape
+        if(window.innerWidth > window.innerHeight){
+            const outer_hor_space = (window.innerWidth - window.innerHeight) / 2;
+
+            let P1 = `M${outer_hor_space} ${window.innerHeight} `;
+            let P2 = `C${window.innerWidth-outer_hor_space} ${window.innerHeight}, `;
+            let P3 = `${window.innerWidth/2} 0, `;
+            let P4 = `${window.innerWidth/2.17} ${window.innerHeight/2}`;
+            pathE = P1 + P2 + P3 + P4;
+
+            document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
+            document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
+            document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
+
+            P1 = `M${window.innerWidth-outer_hor_space} 0 `;
+            P2 = `C${outer_hor_space} 0, `;
+            P3 = `${window.innerWidth/2} ${window.innerHeight}, `;
+            P4 = `${window.innerWidth/1.87} ${window.innerHeight/2}`;
+            pathK = P1 + P2 + P3 + P4;
+            
+            document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
+            document.getElementById("k_id").style.width=`${window.innerWidth * 0.08}px`;
+            document.getElementById("k_id").style.height=`${window.innerWidth * 0.08}px`;
+
+        }
+        //portrait
+        else{
+        // if(window.innerWidth < window.innerHeight){
+            const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
+
+            //path for E
+            let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
+            let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
+            let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
+            let P4 = `${window.innerWidth/2.4} ${window.innerHeight/2}`;
+            pathE = P1 + P2 + P3 + P4;
+
+            document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
+            document.getElementById("e_id").style.width=`${window.innerWidth * 0.15}px`;
+            document.getElementById("e_id").style.height=`${window.innerWidth * 0.15}px`;
+
+            //path for K
+            P1 = `M${window.innerWidth} ${outer_vert_space} `;
+            P2 = `C0 ${window.innerHeight/2}, `;
+            P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
+            P4 = `${window.innerWidth/1.75} ${window.innerHeight/2}`;
+            pathK= P1 + P2 + P3 + P4;
+
+            document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
+            document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
+            document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
+        }
+
+        //============
+
+    </script>
 
 
     <script>
@@ -397,8 +498,10 @@
                 height: 256,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.L
+                correctLevel: QRCode.CorrectLevel.H
             });
+
+            // #D25A21
 
             getQRDateTime();
 
@@ -594,8 +697,17 @@
 
                 doc.addImage(qr_img, "PNG", x, y-20, imgWidth, imgHeight);
 
-                                
-                doc.setFont("times", "Bold");
+                doc.setFillColor(0,0,0); //black
+                doc.setFillColor(255, 255, 255); //white
+                // doc.setFillColor(210, 90, 33); //orange
+               
+                const radius = 12;
+
+                doc.circle(pageWidth / 2 - 0.1, pageHeight /2 - 20.3, radius, 'F'); // 'F' = fill only
+
+                doc.addImage("logo_for_pdf.png", 'PNG', pageWidth / 2 - 11.5, pageHeight / 2 - 27.5, 22.5, 15);
+          
+                doc.setFont("times", "bold");
                 doc.setFontSize(36);
 
                 if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
