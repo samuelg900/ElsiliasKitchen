@@ -28,7 +28,8 @@
     <!-- <p id="lett">ELSILIAS'S KITCHEN</p> -->
 </div>
 
-<!-- #lett{
+<!-- <style>
+#lett{
     
   position: relative;
   justify-self: center;
@@ -52,8 +53,9 @@ font-size: 14px;
         transform: rotate(720deg);
         /* transform:translate(-50%, -50%); */
     }
-} -->
-    
+}
+    </style> -->
+
 <style>
 .loading_div{
     position: fixed;
@@ -118,32 +120,45 @@ font-size: 14px;
         let pathE;
         let pathK;
         //landscape
-        if(window.innerWidth > window.innerHeight){
-            const outer_hor_space = (window.innerWidth - window.innerHeight) / 2;
+        // if(window.innerWidth > window.innerHeight){
+        //     const outer_hor_space = (window.innerWidth - window.innerHeight) / 2;
+        //     const third_of_half = window.innerWidth/3;
 
-            let P1 = `M${outer_hor_space} ${window.innerHeight} `;
-            let P2 = `C${window.innerWidth-outer_hor_space} ${window.innerHeight}, `;
-            let P3 = `${window.innerWidth/2} 0, `;
-            let P4 = `${window.innerWidth/2.17} ${window.innerHeight/2}`;
-            pathE = P1 + P2 + P3 + P4;
+        //     let P1 = `M0 ${window.innerHeight/2} `;
+        //     let P2 = `C${third_of_half} ${window.innerHeight/2}, `;
+        //     let P3 = `${third_of_half * 2} ${window.innerHeight/2}, `;
+        //     let P4 = `${window.innerWidth/2-20} ${window.innerHeight/2}`;
+        //     pathE = P1 + P2 + P3 + P4;
 
-            document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
-            document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
-            document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
-
-            P1 = `M${window.innerWidth-outer_hor_space} 0 `;
-            P2 = `C${outer_hor_space} 0, `;
-            P3 = `${window.innerWidth/2} ${window.innerHeight}, `;
-            P4 = `${window.innerWidth/1.87} ${window.innerHeight/2}`;
-            pathK = P1 + P2 + P3 + P4;
             
-            document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
-            document.getElementById("k_id").style.width=`${window.innerWidth * 0.08}px`;
-            document.getElementById("k_id").style.height=`${window.innerWidth * 0.08}px`;
+        //     document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
+        //     document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
+        //     document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
+        //     // document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
 
-        }
-        //portrait
-        else{
+        //     // let P1 = `M${outer_hor_space} ${window.innerHeight} `;
+        //     // let P2 = `C${window.innerWidth-outer_hor_space} ${window.innerHeight}, `;
+        //     // let P3 = `${window.innerWidth/2} 0, `;
+        //     // let P4 = `${window.innerWidth/2.17} ${window.innerHeight/2}`;
+        //     // pathE = P1 + P2 + P3 + P4;
+
+        //     // document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
+        //     // document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
+        //     // document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
+
+        //     // P1 = `M${window.innerWidth-outer_hor_space} 0 `;
+        //     // P2 = `C${outer_hor_space} 0, `;
+        //     // P3 = `${window.innerWidth/2} ${window.innerHeight}, `;
+        //     // P4 = `${window.innerWidth/1.87} ${window.innerHeight/2}`;
+        //     // pathK = P1 + P2 + P3 + P4;
+            
+        //     // document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
+        //     // document.getElementById("k_id").style.width=`${window.innerWidth * 0.08}px`;
+        //     // document.getElementById("k_id").style.height=`${window.innerWidth * 0.08}px`;
+
+        // }
+        // //portrait
+        // else{
         // if(window.innerWidth < window.innerHeight){
             const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
 
@@ -168,7 +183,7 @@ font-size: 14px;
             document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
             document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
             document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-        }
+        // }
 
         //============
 
