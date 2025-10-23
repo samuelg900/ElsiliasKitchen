@@ -129,6 +129,14 @@ font-size: 14px;
     <script>
         //-------------
 
+        const ua = navigator.userAgent;
+
+const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
+
+console.log("iOS:", isIOS);
+console.log("macOS:", isMacOS);
+
         let pathE;
         let pathK;
 
