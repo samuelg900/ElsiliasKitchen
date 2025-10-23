@@ -134,9 +134,7 @@ font-size: 14px;
         const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
         const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
 
-        console.log("iOS:", isIOS);
-        console.log("macOS:", isMacOS);
-
+        //Doesn't show animation for IOS or MacOS...until i can fix the centering/Bezier curve in their system
         if(isIOS || isMacOS){
             document.getElementById('loading_div').style.display="none";
         }
@@ -611,8 +609,7 @@ font-size: 14px;
             </section>
 
             <section class="category">
-                <!-- <h1>Meats</h1> -->
-                <h1>i</h1>
+                <h1>Meats</h1>
                 <div class="tempContainer" id="menu-carne"></div>
             </section>
 
