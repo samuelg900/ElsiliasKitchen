@@ -61,14 +61,13 @@ font-size: 14px;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
+    width: 101%;/* made these 101% because rendering had a tiny gap to the right*/
+    height: 101%; /* and bottom of the screen (showing the background)*/
+    background-color: #393939;
     z-index: 30;
     
-  animation: opac 1s linear forwards;
-  animation-delay: 2.5s;
-  /* animation-delay: 1s; */
+  animation: opac 1.5s linear forwards;
+  animation-delay: 4s;
 }
 
 @keyframes opac {
@@ -77,40 +76,53 @@ font-size: 14px;
     }
     to {
         opacity: 0;
-        /* opacity: 0.3; */
         display: none;
     }
 }
 
 #e_id {
-  width: 60px;
-  height: 60px;
   position: absolute;
   z-index: 100;
-  animation: bezier_curve_moveE 2s linear forwards;
-  /* animation: bezier_curve_moveE 1s linear forwards; */
+  animation: bezier_curve_move 2s ease-out forwards, rot_e 1.5s ease-out forwards;
+  animation-delay: 0s, 2.1s;
 }
 
 #k_id {
-  width: 60px;
-  height: 60px;
   position: absolute;
   z-index: 100;
-  animation: bezier_curve_moveK 2s linear forwards;
-  /* animation: bezier_curve_moveK 1s linear forwards; */
+  animation: bezier_curve_move 2s ease-out forwards, rot_k 1.5s ease-out forwards;
+  animation-delay: 0s, 2.1s;
 }
 
-@keyframes bezier_curve_moveE {
-  to {
-    offset-distance: 100%;
-    transform: rotate(-819deg);
-  }
+@keyframes rot_e {
+    from{
+        left:0px;
+    }
+    to{
+        transform: rotate(-90deg);
+        left:-7.5%;
+    }
 }
-@keyframes bezier_curve_moveK {
+
+@keyframes rot_k {
+    from{
+        left:0px;
+    }
+    to{
+        transform: rotate(-90deg);
+        left:7.5%;
+    }
+}
+
+@keyframes bezier_curve_move {
+    from{
+        transform: rotate(270deg);
+    }
   to {
-    offset-distance: 100%;
-    transform: rotate(-818deg);
+        offset-distance: 100%;
+        transform: rotate(0deg);
   }
+
 }
 </style>
 
@@ -119,54 +131,14 @@ font-size: 14px;
 
         let pathE;
         let pathK;
-        //landscape
-        // if(window.innerWidth > window.innerHeight){
-        //     const outer_hor_space = (window.innerWidth - window.innerHeight) / 2;
-        //     const third_of_half = window.innerWidth/3;
 
-        //     let P1 = `M0 ${window.innerHeight/2} `;
-        //     let P2 = `C${third_of_half} ${window.innerHeight/2}, `;
-        //     let P3 = `${third_of_half * 2} ${window.innerHeight/2}, `;
-        //     let P4 = `${window.innerWidth/2-20} ${window.innerHeight/2}`;
-        //     pathE = P1 + P2 + P3 + P4;
-
-            
-        //     document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
-        //     document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
-        //     document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
-        //     // document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
-
-        //     // let P1 = `M${outer_hor_space} ${window.innerHeight} `;
-        //     // let P2 = `C${window.innerWidth-outer_hor_space} ${window.innerHeight}, `;
-        //     // let P3 = `${window.innerWidth/2} 0, `;
-        //     // let P4 = `${window.innerWidth/2.17} ${window.innerHeight/2}`;
-        //     // pathE = P1 + P2 + P3 + P4;
-
-        //     // document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
-        //     // document.getElementById("e_id").style.width=`${window.innerWidth * 0.08}px`;
-        //     // document.getElementById("e_id").style.height=`${window.innerWidth * 0.08}px`;
-
-        //     // P1 = `M${window.innerWidth-outer_hor_space} 0 `;
-        //     // P2 = `C${outer_hor_space} 0, `;
-        //     // P3 = `${window.innerWidth/2} ${window.innerHeight}, `;
-        //     // P4 = `${window.innerWidth/1.87} ${window.innerHeight/2}`;
-        //     // pathK = P1 + P2 + P3 + P4;
-            
-        //     // document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
-        //     // document.getElementById("k_id").style.width=`${window.innerWidth * 0.08}px`;
-        //     // document.getElementById("k_id").style.height=`${window.innerWidth * 0.08}px`;
-
-        // }
-        // //portrait
-        // else{
-        // if(window.innerWidth < window.innerHeight){
             const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
 
             //path for E
             let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
             let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
             let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
-            let P4 = `${window.innerWidth/2.4} ${window.innerHeight/2}`;
+            let P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
             pathE = P1 + P2 + P3 + P4;
 
             document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
@@ -177,14 +149,13 @@ font-size: 14px;
             P1 = `M${window.innerWidth} ${outer_vert_space} `;
             P2 = `C0 ${window.innerHeight/2}, `;
             P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
-            P4 = `${window.innerWidth/1.75} ${window.innerHeight/2}`;
+            P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
             pathK= P1 + P2 + P3 + P4;
 
             document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
             document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
             document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-        // }
-
+     
         //============
 
     </script>
@@ -627,7 +598,8 @@ font-size: 14px;
             </section>
 
             <section class="category">
-                <h1>Meats</h1>
+                <!-- <h1>Meats</h1> -->
+                <h1>i</h1>
                 <div class="tempContainer" id="menu-carne"></div>
             </section>
 
