@@ -22,7 +22,7 @@
 
 <body>
 
-<div class="loading_div">
+<div id="loading_div">
     <img id="e_id" src="logo_e.png"></img>
     <img id="k_id" src="logo_k.png"></img>
     <!-- <p id="lett">ELSILIAS'S KITCHEN</p> -->
@@ -57,7 +57,7 @@ font-size: 14px;
     </style> -->
 
 <style>
-.loading_div{
+#loading_div{
     position: fixed;
     top: 0;
     left: 0;
@@ -131,41 +131,46 @@ font-size: 14px;
 
         const ua = navigator.userAgent;
 
-const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
 
-console.log("iOS:", isIOS);
-console.log("macOS:", isMacOS);
+        console.log("iOS:", isIOS);
+        console.log("macOS:", isMacOS);
 
-        let pathE;
-        let pathK;
+        if(isIOS || isMacOS){
+            document.getElementById('loading_div').style.display="none";
+        }
+        else{
 
-            const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
+                let pathE;
+                let pathK;
 
-            //path for E
-            let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
-            let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
-            let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
-            let P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
-            pathE = P1 + P2 + P3 + P4;
+                    const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
 
-            document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
-            document.getElementById("e_id").style.width=`${window.innerWidth * 0.15}px`;
-            document.getElementById("e_id").style.height=`${window.innerWidth * 0.15}px`;
+                    //path for E
+                    let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
+                    let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
+                    let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
+                    let P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
+                    pathE = P1 + P2 + P3 + P4;
 
-            //path for K
-            P1 = `M${window.innerWidth} ${outer_vert_space} `;
-            P2 = `C0 ${window.innerHeight/2}, `;
-            P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
-            P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
-            pathK= P1 + P2 + P3 + P4;
+                    document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
+                    document.getElementById("e_id").style.width=`${window.innerWidth * 0.15}px`;
+                    document.getElementById("e_id").style.height=`${window.innerWidth * 0.15}px`;
 
-            document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
-            document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
-            document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-     
-        //============
+                    //path for K
+                    P1 = `M${window.innerWidth} ${outer_vert_space} `;
+                    P2 = `C0 ${window.innerHeight/2}, `;
+                    P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
+                    P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
+                    pathK= P1 + P2 + P3 + P4;
 
+                    document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
+                    document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
+                    document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
+            
+                //============
+            }
     </script>
 
 
