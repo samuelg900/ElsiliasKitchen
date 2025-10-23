@@ -23,8 +23,25 @@
 <body>
 
 <div id="loading_div">
-    <img id="e_id" src="logo_e.png"></img>
-    <img id="k_id" src="logo_k.png"></img>
+    
+    <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+         <!-- E -->
+        <path
+            fill="#D35A21"
+            d="
+            M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z"
+        />
+
+    </svg>
+
+    <svg id="k_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90" fill="#D35A21"></polygon>
+    </svg>
+
+
+
+    <!-- <img id="e_id" src="logo_e.png"></img>
+    <img id="k_id" src="logo_k.png"></img> -->
     <!-- <p id="lett">ELSILIAS'S KITCHEN</p> -->
 </div>
 
@@ -109,8 +126,8 @@ font-size: 14px;
         left:0px;
     }
     to{
-        transform: rotate(-90deg);
-        left:7.5%;
+        transform: rotate(90deg);
+        left:6.5%;
     }
 }
 
