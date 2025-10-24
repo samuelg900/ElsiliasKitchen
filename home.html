@@ -78,6 +78,8 @@ font-size: 14px;
     position: fixed;
     top: 0;
     left: 0;
+    right:0;
+    bottom: 0;
     width: 101%;/* made these 101% because rendering had a tiny gap to the right*/
     height: 101%; /* and bottom of the screen (showing the background)*/
     background-color: #393939;
@@ -92,9 +94,9 @@ font-size: 14px;
         opacity: 1;
     }
     to {
-        /* opacity: 0; */
-        /* display: none; */
-        opacity: 0.7;
+        opacity: 0;
+        display: none;
+        /* opacity: 0.7; */
     }
 }
 
@@ -132,7 +134,6 @@ font-size: 14px;
     to{
         transform: rotate(90deg);
         left:6.5%;
-        top: auto;
     }
 }
 
@@ -150,18 +151,17 @@ font-size: 14px;
 </style>
 
     <script>
-        //-------------
 
         const ua = navigator.userAgent;
 
         const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
         const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
 
-        //Doesn't show animation for IOS or MacOS...until i can fix the centering/Bezier curve in their system
-        // if(isIOS || isMacOS){
-        //     document.getElementById('loading_div').style.display="none";
-        // }
-        // else{
+        // Doesn't show animation for IOS or MacOS...until i can fix the centering/Bezier curve in their system
+        if(isIOS || isMacOS){
+            document.getElementById('loading_div').style.display="none";
+        }
+        else{
 
                 let pathE;
                 let pathK;
@@ -189,9 +189,7 @@ font-size: 14px;
                     document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
                     document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
                     document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-            
-                //============
-            // }
+            }
     </script>
 
 
