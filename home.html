@@ -22,11 +22,6 @@
 
 <body>
 
-    <div class="container">
-  <div class="object"></div>
-</div>
-
-
 <div id="loading_div">
     
     <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -119,21 +114,25 @@ font-size: 14px;
 
 @keyframes rot_e {
     from{
+        transform: rotate(0deg);
         left:0px;
     }
     to{
         transform: rotate(-90deg);
         left:-7.5%;
+        top: auto;
     }
 }
 
 @keyframes rot_k {
     from{
+        transform: rotate(0deg);
         left:0px;
     }
     to{
         transform: rotate(90deg);
         left:6.5%;
+        top: auto;
     }
 }
 
@@ -148,51 +147,6 @@ font-size: 14px;
 
 }
 
-.container {
-  width: 100vw;
-  height: 100vh;
-  background: #f0f0f0;
-  position: relative;
-  overflow: hidden;
-  z-index: 999;
-}
-
-.object {
-  width: 80px;
-  height: 80px;
-  background: red;
-  offset-path: path("M50,300 C200,100 400,100 550,300");
-  offset-rotate: auto; /* optional */
-  animation: move 4s linear infinite;
-}
-
-/* Keyframes */
-@keyframes move {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
-  }
-}
-
-/* iOS Safari Prefix */
-@supports (-webkit-offset-path: path("M0,0 L100,100")) {
-  .object {
-    -webkit-offset-path: path("M50,300 C200,100 400,100 550,300");
-    -webkit-offset-rotate: auto;
-    animation: move 4s linear infinite;
-  }
-
-  @keyframes move {
-    0% {
-      -webkit-offset-distance: 0%;
-    }
-    100% {
-      -webkit-offset-distance: 100%;
-    }
-  }
-}
 </style>
 
     <script>
