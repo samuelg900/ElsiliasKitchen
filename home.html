@@ -95,8 +95,7 @@ font-size: 14px;
     }
     to {
         opacity: 0;
-        display: none;
-        /* opacity: 0.7; */
+        z-index: -1;
     }
 }
 
@@ -158,10 +157,10 @@ font-size: 14px;
         const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
 
         // Doesn't show animation for IOS or MacOS...until i can fix the centering/Bezier curve in their system
-        // if(isIOS || isMacOS){
-        //     document.getElementById('loading_div').style.display="none";
-        // }
-        // else{
+        if(isIOS || isMacOS){
+            document.getElementById('loading_div').style.display="none";
+        }
+        else{
 
                 let pathE;
                 let pathK;
@@ -189,7 +188,7 @@ font-size: 14px;
                     document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
                     document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
                     document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-            // }
+            }
     </script>
 
 
