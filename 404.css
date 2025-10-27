@@ -20,13 +20,14 @@ body {
 #qrcode-div-id {
     display: flex;
     /* flex: 0.7; */
+    margin: 20px;
     align-items: center;
     flex-direction: column;
     text-align: center;
 }
 
 h2 {
-    margin-top: 20px;
+    margin-top: 0px;
     text-align: center;
 }
 
