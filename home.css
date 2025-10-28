@@ -1,16 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 @import url('https://fonts.googleapis.com/css2?family=Lato');
 
+:root{
+    --primary-orange: orange;
+    --primary-orange-hue: #ffad5067;
+    --primary-blue: #4791e1d2;
+    --background-color: #ececec;
+    
+    --primary-dark: rgb(52, 52, 52);
+}
+
 body {
     margin: 0;
     padding: 0;
     /* font-family: 'Arial', sans-serif; */
       font-family: "Lato", sans-serif;
     /* background-color: #cecece; */
-    background-color: #f1f8fb;
+    background-color: var(--background-color);
+
     min-width: 400px;
     justify-items: center;
 }
+
+
 
 .body_content {
     width: 100%;
@@ -26,11 +38,16 @@ body {
 }
 
 .top_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin: auto; */
+   
     /* width: 100%; */
     height: 54px;
     /* max-width: 1200px; */
-    background-color: rgb(42, 42, 42);
-    display: block;
+    background-color: #FEFEFF;
+    /* display: block; */
     position: fixed;
     top: 0;
     left: 0;
@@ -48,6 +65,10 @@ body {
 
 .ig {
     align-self: center;
+}
+
+#ee{
+    color: var(--primary-orange);
 }
 
 .syncopate-bold {
@@ -79,13 +100,13 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.top_nav .num {
+/* .top_nav .num {
     position: absolute;
     color: white;
     font-size: 10px;
     top: 11px;
     right: 11px;
-}
+} */
 
 button::after{
     background: #6dac63;
@@ -95,6 +116,7 @@ button::after{
 #cart_num_id {
     display: none;
     text-align: center;
+    float: right;
     /* justify-content: center; */
     /* align-items: center; */
     position: absolute;
@@ -105,7 +127,8 @@ button::after{
     top: 7px;
     right: 7px;
     color: white;
-    border: 1px solid rgb(42, 42, 42);
+    border: 1px solid white;
+    font-size: 14px;
 }
 
 #cart_num_id.active {
@@ -114,13 +137,14 @@ button::after{
 
 
 .material-symbols-outlined {
-    color: rgb(190, 190, 190);
+    color: var(--primary-dark);
 }
 
 .cart_icon {
     font-size: 28px;
-    float: right;
+    /* float: right; */
     margin: 13px;
+    margin-left: 45px;
     cursor: pointer;
 }
 
@@ -377,7 +401,7 @@ button::after{
 }
 
 .menu-item-content h3 {
-    color: #4791e1d2;
+    color: var(--primary-blue);
     /* margin: 15px 0 0 0; */
     margin: 0;
     font-size: 24px;
@@ -386,17 +410,19 @@ button::after{
 
 .languageContainer{ 
     position: relative;
-        float: left;
+    /* float: right; */
+    /* top: 15px; */
+    /* left: 12px; */
+    /* right:20px; */
     /* display: flex; */
-    top: 15px;
-    left: 12px;
     /* justify-content: center;
     align-items: center; */
     /* margin: 15px 0 0 0; */
     /* margin-block: auto; */
     
+    /* gap: 4px; */
     
-    gap: 4px;
+    margin: 13px;
     width: 60px;
     height: 24px;
     z-index: 999;
@@ -420,12 +446,14 @@ button::after{
 .dr{
     right: 4px;
     top:23%;
-    border-radius: 3px;
+    border-radius: 3px;    
+    /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9); */
+
 }
 
 .switchLanguage{
-    display: flex;
-    background: white !important;
+    /* display: flex; */
+    background: rgba(42, 42, 42, 0.639) !important;
     height: inherit;
     aspect-ratio: 2.5/1;
     border-radius: 50px;
@@ -438,7 +466,7 @@ button::after{
     border-radius: 50px;
     transition: transform 0.5s ease;
     transform: translateX(0);
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.9);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 .switchBall.changeToSpanish{
