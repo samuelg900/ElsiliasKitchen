@@ -370,8 +370,8 @@ button::after{
     to bottom, 
     #fff 0%,      
     #fff 30%,     
-    #393939E0 30%,
-    #393939E0 100%
+    #444444e0 30%,
+    #000000eb 100%
   );
     margin-bottom: 15px;
     border-radius: 100px 100px 30px 30px;
