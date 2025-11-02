@@ -23,6 +23,7 @@
 <body>
 
 
+
 <div id="loading_div">
     <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -35,6 +36,12 @@
         <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90" fill="#D35A21"></polygon>
     </svg>
 </div>
+    <script>
+          if(DEBUG_MODE == DEBUG.YES){
+            document.getElementById('loading_div').style.display='none';
+          }
+
+    </script>
 
 <style>
 #loading_div{
@@ -800,18 +807,17 @@ navigation_pie.addEventListener('mouseleave', () => {
         }
     #pie_container{ 
         position: fixed;
-        top:50%;
+        top:40%;
         right:-170px;
         width: 300px;
         height: 300px;
-        transform: translate(0, -50%);
-  transition: right 0.3s ease;
-            
+        /* transform: translate(0, -50%); */
+        transition: right 0.3s ease;  
     }
 
      #pie_container.active {
             pointer-events: auto;
-        right:-140px;
+            right:-140px;
         }
       
 
@@ -851,10 +857,10 @@ function addInteractivity(svg) {
                   menu.forEach(item => item.classList.toggle('show'));
                   clearTimeout(timeout);
 
-            if(document.getElementById('pie_container').style.zIndex=='6')
+            if(document.getElementById('pie_container').style.zIndex=='7')
                 hidePieTitleSelector();
             else
-                document.getElementById('pie_container').style.zIndex='6'
+                document.getElementById('pie_container').style.zIndex='7'
 
         });
 
@@ -983,10 +989,10 @@ function createHalfDonutPie(labels, names, options = {}) {
 
   for (let i = 0; i < 4; i++) {
   const rect = document.createElementNS(svgNS, "rect");
-  rect.setAttribute("x", 12);      // left edge
-  rect.setAttribute("y", 45.1 + i*2); // vertical spacing
-  rect.setAttribute("width", 40);  // line length
-  rect.setAttribute("height", 1);  // line thickness
+  rect.setAttribute("x", 11.8);      
+  rect.setAttribute("y", 45.3 + i*2);
+  rect.setAttribute("width", 40);
+  rect.setAttribute("height", 0.7); 
   rect.setAttribute("fill", "white");
   svg.appendChild(rect);
 }

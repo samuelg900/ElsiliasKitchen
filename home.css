@@ -214,7 +214,7 @@ button::after{
   max-width: 430px;
   height: 0;
   max-height: 400px;
-  z-index: 2;
+  z-index: 6;
   transition: height 0.3s ease;
   overflow: hidden; 
   
