@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato');
 
 :root{
+    /* --primary-orange: #54a0de; */
     --primary-orange: orange;
     --primary-orange-hue: #ffad5067;
-    --primary-blue: #4791e1d2;
+    --primary-blue: #4b70d5d2;
     --background-color: #ececec;
     
     --primary-dark: rgb(52, 52, 52);
@@ -52,8 +53,9 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 6;
+    z-index: 10;
     min-width: 400px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .conig {
@@ -215,6 +217,7 @@ button::after{
   z-index: 2;
   transition: height 0.3s ease;
   overflow: hidden; 
+  
 }
 
 #cart_contents_id.open {
@@ -276,25 +279,20 @@ button::after{
     overflow-y: auto;}
 
 .pan_button_div{
-    /* display: flex;
-    justify-content: center;*/
     padding: 10px 0 0 0; 
     width: 100%;
     margin-inline: auto;
     /* max-width: 600px; */
 
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 1%;
+  display: flex;
+  gap: 1%; 
 }
 
 .pan_button_div button{
 
     height: 46px;
-    /* width: 90px; */
     padding: 0;
     width: 100%;
-    /* aspect-ratio: 3 / 1; */
     cursor: pointer;
 }
 
@@ -304,10 +302,12 @@ button::after{
     font-size: 15px;
     border: none;
     border-radius: 80px;
+    /* transition: border 0.5s; */
 }
 
 .portionButton.active{
     border: 3px solid orange;
+    /* transition: border 2s; */
 }
 
 .cirButton{
@@ -376,6 +376,7 @@ button::after{
     margin-bottom: 15px;
     border-radius: 100px 100px 30px 30px;
     /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); */
+    z-index: 5;
 }
 
 .item_image {
@@ -409,19 +410,7 @@ button::after{
 
 
 .languageContainer{ 
-    position: relative;
-    /* float: right; */
-    /* top: 15px; */
-    /* left: 12px; */
-    /* right:20px; */
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center; */
-    /* margin: 15px 0 0 0; */
-    /* margin-block: auto; */
-    
-    /* gap: 4px; */
-    
+    position: relative;    
     margin: 13px;
     width: 60px;
     height: 24px;
@@ -431,24 +420,20 @@ button::after{
 .languageContainer img{
     position: absolute;
     margin: auto;
-    /* padding-inline: 3px; */
     height: 14px;
-    /* aspect-ratio: 2.5/1; */
     z-index: 1;
 }
 
 .usa{
     left: 4px;
-    top:23%;
+    top:22%;
     border-radius: 3px;
 }
 
 .dr{
     right: 4px;
-    top:23%;
-    border-radius: 3px;    
-    /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9); */
-
+    top:22%;
+    border-radius: 3px;
 }
 
 .switchLanguage{
@@ -600,7 +585,7 @@ transform: translateX(100%);
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 8;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.9);
 }
@@ -678,7 +663,6 @@ transform: translateX(100%);
     max-height: 350px;
     padding-top: 40px;
     background-color: #94cbe3;
-    box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
     /* background-color: #b3b3b3; */
     /* border-radius: 0 0 20px 20px; */
     z-index: 4;
@@ -688,6 +672,7 @@ transform: translateX(100%);
 
 #saveContainerId.show {
     /* padding-top: 40px; */
+    box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
      height: 40%;
 }
 
@@ -748,7 +733,7 @@ transform: translateX(100%);
     text-align: center;
     padding: 20px 0px;
     position: relative;
-    background-color: #222222;
+    background-color: #29629c99;
     /* background-image: linear-gradient(rgb(42, 42, 42), rgba(62, 37, 16, 0.925)); */
 }
 

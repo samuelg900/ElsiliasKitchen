@@ -22,24 +22,19 @@
 
 <body>
 
-<div id="loading_div">
-    
+
+<!-- <div id="loading_div">
     <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    
         <path
             fill="#D35A21"
             d="
             M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z"
         />
-
     </svg>
-
     <svg id="k_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90" fill="#D35A21"></polygon>
     </svg>
-
-
-</div>
+</div> -->
 
     <!-- <img id="e_id" src="logo_e.png"></img>
     <img id="k_id" src="logo_k.png"></img> -->
@@ -690,31 +685,432 @@ Elsilia's Kitchen</h3> -->
 
         <div class="menu" id="menu">
             <section class="category">
-                <h1>Rice</h1>
+                <h1 id="title_rice_id">Rice</h1>
                 <div class="tempContainer" id="menu-arroz"></div>
             </section>
 
             <section class="category">
-                <h1>Meats</h1>
+                <h1 id="title_meats_id">Meats</h1>
                 <div class="tempContainer" id="menu-carne"></div>
             </section>
 
             <section class="category">
-                <h1>Pastas & Salads</h1>
+                <h1 id="title_pasta_id">Pastas & Salads</h1>
                 <div class="tempContainer" id="menu-pasta"></div>
             </section>
 
             <section class="category">
-                <h1>Roots</h1>
+                <h1 id="title_roots_id">Roots</h1>
                 <div class="tempContainer" id="menu-viveres"></div>
             </section>
 
             <section class="category">
-                <h1>Finger Food</h1>
+                <h1 id="title_fingerfood_id">Finger Food</h1>
                 <div class="tempContainer" id="menu-picadera"></div>
             </section>
 
         </div>
+
+
+
+            <!-- scroll bar -->
+
+        <script>
+//hover == add class
+//id -> item  ..switch
+
+//active == add class
+
+  
+//   const scroll_item = document.getElementById('scrill_div_Id');
+
+  function scrollFunc(menu_id){
+    
+    // window.scrollY=window.scrollY-100;
+    document.getElementById(menu_id).scrollIntoView();
+    // document.getElementById("carneId").classList.add("active");
+    
+        hidePieTitleSelector();
+
+
+  }
+
+        </script>
+        
+        <style>
+
+.xx{
+    width: auto;
+    transform: width 1s;
+}
+    .xx:hover{
+        transform: scale(1.5);
+    }
+    
+    .my-polygon-shape {
+      /* Other styles for the element */
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      
+      /* Apply the polygon shape using clip-path */
+      clip-path: polygon(50% 50%, 0% 100%, 0% 80%); /* Example: a diamond shape */
+    }
+
+    </style>
+
+            <div id="pie_container"></div>
+
+<script>
+              const navigation_pie = document.getElementById('pie_container');
+let timeout;
+
+// 1. SCROLL LISTENER (Modified slightly)
+window.addEventListener('scroll', () => {
+    
+    //resets current timeouts set
+    clearTimeout(timeout);
+        navigation_pie.classList.add('active');
+    
+    timeout =  setTimeout(() => {
+        //stay open for a second
+     hidePieTitleSelector();
+    
+    console.log('Scroll timeout - Hiding after 1 sec');
+      }, 1000);
+
+});
+
+
+
+// 2. MOUSE ENTER/LEAVE (For desktop)
+navigation_pie.addEventListener('mouseenter', () => {
+    clearTimeout(timeout);
+    // console.log(3);
+    console.log('Mouse Enter - Keeping visible');
+});
+
+navigation_pie.addEventListener('mouseleave', () => {
+    // Only start a hide timer if a touch hasn't kept it active
+        timeout = setTimeout(() => {
+            hidePieTitleSelector();
+            // console.log(4);
+            
+    console.log('Mouse Leave - Hiding after short delay');
+        }, 100);
+});
+
+</script>
+
+<style>
+
+    #nav_circle_id{
+        cursor: pointer;
+    }
+
+
+    .pie_group{
+        display: none;
+        /* opacity: 0; */
+    }
+
+    .pie_group.show{
+        display: block;
+        /* opacity: 1; */
+    }
+
+    .slice {
+        display: none;
+            transition: transform 0.3s ease-out;
+            opacity: 0.9;
+        }
+        .slice:hover {
+            transform: scale(1.02);
+            opacity: 1;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            cursor: pointer;
+        }
+    #pie_container{ 
+        position: fixed;
+        top:50%;
+        right:-170px;
+        width: 300px;
+        height: 300px;
+        transform: translate(0, -50%);
+  transition: right 0.3s ease;
+            
+    }
+
+     #pie_container.active {
+            pointer-events: auto;
+        right:-140px;
+        }
+      
+
+
+</style>
+
+<script>
+const titlesArray = {
+  titles: ["title_fingerfood_id", "title_roots_id", "title_pasta_id", "title_meats_id", "title_rice_id"],
+  names: ["Finger Food", "Roots", "Salads", "Meats", "Rice"]
+}
+
+function hidePieTitleSelector(){
+
+    document.querySelectorAll('.pie_group').forEach(item => item.classList.remove('show'));
+                document.getElementById('pie_container').classList.remove('active');
+                document.getElementById('pie_container').style.zIndex='1';
+}
+
+function addInteractivity(svg) {
+         
+
+        const menu = svg.querySelectorAll('.pie_group');
+        const circle = svg.getElementById('nav_circle_id');
+        
+        svg.querySelectorAll('.slice').forEach(slice => {
+                slice.addEventListener('click', (e) => {
+                    const titleID = e.target.getAttribute('data-id');
+                    scrollFunc(titleID);
+                     menu.forEach(item => item.classList.remove('show'));
+                     document.getElementById('pie_container').style.zIndex='1';
+                });
+        });
+        // Click or touch to toggle
+        circle.addEventListener('click', () => {
+
+                  menu.forEach(item => item.classList.toggle('show'));
+                  clearTimeout(timeout);
+
+            if(document.getElementById('pie_container').style.zIndex=='6')
+                hidePieTitleSelector();
+            else
+                document.getElementById('pie_container').style.zIndex='6'
+
+        });
+
+        }
+
+function createHalfDonutPie(labels, names, options = {}) {
+  const size = options.size || 200;
+  const gap = options.gap || 2; // degrees between slices
+  const innerRadiusRatio = options.innerRadiusRatio || 0.6;
+  const radius = size / 2.05;
+  const innerRadius = radius * innerRadiusRatio;
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+  svg.style.transform = "rotate(180deg)"; // makes flat side on the left
+
+  const sliceCount = labels.length;
+  const sliceAngle = 180 / sliceCount; // divide half circle evenly
+
+  let index=0;
+  let currentAngle = 0;
+
+  const toRadians = (angleDeg) => angleDeg * (Math.PI / 180);
+
+
+    const getCoordinates = (angleDeg, radius) => {
+            // Adjust angle so 0 degrees is at 12 o'clock (top of the circle)
+            const adjustedAngleDeg = angleDeg - 90;
+            const angleRad = toRadians(adjustedAngleDeg);
+            return {
+                x: radius * Math.cos(angleRad),
+                y: radius * Math.sin(angleRad)
+            };
+        };
+
+  labels.forEach((title_id, i) => {
+    const startAngle = currentAngle + gap / 2;
+    const endAngle = startAngle + sliceAngle - gap;
+
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("d", describeArc(radius, radius, radius, innerRadius, startAngle, endAngle));
+    path.setAttribute("fill", "white");
+    path.setAttribute("data-id", title_id);
+    // path.setAttribute("label", "hello");
+    path.classList.add("slice");
+    path.classList.add("pie_group");
+    // path.setAttribute("click",`scrollFunc(${title_id})`);
+
+
+    // path.addEventListener("click",scrollFunc(title_id));
+
+    svg.appendChild(path);
+
+    const midAngle = (startAngle + endAngle) / 2;
+
+  // Midpoint position for text
+    const textPos = polarToCartesian(
+      radius,
+      radius,
+      (radius + innerRadius) / 2,
+      midAngle
+    );
+
+    // Text element
+    const text = document.createElementNS(svgNS, "text");
+    text.setAttribute("x", textPos.x);
+    text.setAttribute("y", textPos.y);
+    text.setAttribute("fill", "black");
+    text.setAttribute("font-size", "5");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("alignment-baseline", "middle");
+    text.setAttribute("alignment-baseline", "middle");
+                    text.setAttribute("pointer-events", "none");
+    text.classList.add("pie_group");
+    text.textContent = names[index++];
+
+     const textRadius = (radius + innerRadius) / 2;
+
+      // Keep text upright when on the lower half (so it doesn't flip upside-down)
+    let rotation = midAngle;
+    if (rotation > 90 && rotation < 270) rotation += 180;
+
+
+// pick the end of the slice line (outer arc)
+  let rotationAngle = midAngle - 270;
+
+    // If the mid-angle is in the lower half (180 to 270), flip the text by 180 degrees
+    // to ensure it reads upright from the inner radius outwards.
+    if (midAngle > 180 && midAngle < 270) {
+        rotationAngle += 180;
+    }
+
+    text.setAttribute("transform", `rotate(${rotationAngle}, ${textPos.x}, ${textPos.y})`);
+        
+    svg.appendChild(text);
+
+    currentAngle += sliceAngle;
+  });
+
+
+
+      const square = document.createElementNS(svgNS, "polygon");
+
+    const topleft = `${size/2.05},${size/2.05+6}`;
+     const topright = `${size/2.05-8},${size/2.05+6}`;
+      const bottomright = `${size/2.05-8},${size/2.05-6}`;
+       const bottomleft = `${size/2.05},${size/2.05-6}`;
+
+
+    square.setAttribute("points",`${topleft} ${topright} ${bottomright} ${bottomleft}`);
+    square.setAttribute('fill', '#202020');
+    square.setAttribute('stroke', 'none');
+
+    svg.appendChild(square);
+
+
+  const circle = document.createElementNS(svgNS, "circle");
+    circle.setAttribute('cx', size/2.05);
+    circle.setAttribute('cy', size/2.05);
+    circle.setAttribute('r', 6);
+    circle.setAttribute('fill', '#202020');
+    circle.setAttribute('id', 'nav_circle_id');
+
+    svg.appendChild(circle);
+  
+    addInteractivity(svg);
+
+  return svg;
+}
+
+// Helpers
+function polarToCartesian(cx, cy, r, angle) {
+  const rad = (angle - 90) * Math.PI / 180.0;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+function describeArc(cx, cy, outerR, innerR, startAngle, endAngle) {
+  const startOuter = polarToCartesian(cx, cy, outerR, endAngle);
+  const endOuter = polarToCartesian(cx, cy, outerR, startAngle);
+  const startInner = polarToCartesian(cx, cy, innerR, startAngle);
+  const endInner = polarToCartesian(cx, cy, innerR, endAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+  return [
+    "M", startOuter.x, startOuter.y,
+    "A", outerR, outerR, 0, largeArcFlag, 0, endOuter.x, endOuter.y,
+    "L", startInner.x, startInner.y,
+    "A", innerR, innerR, 0, largeArcFlag, 0, endInner.x, endInner.y,
+    "Z"
+  ].join(" ");
+  
+}
+
+// --- Create and append pie ---
+const pie = createHalfDonutPie(titlesArray.titles, titlesArray.names, { size: 100, gap: 2, innerRadiusRatio: 0.2 });
+document.getElementById("pie_container").appendChild(pie);
+</script>
+
+
+
+
+        
+
+         <!-- create pie slices on left side -->
+            
+        
+
+
+        <!-- END -->
+
+    <style>
+
+        
+html { scroll-behavior: smooth; } 
+
+        #scrill_div_Id.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .scroll_spacer{
+            display: flex;
+            flex-direction: column;            
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            margin: 0;
+            border-radius: 50%;
+            box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+
+        }
+        .scroll_spacer:hover{
+            transform: scale(1.2);
+        }
+
+        .scroll_item{
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+            background-color: white;
+            /* text-align: center; */
+            width: 10px;
+            height: 40px;
+            border-radius: 5px 0 0 5px;  
+            box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            overflow: hidden;
+            transition: width 0.5s;
+        }
+
+        .scroll_item:hover{
+            /* expand */
+            width: 80px;
+            transition: width 0.5s;
+        }
+
+        .scroll_item:active{
+            width: 120px;
+        }
+    </style>
+
+
+    <!-- =============== -->
 
 
         <script>
