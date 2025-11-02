@@ -23,7 +23,7 @@
 <body>
 
 
-<div id="loading_div">
+<!-- <div id="loading_div">
     <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <path
             fill="#D35A21"
@@ -34,39 +34,7 @@
     <svg id="k_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90" fill="#D35A21"></polygon>
     </svg>
-</div>
-
-    <!-- <img id="e_id" src="logo_e.png"></img>
-    <img id="k_id" src="logo_k.png"></img> -->
-    <!-- <p id="lett">ELSILIAS'S KITCHEN</p> -->
-
-<!-- <style>
-#lett{
-    
-  position: relative;
-  justify-self: center;
-  top:-40px;
-/* text-align: center; */
-  /* left: 37%; */
-margin-inline: auto;
-font-size: 14px;
-  animation: pmove 1s linear forwards;
-  animation-delay: 2s;
-}
-
-@keyframes pmove {
-    from{
-        top:100%;
-    }
-    to {
-        top:52%;
-        /* transform-origin: center; */
-        /* transform: rotate(720deg) translate(-50%, -50%); */
-        transform: rotate(720deg);
-        /* transform:translate(-50%, -50%); */
-    }
-}
-    </style> -->
+</div> -->
 
 <style>
 #loading_div{
@@ -1012,6 +980,28 @@ function createHalfDonutPie(labels, names, options = {}) {
     circle.setAttribute('id', 'nav_circle_id');
 
     svg.appendChild(circle);
+
+  for (let i = 0; i < 4; i++) {
+  const rect = document.createElementNS(svgNS, "rect");
+  rect.setAttribute("x", 12);      // left edge
+  rect.setAttribute("y", 45.1 + i*2); // vertical spacing
+  rect.setAttribute("width", 40);  // line length
+  rect.setAttribute("height", 1);  // line thickness
+  rect.setAttribute("fill", "white");
+  svg.appendChild(rect);
+}
+
+
+    // svg.appendChild(iconPath);
+
+// <svg xmlns="http://www.w3.org/2000/svg" 
+// height="24px" 
+// viewBox="0 -960 960 960" 
+// width="24px" 
+// fill="#00A5FF">
+// <path d="M160-360v-80h640v80H160Zm0 160v-80h640v80H160Zm0-320v-80h640v80H160Zm0-160v-80h640v80H160Z"/>
+// </svg>
+
   
     addInteractivity(svg);
 
