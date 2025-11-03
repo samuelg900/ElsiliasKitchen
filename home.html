@@ -227,6 +227,12 @@
 
     <script>
         function openCartContents() {
+
+            //close message box if open
+            if(document.getElementById("saveContainerId").classList.contains("show"))
+                document.getElementById("saveContainerId").classList.toggle("show");
+        
+
             document.querySelector('.cart').classList.toggle('open');
             
                 if (cart.length === 0) {
@@ -472,6 +478,10 @@
 
 
         function checkoutBtnFunc() {
+
+            //close message box if open
+            if(document.getElementById("saveContainerId").classList.contains("show"))
+                document.getElementById("saveContainerId").classList.toggle("show");
 
             if (cart.length === 0) return;
 
@@ -807,8 +817,8 @@ navigation_pie.addEventListener('mouseleave', () => {
         }
     #pie_container{ 
         position: fixed;
-        /* top:40%; */
-        top:40vh;
+        top:25%;
+        /* top:40vh; */
 
         right:-170px;
         width: 300px;
