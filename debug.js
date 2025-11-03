@@ -1,5 +1,4 @@
 
-
 const DEBUG = {
   YES: 2,
   NO: 1,
@@ -8,7 +7,7 @@ const DEBUG = {
 //Change DEBUG here mode when needed
 const DEBUG_MODE = DEBUG.NO;
 
-function setUp404Debug(){
+function setUpOnlyFor404Debug(){
      if(DEBUG_MODE === DEBUG.NO) {
         let link = document.createElement('link');
         link.rel = 'stylesheet';

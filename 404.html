@@ -7,8 +7,9 @@
     <!-- <link rel="stylesheet" href="https://samuelg900.github.io/ElsiliasKitchen/404.css"> -->
     <script src="debug.js"></script>
     
-    <script> setUp404Debug(); </script>
+    <script> setUpOnlyFor404Debug(); </script>
     
+    <!-- vvv Not needed for some reason... I think github automatically calls for any 404.css file in directory -->
     <!-- <link rel="stylesheet" href="404.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,17 +168,16 @@ function getItemsNames(){
 }
 
 
-
-
 window.onload = function() {
 
     let hash;
 
    if(DEBUG_MODE === DEBUG.NO)
         hash = window.location.hash;
-    else
+    else{
         hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00302f2/00601f1/@";  
-
+        // hash = "#2/00302f2/00601f1/@";  
+    }
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
     const match = regex.exec(hash);
 
@@ -219,7 +219,7 @@ if (match) {
             document.body.innerHTML = "<h2>Invalid order link.</h2>";
         }
     } else {
-        // ❌ Not a valid QR link → show default 404
+        // Not a valid QR link --> show default 404
         document.body.innerHTML = "<h2>Page not found</h2>";
     }
 }

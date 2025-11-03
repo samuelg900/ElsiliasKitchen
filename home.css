@@ -16,9 +16,10 @@ body {
     padding: 0;
     /* font-family: 'Arial', sans-serif; */
       font-family: "Lato", sans-serif;
+      
+    /* font-family: "Syncopate", sans-serif; */
     /* background-color: #cecece; */
     background-color: var(--background-color);
-
     min-width: 400px;
     justify-items: center;
 }
@@ -719,6 +720,8 @@ transform: translateX(100%);
     margin-inline: auto;
     padding-inline: 10px;
     max-width: 500px;
+    z-index: 2;
+    position: relative;
 }
 
 
@@ -729,7 +732,7 @@ transform: translateX(100%);
     text-align: center;
     padding: 20px 0px;
     position: relative;
-    background-color: #29629c99;
+    background-color: #000000eb;
     /* background-image: linear-gradient(rgb(42, 42, 42), rgba(62, 37, 16, 0.925)); */
 }
 

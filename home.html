@@ -577,13 +577,13 @@
         <!-- E -->
         <svg id="ee" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
            
-            <path stroke="var(--primary-dark)" stroke-width="6" fill="none"
+            <path stroke="var(--primary-dark)" stroke-width="5" fill="none"
                 d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z" />
         </svg>
             <!-- K -->
         <svg id="kk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90"
-                stroke="var(--primary-dark)" stroke-width="6" fill="none"></polygon>
+                stroke="var(--primary-dark)" stroke-width="5" fill="none"></polygon>
         </svg>
 
     </div>
@@ -761,7 +761,7 @@ window.addEventListener('scroll', () => {
     
     //resets current timeouts set
     clearTimeout(timeout);
-        navigation_pie.classList.add('active');
+    navigation_pie.classList.add('active');            
     
     timeout =  setTimeout(() => {
         //stay open for a second
@@ -831,12 +831,22 @@ navigation_pie.addEventListener('mouseleave', () => {
         height: 300px;
         /* transform: translate(0, -50%); */
         transition: right 0.3s ease;  
+        display: block;
     }
 
      #pie_container.active {
             pointer-events: auto;
             right:-140px;
         }
+
+          /* #pie_container.disappear {
+            right:-640px;
+            transition: right 1s ease;
+            transition-delay: 1.3s;
+            z-index: -1;
+        } */
+
+
       
 
 
@@ -849,10 +859,10 @@ const titlesArray = {
 }
 
 function hidePieTitleSelector(){
-
     document.querySelectorAll('.pie_group').forEach(item => item.classList.remove('show'));
-                document.getElementById('pie_container').classList.remove('active');
-                document.getElementById('pie_container').style.zIndex='1';
+    document.getElementById('pie_container').classList.remove('active');
+    document.getElementById('pie_container').style.zIndex='1';   
+    document.getElementById('pie_container').classList.add('disappear');
 }
 
 function addInteractivity(svg) {
@@ -865,8 +875,9 @@ function addInteractivity(svg) {
                 slice.addEventListener('click', (e) => {
                     const titleID = e.target.getAttribute('data-id');
                     scrollFunc(titleID);
-                     menu.forEach(item => item.classList.remove('show'));
-                     document.getElementById('pie_container').style.zIndex='1';
+                    //  menu.forEach(item => item.classList.remove('show'));
+                     hidePieTitleSelector();
+                    //  document.getElementById('pie_container').style.zIndex='1';
                 });
         });
         // Click or touch to toggle
@@ -877,8 +888,10 @@ function addInteractivity(svg) {
 
             if(document.getElementById('pie_container').style.zIndex=='9')
                 hidePieTitleSelector();
-            else
+            else{
+                document.getElementById('pie_container').classList.remove('disappear');
                 document.getElementById('pie_container').style.zIndex='9'
+            }
 
         });
 
@@ -923,13 +936,8 @@ function createHalfDonutPie(labels, names, options = {}) {
     path.setAttribute("d", describeArc(radius, radius, radius, innerRadius, startAngle, endAngle));
     path.setAttribute("fill", "white");
     path.setAttribute("data-id", title_id);
-    // path.setAttribute("label", "hello");
     path.classList.add("slice");
     path.classList.add("pie_group");
-    // path.setAttribute("click",`scrollFunc(${title_id})`);
-
-
-    // path.addEventListener("click",scrollFunc(title_id));
 
     svg.appendChild(path);
 
@@ -948,7 +956,7 @@ function createHalfDonutPie(labels, names, options = {}) {
     text.setAttribute("x", textPos.x);
     text.setAttribute("y", textPos.y);
     text.setAttribute("fill", "black");
-    text.setAttribute("font-size", "5");
+    text.setAttribute("font-size", "5.5");
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("alignment-baseline", "middle");
     text.setAttribute("alignment-baseline", "middle");
@@ -979,15 +987,12 @@ function createHalfDonutPie(labels, names, options = {}) {
     currentAngle += sliceAngle;
   });
 
-
-
-      const square = document.createElementNS(svgNS, "polygon");
+    const square = document.createElementNS(svgNS, "polygon");
 
     const topleft = `${size/2.05},${size/2.05+6}`;
-     const topright = `${size/2.05-8},${size/2.05+6}`;
-      const bottomright = `${size/2.05-8},${size/2.05-6}`;
-       const bottomleft = `${size/2.05},${size/2.05-6}`;
-
+    const topright = `${size/2.05-8},${size/2.05+6}`;
+    const bottomright = `${size/2.05-8},${size/2.05-6}`;
+    const bottomleft = `${size/2.05},${size/2.05-6}`;
 
     square.setAttribute("points",`${topleft} ${topright} ${bottomright} ${bottomleft}`);
     square.setAttribute('fill', '#202020');
@@ -995,8 +1000,7 @@ function createHalfDonutPie(labels, names, options = {}) {
 
     svg.appendChild(square);
 
-
-  const circle = document.createElementNS(svgNS, "circle");
+    const circle = document.createElementNS(svgNS, "circle");
     circle.setAttribute('cx', size/2.05);
     circle.setAttribute('cy', size/2.05);
     circle.setAttribute('r', 6);
@@ -1005,29 +1009,17 @@ function createHalfDonutPie(labels, names, options = {}) {
 
     svg.appendChild(circle);
 
-  for (let i = 0; i < 4; i++) {
-  const rect = document.createElementNS(svgNS, "rect");
-  rect.setAttribute("x", 11.8);      
-  rect.setAttribute("y", 45.3 + i*2);
-  rect.setAttribute("width", 40);
-  rect.setAttribute("height", 0.7); 
-  rect.setAttribute("fill", "white");
-  rect.setAttribute("pointer-events", "none");
-  svg.appendChild(rect);
-}
-
-
-    // svg.appendChild(iconPath);
-
-// <svg xmlns="http://www.w3.org/2000/svg" 
-// height="24px" 
-// viewBox="0 -960 960 960" 
-// width="24px" 
-// fill="#00A5FF">
-// <path d="M160-360v-80h640v80H160Zm0 160v-80h640v80H160Zm0-320v-80h640v80H160Zm0-160v-80h640v80H160Z"/>
-// </svg>
-
-  
+    for (let i = 0; i < 4; i++) {
+        const rect = document.createElementNS(svgNS, "rect");
+        rect.setAttribute("x", 42);      
+        rect.setAttribute("y", 45.3 + i*2);
+        rect.setAttribute("width", 10);
+        rect.setAttribute("height", 0.7); 
+        rect.setAttribute("fill", "white");
+        rect.setAttribute("pointer-events", "none");
+        svg.appendChild(rect);
+    }
+ 
     addInteractivity(svg);
 
   return svg;
@@ -1062,17 +1054,6 @@ document.getElementById("pie_container").appendChild(pie);
 </script>
 
 
-
-
-        
-
-         <!-- create pie slices on left side -->
-            
-        
-
-
-        <!-- END -->
-
     <style>
 
         
@@ -1103,7 +1084,6 @@ html { scroll-behavior: smooth; }
             justify-content: center;
             align-items: center;  
             background-color: white;
-            /* text-align: center; */
             width: 10px;
             height: 40px;
             border-radius: 5px 0 0 5px;  
@@ -1114,7 +1094,6 @@ html { scroll-behavior: smooth; }
         }
 
         .scroll_item:hover{
-            /* expand */
             width: 80px;
             transition: width 0.5s;
         }
@@ -1134,7 +1113,7 @@ html { scroll-behavior: smooth; }
 
         <p class="disclaimerText" id="size_disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
         
-        <p class="disclaimerText" id="ai_disclaimerTextId" style="font-size: 13px;">For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used as a reference, please click <a href="original_images.html" target="_blank">here</a></p>
+        <div class="disclaimerText" id="ai_disclaimerTextId" style="font-size: 13px;">For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used as a reference, please click <a href="original_images.html" target="_blank">here</a></div>
 
         <div id="qrcode-div-background-id">
             <div id="qrcode-div-id">

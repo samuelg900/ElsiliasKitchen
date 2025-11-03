@@ -68,15 +68,17 @@ h2 {
 
 .main_container{
     display: flex;
+    justify-content: center;
     margin-top: 100px;
     margin-left: 30px;
     flex-direction: row-reverse;
     align-items: center;
     width: 80%;
-    height: fit-content;
+    height: auto;
+    min-height: 500px;
     max-width: 900px;
     max-height: 600px;
-    /* border-radius: 50px; */
+    border-radius: 20px;
     background-color: white;  
     /* box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3); */
 }
@@ -136,6 +138,7 @@ h2 {
     .main_container{
         margin: 0;
         margin-top: 50px;
+        /* margin-block: auto; */
        /*  margin-bottom: 120px; */
      display: flex;
      flex-direction: column;
@@ -144,7 +147,7 @@ h2 {
     width: 90%;
     height: 90vh;
     max-width: 500px;
-    max-height: 900px;
+    max-height: 700px;
     /* border-radius: 50px; */
     /* box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3); */
 }
