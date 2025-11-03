@@ -711,11 +711,17 @@ Elsilia's Kitchen</h3> -->
 
   function scrollFunc(menu_id){
     
-    // window.scrollY=window.scrollY-100;
-    document.getElementById(menu_id).scrollIntoView();
-    // document.getElementById("carneId").classList.add("active");
+    // document.getElementById(menu_id).scrollIntoView();
     
-        hidePieTitleSelector();
+    hidePieTitleSelector();
+
+    const elementPosition = document.getElementById(menu_id).getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - 80;
+
+    window.scrollTo({
+        top: offsetPosition
+        // behavior: 'smooth' // remove if you want instant scroll
+    });
 
 
   }
@@ -946,7 +952,7 @@ function createHalfDonutPie(labels, names, options = {}) {
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("alignment-baseline", "middle");
     text.setAttribute("alignment-baseline", "middle");
-                    text.setAttribute("pointer-events", "none");
+    text.setAttribute("pointer-events", "none");
     text.classList.add("pie_group");
     text.textContent = names[index++];
 
@@ -1006,6 +1012,7 @@ function createHalfDonutPie(labels, names, options = {}) {
   rect.setAttribute("width", 40);
   rect.setAttribute("height", 0.7); 
   rect.setAttribute("fill", "white");
+  rect.setAttribute("pointer-events", "none");
   svg.appendChild(rect);
 }
 

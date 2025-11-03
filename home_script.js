@@ -1,8 +1,7 @@
 
 const translateArray = [];
 
-function titlesFunc() {
-  let titles = document.querySelectorAll('h1');
+function titlesFunc(titles) {
 
   titles.forEach(title => {
     switch (title.textContent) {
@@ -36,6 +35,12 @@ function titlesFunc() {
       case 'Picadera':
         title.textContent = 'Finger Food';
         break;
+      case 'Salads': //for slices
+        title.textContent = 'Ensaladas';
+        break;
+      case 'Ensaladas': //for slices
+        title.textContent = 'Salads';
+        break;
     }
   });
 }
@@ -63,8 +68,10 @@ function updateLayout() {
     document.getElementById('qrTextId').innerHTML= `Por favor guarde y envíe este código QR a <strong>Elsa</strong> para confirmar su pedido y establecer una fecha de orden`;
     document.getElementById('p_for_saved_message').innerHTML= `Notas:<br>${savedMessage}`;
     
-    titlesFunc();
-
+    titlesFunc(document.querySelectorAll('h1'));
+    titlesFunc(document.getElementById('pie_container').querySelectorAll('.pie_group'));  
+    //^ I should create a seperate class for the pie text so it doesn't loop 
+    // through the 5* empty slice.textContents but its fine for now.
 
     for (let item of menu_item) {
       item.querySelector('h3').innerHTML = translateArray[index + 1];
@@ -92,7 +99,9 @@ function updateLayout() {
     document.getElementById('qrTextId').innerHTML = `Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order`;
     document.getElementById('p_for_saved_message').innerHTML= `Notes:<br>${savedMessage}`;
     
-    titlesFunc();
+    titlesFunc(document.querySelectorAll('h1'));
+    titlesFunc(document.getElementById('pie_container').querySelectorAll('.pie_group'));  
+
 
     for (let item of menu_item) {
       item.querySelector('h3').innerHTML = translateArray[index];
