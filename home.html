@@ -807,7 +807,9 @@ navigation_pie.addEventListener('mouseleave', () => {
         }
     #pie_container{ 
         position: fixed;
-        top:40%;
+        /* top:40%; */
+        top:40vh;
+
         right:-170px;
         width: 300px;
         height: 300px;
@@ -857,10 +859,10 @@ function addInteractivity(svg) {
                   menu.forEach(item => item.classList.toggle('show'));
                   clearTimeout(timeout);
 
-            if(document.getElementById('pie_container').style.zIndex=='7')
+            if(document.getElementById('pie_container').style.zIndex=='9')
                 hidePieTitleSelector();
             else
-                document.getElementById('pie_container').style.zIndex='7'
+                document.getElementById('pie_container').style.zIndex='9'
 
         });
 
