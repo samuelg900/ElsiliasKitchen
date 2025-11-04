@@ -183,24 +183,24 @@
 
   <script>
     // Array of image URLs
-    const images = [
-        "original_food_images/1.png",
-        "original_food_images/2.png",
-        "original_food_images/3.png",
-        "original_food_images/4.png",
-        "original_food_images/5.png",
-        "original_food_images/6.png",
-        "original_food_images/7.png",
-        "original_food_images/8.png",
-        "original_food_images/9.png",
-        "original_food_images/10.png",
-        "original_food_images/11.png",
-        "original_food_images/12.png",
-        "original_food_images/13.png",
-        "original_food_images/14.png",
-        "original_food_images/15.png",
-        "original_food_images/16.png",
-        "original_food_images/17.png"
+    const reduced_images = [
+        "reduced_food_images/1.png",
+        "reduced_food_images/2.png",
+        "reduced_food_images/3.png",
+        "reduced_food_images/4.png",
+        "reduced_food_images/5.png",
+        "reduced_food_images/6.png",
+        "reduced_food_images/7.png",
+        "reduced_food_images/8.png",
+        "reduced_food_images/9.png",
+        "reduced_food_images/10.png",
+        "reduced_food_images/11.png",
+        "reduced_food_images/12.png",
+        "reduced_food_images/13.png",
+        "reduced_food_images/14.png",
+        "reduced_food_images/15.png",
+        "reduced_food_images/16.png",
+        "reduced_food_images/17.png"
     ];
 
     // Create the grid container
@@ -208,14 +208,13 @@
     grid.classList.add("grid");
 
     // Add images to the grid
-    images.forEach(src => {
+    reduced_images.forEach(src => {
       const img = document.createElement("img");
       img.className="image";
       img.src = src;
       img.alt = "Image";
-      img.addEventListener('click', () => openImageViewer(src));
+      img.addEventListener('click', () => openImageViewer("original_food_images/"+ src.slice(20,src.length)));
       grid.appendChild(img);
-
     });
 
     // Add the grid to the page
