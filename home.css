@@ -118,16 +118,18 @@ button::after{
     float: right;
     /* justify-content: center; */
     /* align-items: center; */
+    padding-top:1px ;
     position: absolute;
     background-color: red;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    top: 7px;
-    right: 7px;
+    width: 13px;
+    height: 13px;
+    top: 4px;
+    right: 10px;
     color: white;
     border: 1px solid white;
-    font-size: 14px;
+    font-size: 10px;
+    pointer-events: none;
 }
 
 #cart_num_id.active {
