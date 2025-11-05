@@ -11,19 +11,21 @@
     --primary-dark: rgb(52, 52, 52);
 }
 
+
+/* Removes the blue tap highlight on mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     margin: 0;
     padding: 0;
-    /* font-family: 'Arial', sans-serif; */
-      font-family: "Lato", sans-serif;
-      
-    /* font-family: "Syncopate", sans-serif; */
+    font-family: "Lato", sans-serif;
     /* background-color: #cecece; */
     background-color: var(--background-color);
     min-width: 400px;
     justify-items: center;
 }
-
 
 
 .body_content {
@@ -40,12 +42,11 @@ body {
 }
 
 .top_nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
     height: 54px;
     background-color: #FEFEFF;
-    position: fixed;
+    /* position: fixed; */
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -197,39 +198,46 @@ button::after{
   left: 0;
   width: 100%;
   z-index: 2;
-  height: 87% !important; /* TODO: 'fix'/solve this problem later*/
+  height: 87% !important; /* TODO: 'fix'/solve this problem later...ornot*/
   filter: grayscale(100%) brightness(50%);
   clip-path: inset(0 0 0 50%);
 }
 
 #cart_contents_id {
   position: fixed;
-  top: 53px;
-  right: 0;
-  width: 100%;
+  top: 28px;
+  left: 6px;
+  right: 6px;
+  /* width: auto; */
+  /* margin-inline: 6px; */
   max-width: 430px;
   height: 0;
   max-height: 400px;
   z-index: 6;
   transition: height 0.3s ease;
   overflow: hidden; 
-  
+  /* margin: 0 auto; */
 }
+
+
 
 #cart_contents_id.open {
   overflow: visible;
-  height: 50%;
+  height: 370px;
 }
 
 .cartContent {
     display: flex;
     flex-direction: column;
     min-width: 400px;
+    width: 100%;
     height:100%;
     /* height: 400px; */
+  /* margin-inline: 6px; */
   position: relative;
+  padding-top: 26px;
   padding-bottom: 68px;
-  border-radius: 0 0 16px 16px;
+  border-radius:  0px 0px 16px 16px;
     box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
     background-color: white;
     overflow: hidden;
@@ -642,7 +650,7 @@ transform: translateX(100%);
 .save_div{
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 90%;
 }
 
 #saveContainerId{
@@ -650,27 +658,31 @@ transform: translateX(100%);
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    position: fixed;
-     top: 14px;
-    right: 0px;
-    width: 100%;
-    max-width: 430px;
+    position: relative;
     min-width: 400px;
+     top: -460px;
+    width: 100%;
+    /* min-height: 300px; */
+    /* right: inherit;
+    left: inherit; */
+    /* max-width: 430px; */
     height: 0;
-    max-height: 350px;
-    padding-top: 40px;
-    background-color: #94cbe3;
+    /* max-height: 450px; */
+    /* padding-top: 40px; */
     /* background-color: #b3b3b3; */
     /* border-radius: 0 0 20px 20px; */
+    background-color: #94cbe3;
     z-index: 4;
     transition: height 0.6s ease;
+    /* background-color 0s ease-in-out; */
+    /* transition-delay: 0s, 0s, 0s; */
     overflow: hidden;
 }
 
 #saveContainerId.show {
     /* padding-top: 40px; */
     box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
-     height: 40%;
+    height: 100%;
 }
 
 #cancelMessageButtonId, #saveMessageButtonId{
@@ -736,13 +748,17 @@ transform: translateX(100%);
     /* background-image: linear-gradient(rgb(42, 42, 42), rgba(62, 37, 16, 0.925)); */
 }
 
-
-@media screen and (max-width: 600px) {
-
+@media (min-width: 450px) {
+  #cart_contents_id {
+    left: auto; 
+     right: 6px;
+    width: 100%;
     
-/* .cartContent {
-  border-radius: 0 0 30px 30px;
-} */
+  max-width: 430px;
+    /* margin: 0; */
+  }
+}
+@media screen and (max-width: 600px) {
 
     .menu {
         padding: 0 20px;

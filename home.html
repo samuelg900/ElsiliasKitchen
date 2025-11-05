@@ -534,21 +534,6 @@
                 /* position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); */
             }
 
-            #ee{
-                /* position: absolute; */
-                
-                height: 100%;
-                width: auto;
-                /* transform: rotate(-10deg); */
-            }
-
-            #kk{
-                /* position: relative;
-                left: 37px; */
-                height: inherit;
-                width: inherit;
-            }
-
             .divr{
                 display: flex;
                 align-items: center;
@@ -559,42 +544,63 @@
                 /* width: 306px; */
             }
 
+            #cir_nav{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed;
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                height: 46px;
+                border-radius: 50px;
+                background-color: white;
+                min-width: 400px;
+            }
+            
+            #cir_nav.shadow{
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 4px 8px 0 rgba(0, 0, 0, .12);
+                transition: box-shadow 0.5s ease;
+            }
+
+               
         </style>
 
 <div class="top_nav">
 
-    <div class="divl">
-        <div class="languageContainer">
-            <div class="switchLanguage" onclick="changeLanguage()">
-                <img class="usa" src="USA_flag.png" alt="">
-                <div class="switchBall" id="ball_id"></div>
-                <img class="dr" src="DR_flag.png" alt="">
+    <div id="cir_nav">
+        <div class="divl">
+            <div class="languageContainer">
+                <div class="switchLanguage" onclick="changeLanguage()">
+                    <img class="usa" src="USA_flag.png" alt="">
+                    <div class="switchBall" id="ball_id"></div>
+                    <img class="dr" src="DR_flag.png" alt="">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="divm">
-        <!-- E -->
-        <svg id="ee" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-           
-            <path stroke="var(--primary-dark)" stroke-width="5" fill="none"
-                d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z" />
-        </svg>
-            <!-- K -->
-        <svg id="kk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90"
-                stroke="var(--primary-dark)" stroke-width="5" fill="none"></polygon>
-        </svg>
+        <div class="divm">
+            <!-- E -->
+            <svg id="ee" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                
+                <path stroke="var(--primary-dark)" stroke-width="5" fill="none"
+                    d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z" />
+            </svg>
+                <!-- K -->
+            <svg id="kk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90"
+                    stroke="var(--primary-dark)" stroke-width="5" fill="none"></polygon>
+            </svg>
 
-    </div>
-
+        </div>
 
 
     <!-- <h3 style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%); color: white;">
 Elsilia's Kitchen</h3> -->
-    <div class="divr">
-        <div id="cart_num_id">0</div>
-        <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span>
+        <div class="divr">
+            <div id="cart_num_id">0</div>
+            <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span>
+        </div>
     </div>
 </div>
 
@@ -665,6 +671,18 @@ Elsilia's Kitchen</h3> -->
                     }
                 }
             });
+
+                    const header = document.getElementById('cir_nav');
+const headerTop = header.offsetTop; // original top position
+console.log(header.offsetTop);
+window.addEventListener('scroll', () => {
+  if (window.scrollY > headerTop) {
+    header.classList.add('shadow');
+  } else {
+    header.classList.remove('shadow');
+  }
+});
+
 
         </script>
 

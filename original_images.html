@@ -35,7 +35,7 @@
         <!-- <a href="home.html">Elsilia's Kitchen</a></h3> -->
 </div>
 
-<h2 style="margin-top: 100px; text-align: center; color: white;">These are the original (cropped) pictures taken right from phones</h2>
+<h2 style="max-width:80%; margin-top: 100px; margin-inline: auto; align-content: center; text-align: center; color: white;">These are the original (cropped) pictures taken right from phones</h2>
 
     <div id="image_viewer_window">
             <img class="image_viewer" src="">
@@ -156,6 +156,8 @@
 
     body{
         background-color: rgb(100, 106, 113);
+        
+  background: rgb(31, 31, 38);
     margin: 0;
     padding: 0;
       font-family: "Lato", sans-serif;
@@ -172,11 +174,19 @@
     }
 
     .image{
+         /* border: 9px solid #bababa; */
+         /* border: 9px solid rgb(47, 46, 46);
+          
+  padding: 15px;
+  /* background: rgb(255, 254, 250); */
+  /* background-image: linear-gradient(to right, rgba(255, 254, 250, 0.78),rgba(245, 241, 219, 0.721)); */ 
         width: 300px;
         cursor: pointer;
         margin: auto;
+        /* box-shadow: 1px 1px 16px rgba(43, 43, 43, 0.5); */
         
     }
+    
 </style>
 
  <div id="grid"></div>
@@ -209,11 +219,13 @@
 
     // Add images to the grid
     reduced_images.forEach(src => {
+
       const img = document.createElement("img");
       img.className="image";
       img.src = src;
       img.alt = "Image";
       img.addEventListener('click', () => openImageViewer("original_food_images/"+ src.slice(20,src.length)));
+      
       grid.appendChild(img);
     });
 
