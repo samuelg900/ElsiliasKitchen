@@ -11,6 +11,81 @@
     --primary-dark: rgb(52, 52, 52);
 }
 
+html { scroll-behavior: smooth; } 
+
+
+#loading_div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    width: 101%;/* made these 101% because rendering had a tiny gap to the right*/
+    height: 101%; /* and bottom of the screen (showing the background)*/
+    background-color: #1a1a1a;
+    z-index: 30;
+    
+  animation: opac 1.5s linear forwards;
+  animation-delay: 4s;
+}
+
+@keyframes opac {
+    from{
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+#loading_E_id {
+  position: absolute;
+  z-index: 100;
+  animation: bezier_curve_move 2s ease-out forwards, rot_e 1.5s ease-out forwards;
+  animation-delay: 0s, 2.1s;
+}
+
+#loading_K_id {
+  position: absolute;
+  z-index: 100;
+  animation: bezier_curve_move 2s ease-out forwards, rot_k 1.5s ease-out forwards;
+  animation-delay: 0s, 2.1s;
+}
+
+@keyframes rot_e {
+    from{
+        transform: rotate(0deg);
+        left:0px;
+    }
+    to{
+        transform: rotate(-90deg);
+        left:-7.5%;
+        top: auto;
+    }
+}
+
+@keyframes rot_k {
+    from{
+        transform: rotate(0deg);
+        left:0px;
+    }
+    to{
+        transform: rotate(90deg);
+        left:6.5%;
+    }
+}
+
+@keyframes bezier_curve_move {
+    from{
+        transform: rotate(270deg);
+    }
+  to {
+        offset-distance: 100%;
+        transform: rotate(0deg);
+  }
+}
+
 
 /* Removes the blue tap highlight on mobile */
 * {
@@ -22,28 +97,20 @@ body {
     padding: 0;
     font-family: "Lato", sans-serif;
     /* background-color: #cecece; */
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-color: #ececec;
     min-width: 400px;
     justify-items: center;
 }
 
-
-.body_content {
-    width: 100%;
-    max-width: 1200px;
-    margin-inline: auto;
+.back_dn{
+    transition: background-color 1s ease;
 }
 
-/* Menu layout */
-.menu {
-    max-width: 86%;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-.top_nav {
+#top_nav {
     display: block;
-    height: 54px;
+    /* flex: 1 1 auto; */
+    height: 60px;
     background-color: #FEFEFF;
     /* position: fixed; */
     position: absolute;
@@ -52,23 +119,24 @@ body {
     right: 0;
     z-index: 10;
     min-width: 400px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
-.conig {
+/* BANNER */
+.banner {
     position: relative;
     top: 54px;
     text-align: center;
     margin-bottom: 100px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: opacity 1s ease;
 }
 
-.ig {
+.banner img {
+    width: 100%;
     align-self: center;
 }
 
-#ee{
-    color: var(--primary-orange);
-}
 
 .syncopate-bold {
     font-family: "Syncopate", sans-serif;
@@ -97,19 +165,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-/* .top_nav .num {
-    position: absolute;
-    color: white;
-    font-size: 10px;
-    top: 11px;
-    right: 11px;
-} */
-
-button::after{
-    background: #6dac63;
-    transition: color 2s ease;
 }
 
 #cart_num_id {
@@ -144,9 +199,11 @@ button::after{
 .cart_icon {
     font-size: 28px;
     /* float: right; */
-    margin: 13px;
-    margin-left: 45px;
+    margin: 0 18px 0 20px;
+    /* margin-right: 18px; */
+    /* margin-left: 45px; */
     cursor: pointer;
+    transition: color 1s ease;
 }
 
 .cartItemContainter {
@@ -280,6 +337,21 @@ button::after{
   background: #4091ee;
 }
 
+
+.body_content {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+
+/* Menu layout */
+.menu {
+    max-width: 86%;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
 .cartItems {
     overflow-y: auto;}
 
@@ -374,8 +446,8 @@ button::after{
     background: linear-gradient(
     to bottom, 
     #fff 0%,      
-    #fff 30%,     
-    #444444e0 30%,
+    #fff 25%,     
+    #444444e0 25%,
     #000000eb 100%
   );
     margin-bottom: 15px;
@@ -386,7 +458,7 @@ button::after{
 
 .item_image {
     width: 100%;
-    border-radius: 60px 0 120px 0;
+    border-radius: 60px 0 110px 0;
 }
 
 .item_image:hover {
@@ -418,7 +490,9 @@ button::after{
     position: relative;    
     margin: 13px;
     width: 60px;
-    height: 24px;
+    /* height: 24px; */
+    /* height: 50%; */
+
     /* z-index: 999; */
 }
 
@@ -503,7 +577,7 @@ transform: translateX(100%);
     margin: 10px auto;
     background-color: #fffffffc;
     border-radius: 20px;
-    box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3); */
 
     /* display: flex;           */
     justify-content: center;    /* center horizontally */
@@ -512,6 +586,27 @@ transform: translateX(100%);
     
     /* justify-self: center; */
 } 
+
+p{
+    transition: opacity 0.7s ease !important;
+}
+
+p::before{
+    opacity: 0;
+}
+
+p::after{
+    color:greeen;
+    opacity: 1;
+}
+
+.text_dn{
+    transition: color 1s ease !important;
+}
+
+.shadow_dn{
+    transition: box-shadow 1s ease;
+}
 
 #qrTitleId{
     text-align: center;
@@ -550,7 +645,7 @@ transform: translateX(100%);
     position: absolute;
     top: 20px;
     left: 20px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 #save-qr-button{
@@ -632,17 +727,19 @@ transform: translateX(100%);
 
 .cartMinusSign, 
 .cartPlusSign{
-    width:  18px;
-    height: 18px;
+    width:  24px;
+    height: 24px;
     text-align: center;
     cursor: pointer;
     color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
+    font-size: 30px;
 
 }
 
 .cartTrashIcon{
-    font-size: 18px;
+    margin-top: 14px;
+    font-size: 24px;
     color: rgba(0, 0, 0, 0.7);
     text-align: center;
     cursor: pointer;
@@ -731,7 +828,7 @@ transform: translateX(100%);
     text-align: center; 
     margin-block: 40px;
     margin-inline: auto;
-    padding-inline: 10px;
+    padding-inline: 20px;
     max-width: 500px;
     z-index: 2;
     position: relative;

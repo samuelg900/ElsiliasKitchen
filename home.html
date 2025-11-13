@@ -11,28 +11,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="tab_logo.png" />
-<script src="debug.js"></script>
-    <title>Home</title>
 
+    <title>Elsilias Kitchen</title>
+
+    <script src="debug.js"></script>
     <script src="home_script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js"></script>
-
 </head>
 
-<body>
+<body class="back_dn">
 
-
-
+    
 <div id="loading_div">
-    <svg id="e_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path
-            fill="#D35A21"
-            d="
-            M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z"
+    <svg id="loading_E_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D35A21"
+            d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z"
         />
     </svg>
-    <svg id="k_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <svg id="loading_K_id" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90" fill="#D35A21"></polygon>
     </svg>
 </div>
@@ -40,139 +37,133 @@
           if(DEBUG_MODE == DEBUG.YES){
             document.getElementById('loading_div').style.display='none';
           }
-
-    </script>
-
-<style>
-#loading_div{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right:0;
-    bottom: 0;
-    width: 101%;/* made these 101% because rendering had a tiny gap to the right*/
-    height: 101%; /* and bottom of the screen (showing the background)*/
-    background-color: #1a1a1a;
-    z-index: 30;
-    
-  animation: opac 1.5s linear forwards;
-  animation-delay: 4s;
-}
-
-@keyframes opac {
-    from{
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        z-index: -1;
-    }
-}
-
-#e_id {
-  position: absolute;
-  z-index: 100;
-  animation: bezier_curve_move 2s ease-out forwards, rot_e 1.5s ease-out forwards;
-  animation-delay: 0s, 2.1s;
-}
-
-#k_id {
-  position: absolute;
-  z-index: 100;
-  animation: bezier_curve_move 2s ease-out forwards, rot_k 1.5s ease-out forwards;
-  animation-delay: 0s, 2.1s;
-}
-
-@keyframes rot_e {
-    from{
-        transform: rotate(0deg);
-        left:0px;
-    }
-    to{
-        transform: rotate(-90deg);
-        left:-7.5%;
-        top: auto;
-    }
-}
-
-@keyframes rot_k {
-    from{
-        transform: rotate(0deg);
-        left:0px;
-    }
-    to{
-        transform: rotate(90deg);
-        left:6.5%;
-    }
-}
-
-@keyframes bezier_curve_move {
-    from{
-        transform: rotate(270deg);
-    }
-  to {
-        offset-distance: 100%;
-        transform: rotate(0deg);
-  }
-
-}
-
-</style>
-
-    <script>
-
-        // const ua = navigator.userAgent;
-
-        // const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-        // const isMacOS = /Macintosh/.test(ua) && !/iPhone|iPad|iPod/.test(ua);
-
-        // Doesn't show animation for IOS or MacOS...until i can fix the centering/Bezier curve in their system
-        // if(isIOS || isMacOS){
-        //     document.getElementById('loading_div').style.display="none";
-        // }
-        // else{
-
-                let pathE;
-                let pathK;
-
-                    const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
-
-                    //path for E
-                    let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
-                    let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
-                    let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
-                    let P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
-                    pathE = P1 + P2 + P3 + P4;
-
-                    document.getElementById("e_id").style.offsetPath=`path("${pathE}"`;
-                    document.getElementById("e_id").style.width=`${window.innerWidth * 0.15}px`;
-                    document.getElementById("e_id").style.height=`${window.innerWidth * 0.15}px`;
-
-                    //path for K
-                    P1 = `M${window.innerWidth} ${outer_vert_space} `;
-                    P2 = `C0 ${window.innerHeight/2}, `;
-                    P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
-                    P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
-                    pathK= P1 + P2 + P3 + P4;
-
-                    document.getElementById("k_id").style.offsetPath=`path("${pathK}"`;
-                    document.getElementById("k_id").style.width=`${window.innerWidth * 0.15}px`;
-                    document.getElementById("k_id").style.height=`${window.innerWidth * 0.15}px`;
-            // }
-    </script>
-
-
-    <script>
+          else{
+            createLoadingScreen();
+          }
 
         //refresh content
         function changeLanguage() {
-            const ball = document.getElementById('ball_id');
-            ball.classList.toggle("changeToSpanish");
+            isSpanish = !isSpanish;
+            document.querySelectorAll('.lang_slide').forEach(ball => {
+                        ball.classList.toggle("changeLang");
+            });
             updateLayout();
+        }
+
+        // let shadow_class_for_cir_nav = undefined;
+        
+            let night = false;
+
+        function changeNightMode(){
+            document.querySelectorAll('.dn_slide').forEach(ball => {
+                ball.classList.toggle("changeNight");
+                if(ball.classList.contains("changeNight"))
+                    night = true;
+                else
+                    night = false;
+            });
+
+            // const backDarkColor = "#191919";
+            const backDarkColor = "#202020";
+            // const backLightColor = "#ECECEC";
+            const backLightColor = "white";
+            const textDarkColor = "black";
+            // const textLightColor = "white";
+            const textLightColor = "rgba( 255, 255, 255,0.8)";
+            
+
+            const switchDarkColor = "#454545";
+            const switchLightColor = "#404040";                     
+
+            // NIGHT MODE
+            if(night){
+
+                // border for cart number night
+                document.getElementById('cart_num_id').style.border=`1px solid ${backDarkColor}`;
+                
+                //shadow for cir_nav night
+                window.dispatchEvent(new Event('scroll'));
+
+                //shadow for cartContent night
+                document.querySelector(".cartContent").style.boxShadow ='-1px 0px 20px rgba(255, 255, 255, 0.3)';
+
+                //titles for night
+                document.querySelectorAll(".text_dn").forEach(title =>{
+                    title.style.color=textLightColor;
+                });
+
+                // container_slider
+                document.querySelectorAll(".switch_dn").forEach(container =>{
+                    container.style.backgroundColor= switchDarkColor;
+                });
+
+                //backgrounds for day
+                document.querySelectorAll(".back_dn").forEach(backgrounds =>{
+                    backgrounds.style.backgroundColor=backDarkColor;
+                });
+
+                 document.querySelector(".cart_icon").style.color=textLightColor;
+                
+                
+                 document.querySelector(".banner").style.opacity="0.7";
+                
+            }
+            // DAY MODE
+            else{
+                // border for cart number light
+                document.getElementById('cart_num_id').style.border=`1px solid ${backLightColor}`;
+
+                //titles for day
+                 document.querySelectorAll(".text_dn").forEach(title =>{
+                    title.style.color="black";
+                });
+
+                // container_slider
+                document.querySelectorAll(".switch_dn").forEach(container =>{
+                    container.style.backgroundColor=switchLightColor;
+                });
+
+                  //shadow for cir_nav day
+                  window.dispatchEvent(new Event('scroll'));
+
+                   //shadow for cartContent night
+                document.querySelector(".cartContent").style.boxShadow ='-1px 0px 20px rgba(0, 0, 0, 0.3)';
+
+
+                 //backgrounds for day
+                document.querySelectorAll(".back_dn").forEach(backgrounds =>{
+                    backgrounds.style.backgroundColor=backLightColor;
+                });
+
+                 document.querySelector(".cart_icon").style.color="black";
+
+                 
+                 document.querySelector(".banner").style.opacity="1";
+                
+            }
+
+
         }
     </script>
 
     <script>
+
+
+
+    window.addEventListener('resize', function (e) {
+        if(document.getElementById('side_menu').classList.contains('showMenu'))
+            document.getElementById('side_menu').classList.remove('showMenu');
+
+        if(document.getElementById('payment_menu_id').classList.contains('showMenu'))
+            document.getElementById('payment_menu_id').classList.remove('showMenu');
+
+        if(document.getElementById('payment_id').classList.contains('showPayment'))
+            document.getElementById('payment_id').classList.remove('showPayment');
+    });
+
+
+
+        let isSpanish = false;
 
 
      window.addEventListener('beforeunload', function (e) {
@@ -184,7 +175,7 @@
             //chrome requires the returnValue to be set (this is for old browsers)
             e.returnValue = 'Cart is not empty. Are you sure you want to leave?'; 
         }
-});
+    });
 
         let cart = [];
 
@@ -234,6 +225,10 @@
         
 
             document.querySelector('.cart').classList.toggle('open');
+            // if(document.querySelector('.cart').classList.contains('open'))
+            //      document.body.style.overflow = "hidden";
+            // else
+            //      document.body.style.overflow = "";
             
                 if (cart.length === 0) {
 
@@ -302,7 +297,7 @@
 
                 // Create the outer container
                 let container = document.createElement('div');
-                container.className = 'cartItemContainter';
+                container.className = "cartItemContainter text_dn";
 
                 // Left picture div
                 let left = document.createElement('div');
@@ -323,8 +318,14 @@
 
                 // Right name/qty div
                 let right = document.createElement('div');
-                right.className = 'rightname';
+                right.className = 'rightname text_dn';
                 right.style.position = "relative";
+
+                if(night)
+                    right.style.color = "rgba(255, 255, 255,0.8)";
+                else
+                    right.style.color = "black";
+
 
                 let nameP = document.createElement('p');
                 nameP.textContent = item.name;
@@ -332,37 +333,57 @@
                 let pane_size = document.createElement('p');
                 pane_size.classList.add('pan_text');
 
-                if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
-                    pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
-                    nameP.textContent = item.sp_name;
+                //SPANISH
+                if (isSpanish) {
+                    if((item.id >= 700 && item.id < 800) || (item.id >= 10700 && item.id < 10800))//if pasteles
+                        pane_size.textContent = item.pan_size == 2 ? "Media Dozena" : "Dozena";
+                    else
+                        pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
                 }
-                else
-                    pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+                else{//ENGLISH
+                    if((item.id >= 700 && item.id < 800) || (item.id >= 10700 && item.id < 10800 ))
+                        pane_size.textContent = item.pan_size == 2 ? "Half Dozen" : "Dozen";
+                    else
+                        pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+                }
+                nameP.textContent = item.sp_name;
 
 
                 let qtyP = document.createElement('p');
                 qtyP.style.fontSize = "14px";
                 qtyP.style.position = "absolute";
                 qtyP.style.bottom = "0";
-                if (document.getElementById('ball_id').classList.contains('changeToSpanish'))
+                if (isSpanish)
                     qtyP.textContent = `Cantidad: ${item.quantity}`;
                 else
                     qtyP.textContent = `Quantity: ${item.quantity}`;
 
                 const cartMinusSign = document.createElement('span');
-                cartMinusSign.className = 'cartMinusSign';
+                cartMinusSign.className = 'cartMinusSign text_dn';
                 cartMinusSign.textContent = '\u2212';
 
                 const cartTrashIcon = document.createElement('span');
-                cartTrashIcon.className = 'material-symbols-outlined cartTrashIcon';
+                cartTrashIcon.className = 'material-symbols-outlined cartTrashIcon text_dn';
                 cartTrashIcon.textContent = 'delete';
 
                 const cartPlusSign = document.createElement('span');
-                cartPlusSign.className = 'cartPlusSign';
+                cartPlusSign.className = 'cartPlusSign text_dn';
                 cartPlusSign.textContent = '\u002b';
 
                 const cartPlusMinusDiv = document.createElement('div');
-                cartPlusMinusDiv.className = 'cartPlusMinusDiv';
+                cartPlusMinusDiv.className = 'cartPlusMinusDiv text_dn';
+
+                 if(night){
+                    cartMinusSign.style.color = "rgba(255, 255, 255,0.8)";
+                    cartTrashIcon.style.color = "rgba(255, 255, 255,0.8)";
+                    cartPlusSign.style.color = "rgba(255, 255, 255,0.8)";
+                 }
+                else{
+                     cartMinusSign.style.color = "black";
+                     cartTrashIcon.style.color = "black";
+                     cartPlusSign.style.color = "black";
+                }
+
                 cartPlusMinusDiv.appendChild(cartMinusSign);
                 cartPlusMinusDiv.appendChild(cartTrashIcon);
                 cartPlusMinusDiv.appendChild(cartPlusSign);
@@ -374,17 +395,11 @@
                         clearFromCart(item.id);
                     } else {
                         --item.quantity;
-                        if (document.getElementById('ball_id').classList.contains('changeToSpanish'))
+                        if (isSpanish)
                             qtyP.textContent = `Cantidad: ${item.quantity}`;
                         else
                             qtyP.textContent = `Quantity: ${item.quantity}`;
                     }
-
-                    if(item.quantity < 3)
-                            cartPlusSign.style = "color:black;"
-                        else
-                            cartPlusSign.style = "color:#00000050;"
-
                      updateTotal();
                 });
 
@@ -393,20 +408,12 @@
 
                     if (item.quantity < 3) {
                         ++item.quantity
-                        if (document.getElementById('ball_id').classList.contains('changeToSpanish'))
+                        if (isSpanish)
                             qtyP.textContent = `Cantidad: ${item.quantity}`;
                         else
                             qtyP.textContent = `Quantity: ${item.quantity}`;
-                         updateTotal();
-                       
-                        if(item.quantity === 3)
-                            cartPlusSign.style = "color:#00000050;"
-                        else
-                            cartPlusSign.style = "color:black;"
-                       
-                    }else{
-                        
-                    } 
+                         updateTotal();  
+                    }
                 });
 
                 cartTrashIcon.addEventListener('click', () => {                    
@@ -437,6 +444,7 @@
 
         function closeQRWindow() {
             document.getElementById('qrcode-div-background-id').style.display = 'none';
+            document.body.style.overflow = "";
         }
 
 
@@ -469,13 +477,8 @@
 
         function getQRDateTime() {
             const date = new Date();
-            document.getElementById('currentDateId').style='font-size: 16px;'
             document.getElementById('currentDateId').innerHTML = `${date.toDateString()} <br> ${date.toLocaleTimeString()}`;
-
         }   
-
-        // TODO: stage/state -- if back is pressed
-
 
         function checkoutBtnFunc() {
 
@@ -489,7 +492,7 @@
 
             document.getElementById("qrcode").innerHTML = '';
 
-            let qrcode = new QRCode(document.getElementById("qrcode"), {
+            new QRCode(document.getElementById("qrcode"), {
                 text: createQRLink(),
                 width: 256,
                 height: 256,
@@ -503,7 +506,7 @@
             getQRDateTime();
 
             if(savedMessage != undefined){
-                if (document.getElementById('ball_id').classList.contains('changeToSpanish'))
+                if (isSpanish)
                     document.getElementById('p_for_saved_message').innerHTML = `Notas:<br>${savedMessage}`;
                 else
                     document.getElementById('p_for_saved_message').innerHTML = `Notes:<br>${savedMessage}`;
@@ -513,92 +516,762 @@
                 document.getElementById('p_for_saved_message').style.display='none';
 
             document.querySelector('.cart').classList.toggle('open');
+
+
+            document.body.style.overflow = "hidden";
+                 
         }
     </script>
+
+
+
+    <style>
+        .side_menu_div{
+            display: flex;
+            flex-direction: column;
+            width: 0;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left:0;
+            z-index: 11;
+            background-color: white;
+            overflow: hidden;
+            transition: width 0.6s ease, background-color 1s ease;
+            border-right: 1px solid grey;
+        }
+
+        .showMenu{
+            width: 300px;
+        }
+
+        .side_menu_item{
+            display: flex;
+            position: relative;
+            justify-content: center;
+            /* width: 100%; */
+            height: 80px;
+            border-width: 0 0 1px 0;
+            border-style: solid;
+            border-color: rgba(163, 163, 163, 0.5);
+            align-items: center;
+            overflow: hidden;
+            /* margin-inline: 40px; */
+        }
+
+         .side_menu_item svg{
+            transition: transform 0.6s ease;
+         }
+
+
+        .side_payment_div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .side_close_icon{
+            position: absolute;
+            top: 4px;
+            left: 28px;
+            margin: 0;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .side_svg:hover{
+            transform: scale(1.2);
+        }
+
+        .side_svg{
+            position: absolute;
+            opacity: 0.5;
+            
+                width: 100%;
+                z-index: 0;
+        }
+        .side_label{
+            font-size: 18px;
+            z-index: 1;
+            /* font-weight: 600; */
+            pointer-events: none;
+        }
+
+    </style>
+
+<script>
+
+    function toggleSideMenu(){
+        document.getElementById('side_menu').classList.toggle('showMenu');
+
+        if(document.getElementById('side_menu').classList.contains('showMenu'))
+            document.body.style.overflow = "hidden";
+        else
+            document.body.style.overflow = "";
+    }
+</script>
+
+<style>
+    #payment_menu_id{
+        /* width:0; */
+        z-index: 12;
+    }
+
+    /* #payment_menu_id.show{
+        width:250px;
+    } */
+
+    #payment_menu_div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #payment_menu_label{
+        /* needed? */
+        text-align: center;
+        font-weight: 600;
+        /* color: #008CFF;
+        color: #00e013; */
+    }
+
+    #payment_menu_qr{
+        border: 4px solid white;
+    }
+
+</style>
+
+<script>
+
+    function toggleBackMenu(){
+        document.getElementById('payment_menu_id').classList.toggle('showMenu');
+    }
+
+    function openPaymentQR(item){
+        
+        if(document.getElementById('payment_id').classList.contains('showPayment')){
+            if(document.getElementById("payment_label").textContent[0]==item)
+                document.getElementById('payment_id').classList.toggle('showPayment');
+        }
+        else
+            document.getElementById('payment_id').classList.toggle('showPayment');
+
+
+        switch(item) {
+            case "V":
+                document.getElementById("payment_label").innerHTML=`<br><a style="color:#008CFF; font-style: italic; text-decoration:none; cursor:pointer;" href="https://venmo.com/code?user_id=3229643071029248311" target="_blank">VENMO &#8599;</a><br><p class="text_dn" style="font-weight:500;">@ElsiliaKitchen</p><br>`; 
+                document.getElementById("payment_qr").innerHTML = '';
+
+                new QRCode(document.getElementById("payment_qr"), {
+                text: "https://venmo.com/code?user_id=3229643071029248311",
+                width:200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+                break;
+            case "C":
+                document.getElementById("payment_label").innerHTML=`<br><a style="color:#00E013; font-style: italic; text-decoration:none; cursor:pointer;" href="https://cash.app/$Elsamorel1?qr=1" target="_blank">CASH APP &#8599;</a><br><p class="text_dn" style="font-weight:500;">$Elsamorel1</p><br>`; 
+                document.getElementById("payment_qr").innerHTML = '';
+
+                new QRCode(document.getElementById("payment_qr"), {
+                text: "https://cash.app/$Elsamorel1?qr=1",
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+                break;
+            default:
+                document.getElementById("payment_label").textContent="Nothing";
+                break;
+        }
+    
+    }
+
+    function openPaymentQRMenu(item){
+        // document.getElementById('payment_menu').classList.toggle('show');
+        document.getElementById('payment_menu_id').classList.toggle('showMenu');
+        
+        switch(item) {
+            case "V":
+                document.getElementById("payment_menu_label").innerHTML=`<br><a style="color:#008CFF; text-decoration:none; cursor:pointer;" href="https://venmo.com/code?user_id=3229643071029248311" target="_blank">VENMO &#8599;</a><br><p class="text_dn" style="font-weight:500;">@ElsiliaKitchen</p><br>`; 
+                
+                document.getElementById("payment_menu_qr").innerHTML = '';
+
+                new QRCode(document.getElementById("payment_menu_qr"), {
+                text: "https://venmo.com/code?user_id=3229643071029248311",
+                width:200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+                break;
+            case "C":
+                document.getElementById("payment_menu_label").innerHTML=`<br><a style="color:#00E013; text-decoration:none; cursor:pointer;" href="https://cash.app/$Elsamorel1?qr=1" target="_blank">CASH APP &#8599;</a><br><p class="text_dn" style="font-weight:500;">$Elsamorel1</p><br>`; 
+                document.getElementById("payment_menu_qr").innerHTML = '';
+
+                new QRCode(document.getElementById("payment_menu_qr"), {
+                text: "https://cash.app/$Elsamorel1?qr=1",
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+                break;
+            default:
+                document.getElementById("payment_menu_label").textContent="Nothing";
+                break;
+        }
+    }
+</script>
+
+<style>
+        .payment_id_div{
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 0;
+            position: fixed;
+            top: 28px;
+            right:6px;
+            z-index: 10;
+            background-color: white;
+            overflow: hidden;
+            transition: height 0.6s ease, padding-top 0.6s ease;
+            /* border-left: 1px solid grey;
+            border-bottom: 1px solid grey; */
+    border-radius: 0px 0px 16px 16px;
+    box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .payment_id_div svg{
+            transition: transform 0.6s ease;
+        }
+
+
+        .payment_div{
+            display: flex;
+            justify-content: center;
+            width: 90px;
+            cursor: pointer;
+        }
+
+         #payment_menu_id{
+        /* width:0; */
+        z-index: 12;
+    }
+
+    /* showMenu */
+
+    .showPayment{
+        padding-top: 28px;
+        height: 360px;
+    }
+
+    #payment_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #payment_label{
+        /* needed? */
+        text-align: center;
+        font-weight: 600;
+        /* color: #008CFF;
+        color: #00e013; */
+    }
+
+    #payment_qr{
+        border: 4px solid white;
+    }
+
+</style>
+
+<div id="payment_id" class="back_dn payment_id_div">
+    
+    <!-- <div class="payment_item">
+         <span class="side_close_icon" onclick="toggleBackMenu()">&lt;</span>
+    </div> -->
+
+    <div id="payment_container">
+        <a class="text_dn" id="payment_label"></a>
+        <div id="payment_qr"></div>
+    </div>
+
+</div>
+
+
+<div id="payment_menu_id" class="back_dn side_menu_div">
+    
+    <div class="side_menu_item">
+        <!-- close icon -->
+         <span style="top:14px" class="side_close_icon text_dn" onclick="toggleBackMenu()">&lt;</span>
+    </div>
+
+    <div id="payment_menu_div">
+        <a class="text_dn" id="payment_menu_label"></a>
+        <div id="payment_menu_qr"></div>
+    </div>
+
+</div>
+
+
+
+<div id="side_menu" class="side_menu_div back_dn">
+
+    
+    <div class="side_menu_item">
+        <!-- close icon -->
+         <span style="top:14px" class="side_close_icon text_dn" onclick="toggleSideMenu()">&times;</span>
+
+    </div>
+    <!-- translate -->
+    <div class="side_menu_item">
+        <span class="container_slider_menu switch_dn" onclick="changeLanguage()">
+            <span id="usa_dr_ball" class="ball_slider lang_slide"></span>
+            <span class="flag_span"> <img src="USA_flag.png"> </span>
+            <span class="flag_span"> <img src="DR_flag.png"> </span>
+        </span>
+    </div>
+
+                <!-- venmo -->
+    <div class="side_menu_item" onclick='openPaymentQRMenu("V")'>
+        <div class="side_payment_div">
+            <svg xmlns="http://www.w3.org/2000/svg" class="side_svg" viewBox="0 0 512 512">
+                <path d="M381.4 105.3c11 18.1 15.9 36.7 15.9 60.3 0 75.1-64.1 172.7-116.2 241.2H162.3l-47.6-285 104.1-9.9 25.3 202.8c23.5-38.4 52.6-98.7 52.6-139.7 0-22.5-3.9-37.8-9.9-50.4z" fill="#008CFF"/>
+            </svg>    
+            
+            <span class="text_dn side_label">VENMO</span>
+        </div>     
+    </div>
+
+            <!-- cashapp -->
+    <div class="side_menu_item" onclick='openPaymentQRMenu("C")'>
+        <div class="side_payment_div">
+            <svg xmlns="http://www.w3.org/2000/svg" class="side_svg" viewBox="0 0 210 210" fill="none">
+                <rect width="150" height="150" x="25" y="25" rx="7.81424" fill="#fff"/>
+                <path fill="#00E013" d="M206.398,30.286c-4.502-12.394-14.307-22.189-26.713-26.687C168.48,0,158.075,0,136.865,0h-63.63c-21.11,0-31.615,0-42.92,3.498C17.909,7.996,8.104,17.792,3.602,30.186C0,41.58,0,52.075,0,73.165v63.57c0,21.19,0,31.585,3.502,42.98c4.502,12.394,14.307,22.189,26.713,26.687C41.62,210,52.125,210,73.135,210h63.63c21.11,0,31.615,0,42.92-3.598c12.406-4.498,22.211-14.293,26.713-26.687C210,168.32,210,157.825,210,136.735v-63.47C210,52.175,210,41.68,206.398,30.286z M151.472,71.866l-12.106,9.895c-1.101,0.9-2.601,0.7-3.402-0.4c-6.203-7.596-15.807-11.894-26.312-11.894c-11.706,0-19.009,5.098-19.009,12.294c-0.2,6.097,5.503,9.196,23.011,12.994c22.111,4.698,32.215,13.893,32.215,29.386c0,19.391-15.808,33.684-40.519,35.283l-2.401,11.495c-0.2,1.099-1.201,1.899-2.401,1.899H81.539c-1.601,0-2.701-1.499-2.401-2.999l3.001-12.794c-12.206-3.498-22.111-10.295-27.813-18.591c-0.7-1.099-0.5-2.499,0.5-3.298l13.206-10.395c1.101-0.9,2.701-0.6,3.502,0.5c7.003,9.795,17.808,15.593,30.815,15.593c11.706,0,20.51-5.697,20.51-13.893c0-6.297-4.402-9.196-19.309-12.294c-25.412-5.497-35.517-14.793-35.517-30.286c0-17.991,15.107-31.485,37.918-33.284l2.501-11.894c0.2-1.099,1.201-1.899,2.401-1.899h18.709c1.501,0,2.701,1.399,2.401,2.899l-2.901,13.294c9.805,2.999,17.808,8.396,22.811,15.093C152.673,69.567,152.473,71.066,151.472,71.866z"/>
+            </svg>
+            
+                <span class="text_dn side_label">CASH APP</span>
+        </div>
+    </div>
+
         <style>
-            .divl{
-               align-self: center;
+            .container_slider{
+                display: flex;
+                justify-content: space-around;
+                width: 65px;
+                height: 32px;
+                border-radius: 40px;
+                background-color: rgb(47, 47, 47);
+                cursor: pointer; 
+                margin: 13px;
             }
+
+            .container_slider .ball_slider{
+                height: 27px;
+                width: 27px;
+                margin: 3px;
+            }
+
+            .container_slider #usa_dr_ball{
+                transform: translateX(-16px);
+                 background: greenyellow;
+            }
+
+            .container_slider #usa_dr_ball.changeLang{
+                transform: translateX(16px);
+            }
+
+            .container_slider #day_night_ball{
+                transform: translateX(-16px);
+                 background: lightblue;
+            }
+
+            .container_slider #day_night_ball.changeNight{
+                transform: translateX(16px);
+            }
+
+            .container_slider svg{
+                height:80%;
+                margin: 3.5px;
+            }
+            
+
+             .container_slider img{
+                border-radius: 2px;
+                height: 45%;
+                /* margin-inline: 5px; */
+                /* z-index: 1; */
+            }
+
+            .container_slider_menu{
+                display: flex;
+                justify-content: space-around;
+                width: 115px;
+                height: 70%;
+                border-radius: 40px;
+                background-color: #606060;
+                 cursor: pointer;
+            }
+            
+            .container_slider_menu svg{
+                height: 80%;
+                margin: 5px;
+            }
+            .container_slider_menu img{
+                border-radius: 5px;
+                height: 46%;
+                /* margin-inline: 5px; */
+                /* z-index: 1; */
+            }
+
+            .flag_span{
+                display: flex;
+                align-items: center;
+            }
+
+            .ball_slider{
+                 position: absolute;
+                /* transform: translateX(-30px); */
+                height: 48px;
+                width: 48px;
+                 /* background: lightblue; */
+                 border-radius: 50px;
+                 margin: 4px;
+                transition: transform 0.5s ease;
+            }
+
+            #usa_dr_ball{
+                transform: translateX(-30px);
+                 background: greenyellow;
+            }
+
+            #usa_dr_ball.changeLang{
+                transform: translateX(30px);
+            }
+
+            #day_night_ball{
+                transform: translateX(-30px);
+                 background: lightblue;
+            }
+
+            #day_night_ball.changeNight{
+                transform: translateX(30px);
+            }
+
+        </style>
+
+    <!-- dark and light mode -->
+    <div class="side_menu_item">
+        <span class="container_slider_menu switch_dn" onclick="changeNightMode()">
+
+            <span id="day_night_ball" class="ball_slider dn_slide"></span>
+           <!-- day -->
+            <span>
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="25" fill="#FFC300"/>
+
+                <g stroke="#FFC300" stroke-width="7" stroke-linecap="round">
+                    <line x1="50" y1="10" x2="50" y2="30"/>
+                    <line x1="50" y1="70" x2="50" y2="90"/>
+                    <line x1="10" y1="50" x2="30" y2="50"/>
+                    <line x1="70" y1="50" x2="90" y2="50"/>
+                    
+                    <g transform="rotate(45 50 50)">
+                        <line x1="50" y1="10" x2="50" y2="30"/>
+                        <line x1="50" y1="70" x2="50" y2="90"/>
+                        <line x1="10" y1="50" x2="30" y2="50"/>
+                        <line x1="70" y1="50" x2="90" y2="50"/>
+                    </g>
+                </g>
+                </svg>
+            </span>
+
+            <!-- night --> 
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 21 22"> 
+                    <path d="M15.78 14.09C14 14.84 12 14.84 10.21 14.1C8.43 13.37 7.01 11.95 6.27 10.16C5.52 8.37 5.52 6.36 6.26 4.56C6.99 2.77 8.4 1.35 10.18 0.6C10.45 0.48 10.42 0.14 10.13 0.09C8.6 -0.14 7.03 0.07 5.6 0.71C4.5 1.16 3.5 1.81 2.66 2.65C1.81 3.49 1.14 4.48 0.69 5.58C0.23 6.68 -0 7.86 0 9.05C0 10.25 0.24 11.42 0.7 12.52C1.16 13.62 1.84 14.61 2.69 15.44C3.53 16.28 4.54 16.93 5.64 17.37C6.74 17.81 7.92 18.02 9.11 18C10.29 17.97 11.46 17.71 12.55 17.23C13.98 16.65 15.23 15.68 16.14 14.45C16.29 14.24 16.01 13.97 15.78 14.09Z" fill="grey"/> 
+                </svg>
+            </span>
+
+        </span>
+    </div>
+
+    <style>
+    .side_logo{
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        /* margin-top: 70%; */
+        left: 50%;
+        right:50%;
+        margin-inline: -40px;
+        transform: (50%,50%);
+        
+    }
+
+    .side_logo svg{
+        width: 60px;
+        height: 60px;
+    }
+            
+    </style>
+
+
+     <div class="side_logo">
+            <!-- E -->
+            <svg id="ee" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                
+                <path stroke="var(--primary-dark)" stroke-width="5" fill="white"
+                    d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z" />
+            </svg>
+                <!-- K -->
+            <svg id="kk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90"
+                    stroke="var(--primary-dark)" stroke-width="5" fill="white"></polygon>
+            </svg>
+
+        </div>
+
+</div>
+
+
+
+        <style>
+            /* .divl{
+               align-self: center;
+            } */
             
             .divm{
                 display: flex;
-                /* margin-block: 9px;
-                margin-inline:4px; */
-                /* justify-self: auto; */
-                /* position: absolute; */
                 height: 76px;
                 width: 76px;
-                /* transform: rotate(-10deg); */
-
-
-                /* position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); */
+                position: absolute;
+                left: 50%;
+                right:50%;
+                margin-left: -40px;
+                transform: (-50%,-50%);
             }
 
             .divr{
                 display: flex;
                 align-items: center;
-                /* position: relative; */
-                /* width: fit-content;
-                
-                height: 36px; */
-                /* width: 306px; */
+                gap: 16px;
             }
 
             #cir_nav{
                 display: flex;
+                /* flex-wrap: wrap; */
                 justify-content: space-between;
+                flex: 1 1 auto; 
                 align-items: center;
                 position: fixed;
-                top: 6px;
+                /* padding-inline: 64px; */
+                top: 5px;
                 left: 6px;
                 right: 6px;
-                height: 46px;
+                height: 50px;
                 border-radius: 50px;
-                /* width: 100%; */
-                background-color: white;
-                /* min-width: 400px; ...388px*/
+                min-width: 388px;
+                background-color: inherit;
             }
             
-            #cir_nav.shadow{
+            .cir_nav_shadowDay{
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 4px 8px 0 rgba(0, 0, 0, .12);
                 transition: box-shadow 0.5s ease;
             }
 
+             .cir_nav_shadowNight{
+                box-shadow: 0 1px 3px 0 rgba(255, 255, 255, .12), 0 4px 8px 0 rgba(255, 255, 255, .12);
+                transition: box-shadow 0.5s ease;
+            }
+
+            #id_cashapp, #id_venmo{
+                padding: 20px 0px;
+                font-size: 15px;
+                font-weight: 900;
+                font-style: italic; 
+                transition: color 1s ease;
+                cursor: pointer;
+            }
+
+            #id_cashapp:hover{
+                color: #00E013 !important;
+            /* background: #00e01390; */
+            }
+
+            #id_venmo:hover{
+                color: #008CFF !important;
+            /* background: #008CFF90; */
+            }
                
         </style>
 
-<div class="top_nav">
-
+<div class="back_dn shadow_dn" id="top_nav">
     <div id="cir_nav">
+
+        <style>
+            .divl{
+                display: flex;
+                align-items: center;
+            }
+
+            .menu_icon{
+                display: none;
+                font-size: 30px;
+                margin: 0 20px 0 18px;
+                cursor: pointer;
+            }
+
+
+            .languageContainerrr{ 
+    position: relative;    
+    margin: 13px;
+    width: 90px;
+    /* height: 24px; */
+    /* z-index: 999; */
+}
+
+.languageContainerrr img{
+    position: absolute;
+    margin: auto;
+    height: 20px;
+    z-index: 1;
+}
+
+            @media (max-width: 800px) {
+                .menu_icon{
+                    display: block;
+                }
+
+                .languageContainer{
+                    display: none;
+                }
+
+                .container_slider{
+                    display: none;
+                }
+
+                .payment_div{
+                    display: none;
+                }
+
+                        .switchLanguage{
+    aspect-ratio: 2.4/1;
+}
+
+    .usa{
+    left: 8px;
+    top:25%;
+    border-radius: 3px;
+}
+
+.dr{
+    right: 8px;
+    top:25%;
+    border-radius: 3px;
+}
+
+        .switchBall.changeToSpanish{
+    transform: translateX(101%);
+    }
+            }
+
+        </style>
+
+
+
         <div class="divl">
-            <div class="languageContainer">
+
+            <span class="material-symbols-outlined menu_icon text_dn" onclick="toggleSideMenu()">menu</span>
+
+            <!-- <div class="languageContainer">
                 <div class="switchLanguage" onclick="changeLanguage()">
-                    <img class="usa" src="USA_flag.png" alt="">
+                    <img class="usa" src="USA_flag.png">
                     <div class="switchBall" id="ball_id"></div>
-                    <img class="dr" src="DR_flag.png" alt="">
+                    <img class="dr" src="DR_flag.png">
                 </div>
-            </div>
+            </div> -->
+
+            <span class="container_slider switch_dn" onclick="changeLanguage()">
+                <span id="usa_dr_ball" class="ball_slider lang_slide"></span>
+                <span class="flag_span"> <img src="USA_flag.png"> </span>
+                <span class="flag_span"> <img src="DR_flag.png"> </span>
+            </span>
+
+            <span class="container_slider switch_dn" onclick="changeNightMode()">
+
+                <span id="day_night_ball" class="ball_slider dn_slide"></span>
+                
+                <!-- day -->
+                <span>
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="25" fill="#FFC300"/>
+
+                        <g stroke="#FFC300" stroke-width="7" stroke-linecap="round">
+                            <line x1="50" y1="10" x2="50" y2="30"/>
+                            <line x1="50" y1="70" x2="50" y2="90"/>
+                            <line x1="10" y1="50" x2="30" y2="50"/>
+                            <line x1="70" y1="50" x2="90" y2="50"/>
+                            
+                            <g transform="rotate(45 50 50)">
+                                <line x1="50" y1="10" x2="50" y2="30"/>
+                                <line x1="50" y1="70" x2="50" y2="90"/>
+                                <line x1="10" y1="50" x2="30" y2="50"/>
+                                <line x1="70" y1="50" x2="90" y2="50"/>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+                
+                <!-- night --> 
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 21 22"> 
+                        <path d="M15.78 14.09C14 14.84 12 14.84 10.21 14.1C8.43 13.37 7.01 11.95 6.27 10.16C5.52 8.37 5.52 6.36 6.26 4.56C6.99 2.77 8.4 1.35 10.18 0.6C10.45 0.48 10.42 0.14 10.13 0.09C8.6 -0.14 7.03 0.07 5.6 0.71C4.5 1.16 3.5 1.81 2.66 2.65C1.81 3.49 1.14 4.48 0.69 5.58C0.23 6.68 -0 7.86 0 9.05C0 10.25 0.24 11.42 0.7 12.52C1.16 13.62 1.84 14.61 2.69 15.44C3.53 16.28 4.54 16.93 5.64 17.37C6.74 17.81 7.92 18.02 9.11 18C10.29 17.97 11.46 17.71 12.55 17.23C13.98 16.65 15.23 15.68 16.14 14.45C16.29 14.24 16.01 13.97 15.78 14.09Z" fill="grey"/> 
+                    </svg>
+                </span>
+            </span>
+
         </div>
 
         <div class="divm">
             <!-- E -->
             <svg id="ee" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 
-                <path stroke="var(--primary-dark)" stroke-width="5" fill="none"
+                <path stroke="var(--primary-dark)" stroke-width="5" fill="white"
                     d="M10,40 A30,30 0 0 1 40,10 L90,10 L90,30 L40,30 A10,10 0 0 0 30,40 L85,40 L85,60 L30,60 A10,10 0 0 0 40,70 L90,70 L90,90 L40,90 A30,30 0 0 1 10,60 Z" />
             </svg>
                 <!-- K -->
             <svg id="kk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <polygon points="10,10 30,10 30,40 40,40 65,10 91,10 55,50 91,90 65,90 40,60 30,60 30,90 10,90"
-                    stroke="var(--primary-dark)" stroke-width="5" fill="none"></polygon>
+                    stroke="var(--primary-dark)" stroke-width="5" fill="white"></polygon>
             </svg>
 
         </div>
 
-
-    <!-- <h3 style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%); color: white;">
-Elsilia's Kitchen</h3> -->
         <div class="divr">
+
+                            <!-- venmo -->
+        <div id="id_venmo" class="payment_div text_dn" onclick="openPaymentQR('V')">
+            <span>VENMO</span>
+        </div>
+
+            <!-- cashapp -->
+        <div id="id_cashapp" class="payment_div text_dn" onclick="openPaymentQR('C')">           
+            <span>CASH APP</span>
+        </div>
             <div id="cart_num_id">0</div>
             <span class="material-symbols-outlined cart_icon" onclick="openCartContents()">shopping_cart</span>
         </div>
@@ -606,13 +1279,13 @@ Elsilia's Kitchen</h3> -->
 </div>
 
     <div class="cart" id="cart_contents_id">
-        <div class="cartContent">
-            <div id="nothing_in_cart">Cart is empty</div>
+        <div class="back_dn cartContent">
+            <div class="text_dn" id="nothing_in_cart">Cart is empty</div>
             <div class="cartItems" id="cartItemsId">
         </div>
-            <div class="checkout_div">
-                <p id="total_of_order_id">Total: $0</p>
-                <a id="add_message" onclick="openAddMessage(2)">Add message...</a>
+            <div class="back_dn checkout_div">
+                <p class="text_dn" id="total_of_order_id">Total: $0</p>
+                <a class="text_dn" id="add_message" onclick="openAddMessage(2)">Add message...</a>
                 <button id="checkoutBtn" onclick="checkoutBtnFunc()">Checkout</button>
             </div>
         </div>
@@ -628,14 +1301,60 @@ Elsilia's Kitchen</h3> -->
         
     </div>
 
-    <div class="conig" style="max-height: 500px; overflow: hidden;">
-        <img class="ig" style="width: 100%;" src="banner.png">
+    <div class="banner">
+        <img src="banner.png">
         <div class="p_container">
             <p class="syncopate-bold">Elsilia's<br>Kitchen</p>
             <p class="caveat">Delicious Dominican food,<br>from our home to yours</p>
-        </div>
+           </div> 
+           <div class="location">
+            
+                <span class="material-symbols-outlined">map_pin_heart</span> 
+               <p> Manchester, NH </p>
+            </div>
+           
+                <!-- <p class="location"> -->
     </div>
 
+    <style>
+        .location{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: absolute;
+            font-size: 8px;
+            right:5px;
+            bottom: 6px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 1px 1px 3px rgba(44, 44, 44, 0.716);
+        }
+
+        .location p{
+            margin: 1px 2px;
+            color: black;
+            font-size: 0.7rem;
+        }   
+
+        .location span{
+            /* padding-top: .5px; */
+            font-size: 1rem;
+            color: black;
+        }
+
+        @media screen and (max-width: 600px){
+            
+        .location p{
+            font-size: 0.5rem;
+        }   
+
+        .location span{
+            font-size: .9rem;
+        }
+
+            
+    }
+    </style>
 
     <script>
         let numOfOrders = 0;
@@ -673,64 +1392,70 @@ Elsilia's Kitchen</h3> -->
                 }
             });
 
-                    const header = document.getElementById('cir_nav');
-const headerTop = header.offsetTop; // original top position
-console.log(header.offsetTop);
-window.addEventListener('scroll', () => {
-  if (window.scrollY > headerTop) {
-    header.classList.add('shadow');
-  } else {
-    header.classList.remove('shadow');
-  }
-});
+        const header = document.getElementById('cir_nav');
+        const headerTop = header.offsetTop; // original top position
+        window.addEventListener('scroll', () => {
+            // console.log(window.scrollY);
+            // console.log(headerTop);
+
+        if (window.scrollY > headerTop) {
+            if(night){
+                header.classList.remove('cir_nav_shadowDay');
+                header.classList.add('cir_nav_shadowNight');
+            }
+            else{
+                header.classList.remove('cir_nav_shadowNight');
+                header.classList.add('cir_nav_shadowDay');
+            }
+
+        } else {
+            if(night)
+                header.classList.remove('cir_nav_shadowNight');
+            else
+                header.classList.remove('cir_nav_shadowDay');
+
+        }
+        });
 
 
         </script>
 
         <div class="menu" id="menu">
             <section class="category">
-                <h1 id="title_rice_id">Rice</h1>
+                <h1 class="text_dn" id="title_rice_id">Rice</h1>
                 <div class="tempContainer" id="menu-arroz"></div>
             </section>
 
             <section class="category">
-                <h1 id="title_meats_id">Meats</h1>
+                <h1 class="text_dn" id="title_meats_id">Meats</h1>
                 <div class="tempContainer" id="menu-carne"></div>
             </section>
 
             <section class="category">
-                <h1 id="title_pasta_id">Pastas & Salads</h1>
+                <h1 class="text_dn" id="title_pasta_id">Pastas & Salads</h1>
                 <div class="tempContainer" id="menu-pasta"></div>
             </section>
 
             <section class="category">
-                <h1 id="title_roots_id">Roots</h1>
+                <h1 class="text_dn" id="title_roots_id">Roots</h1>
                 <div class="tempContainer" id="menu-viveres"></div>
             </section>
 
             <section class="category">
-                <h1 id="title_fingerfood_id">Finger Food</h1>
+                <h1 class="text_dn" id="title_fingerfood_id">Finger Food</h1>
                 <div class="tempContainer" id="menu-picadera"></div>
+            </section>
+
+             <section class="category">
+                <h1 class="text_dn" id="title_pasteles_id">Pasteles</h1>
+                <div class="tempContainer" id="menu-pasteles"></div>
             </section>
 
         </div>
 
-
-
-            <!-- scroll bar -->
-
         <script>
-//hover == add class
-//id -> item  ..switch
-
-//active == add class
-
-  
-//   const scroll_item = document.getElementById('scrill_div_Id');
 
   function scrollFunc(menu_id){
-    
-    // document.getElementById(menu_id).scrollIntoView();
     
     hidePieTitleSelector();
 
@@ -739,36 +1464,12 @@ window.addEventListener('scroll', () => {
 
     window.scrollTo({
         top: offsetPosition
-        // behavior: 'smooth' // remove if you want instant scroll
     });
-
 
   }
 
         </script>
         
-        <style>
-
-.xx{
-    width: auto;
-    transform: width 1s;
-}
-    .xx:hover{
-        transform: scale(1.5);
-    }
-    
-    .my-polygon-shape {
-      /* Other styles for the element */
-      width: 100px;
-      height: 100px;
-      background-color: blue;
-      
-      /* Apply the polygon shape using clip-path */
-      clip-path: polygon(50% 50%, 0% 100%, 0% 80%); /* Example: a diamond shape */
-    }
-
-    </style>
-
             <div id="pie_container"></div>
 
 <script>
@@ -858,14 +1559,6 @@ navigation_pie.addEventListener('mouseleave', () => {
             right:-140px;
         }
 
-          /* #pie_container.disappear {
-            right:-640px;
-            transition: right 1s ease;
-            transition-delay: 1.3s;
-            z-index: -1;
-        } */
-
-
       
 
 
@@ -873,15 +1566,14 @@ navigation_pie.addEventListener('mouseleave', () => {
 
 <script>
 const titlesArray = {
-  titles: ["title_fingerfood_id", "title_roots_id", "title_pasta_id", "title_meats_id", "title_rice_id"],
-  names: ["Finger Food", "Roots", "Salads", "Meats", "Rice"]
+  titles: ["title_pasteles_id", "title_fingerfood_id", "title_roots_id", "title_pasta_id", "title_meats_id", "title_rice_id"],
+  names: ["Pasteles", "Finger Food", "Roots", "Salads", "Meats", "Rice"]
 }
 
 function hidePieTitleSelector(){
     document.querySelectorAll('.pie_group').forEach(item => item.classList.remove('show'));
     document.getElementById('pie_container').classList.remove('active');
-    document.getElementById('pie_container').style.zIndex='1';   
-    document.getElementById('pie_container').classList.add('disappear');
+    document.getElementById('pie_container').style.zIndex='1';
 }
 
 function addInteractivity(svg) {
@@ -908,7 +1600,6 @@ function addInteractivity(svg) {
             if(document.getElementById('pie_container').style.zIndex=='9')
                 hidePieTitleSelector();
             else{
-                document.getElementById('pie_container').classList.remove('disappear');
                 document.getElementById('pie_container').style.zIndex='9'
             }
 
@@ -1075,9 +1766,6 @@ document.getElementById("pie_container").appendChild(pie);
 
     <style>
 
-        
-html { scroll-behavior: smooth; } 
-
         #scrill_div_Id.active {
             opacity: 1;
             pointer-events: auto;
@@ -1130,142 +1818,22 @@ html { scroll-behavior: smooth; }
             getJsonData();
         </script>
 
-        <p class="disclaimerText" id="size_disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
+        <p  class="text_dn disclaimerText" id="size_disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
         
-        <div class="disclaimerText" id="ai_disclaimerTextId" style="font-size: 13px;">For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used as a reference, please click <a href="original_images.html" target="_blank">here</a></div>
+        <div  class="text_dn disclaimerText" id="ai_disclaimerTextId" style="font-size: 13px;">For transparency: This site used AI imaging for the images seen on the page. If you'd like to see some of the cropped original images used as a reference, please click <a href="original_images.html" target="_blank">here</a></div>
 
         <div id="qrcode-div-background-id">
-            <div id="qrcode-div-id">
+            <div class="back_dn text_dn" id="qrcode-div-id">
                 <span id="currentDateId"></span>
-                <span class="close_qrcode_window" onclick="closeQRWindow()">&times;</span>
+                <span class="text_dn close_qrcode_window" onclick="closeQRWindow()">&times;</span>
                 <h1 id="qrTitleId">Elsilia's Kitchen Order</h1>
-                <div id="qrcode"></div>
+                <div style="border: 4px solid white;" id="qrcode"></div>
                 <p id="qrTextId">Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order
                     date</p>
                 <p id="p_for_saved_message" style="display:none"></p>
                 <button id="save-qr-button" onclick="generatePdf()">Save QR Code</button>
             </div>
         </div>
-
-        <script>
-            function generatePdf() {
-                const doc = new jspdf.jsPDF();
-
-                const imgWidth = 80;  //desired width in PDF
-                const imgHeight = 80; //desired height in PDF
-
-                //page dimensions
-                const pageWidth = doc.internal.pageSize.getWidth();
-                const pageHeight = doc.internal.pageSize.getHeight();
-
-                //center position
-                const x = (pageWidth - imgWidth) / 2;
-                const y = (pageHeight - imgHeight) / 2;
-
-                
-                //Browser with show (to devs) a 'deprecated feature used' warning for XMLHttpRequest when addImage is called.
-                //I believe this happens due to a jspdf library call for loading the image file synchronously. It's fine- it all still works 
-
-                //adds decorative images, sets date, logo, and QR code        
-                doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 50, 75);
-                doc.addImage("pep.png", "PNG", pageWidth * 0.7, pageHeight * 0.26, 40, 40);
-                doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.46, 50, 50);
-                doc.addImage("plan.png", "PNG", pageWidth * 0.503, pageHeight * 0.7, 100, 100);
-
-                doc.setFontSize(16);
-                doc.setFont("times", "normal");
-                doc.text(document.getElementById('currentDateId').textContent, 5, 8);
-
-                doc.addImage("logo_for_pdf.png", "PNG", pageWidth - 42, 0, 36, 26.7);
-                doc.setFontSize(10);
-                doc.setTextColor(0, 0, 0);
-                doc.text("ELSILIA'S KITCHEN", pageWidth - 23.5, 26, { align: "center" });
-
-                let canvas = document.getElementById('qrcode').querySelector("canvas");
-
-                // Create an <img> element with it
-                let qr_img = new Image();
-                qr_img.src = canvas.toDataURL("image/png");
-
-                doc.addImage(qr_img, "PNG", x, y-20, imgWidth, imgHeight);
-
-                doc.setFillColor(0,0,0); //black
-                doc.setFillColor(255, 255, 255); //white
-                // doc.setFillColor(210, 90, 33); //orange
-               
-                const radius = 12;
-
-                doc.circle(pageWidth / 2 - 0.1, pageHeight /2 - 20.3, radius, 'F'); // 'F' = fill only
-
-                doc.addImage("logo_for_pdf.png", 'PNG', pageWidth / 2 - 11.5, pageHeight / 2 - 27.5, 22.5, 15);
-          
-                doc.setFont("times", "bold");
-                doc.setFontSize(36);
-
-                if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
-                    //SPANISH              
-                    doc.text("Orden de Elsilia's Kitchen", pageWidth / 2, y - 40, { align: "center" });
-
-                    if(savedMessage == undefined){
-                        doc.setFontSize(24);
-                        doc.text("¡Gracias por elegirnos!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
-                    }
-                    else{
-                        doc.setFontSize(12);
-                        doc.setFont("times", "italic");
-                        const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
-                        doc.text("Notas:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
-                        doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
-                    }
-
-                    doc.setFontSize(16);
-                    doc.setFont("times", "normal");
-
-                    doc.text("Por favor guarde y envíe esta página a Elsa para obtener", pageWidth / 2, y + imgHeight + 34, { align: "center" });
-                    doc.text("la confirmación de su pedido y establecer una fecha de pedido.", pageWidth / 2, y + imgHeight + 40, { align: "center" });
-
-                    doc.setFont("times", "bolditalic");
-                    doc.text("Esta página por sí sola no con", (pageWidth / 2) - 26, y + imgHeight + 70, { align: "center" });
-
-                    doc.setTextColor(255, 255, 255);
-                    doc.text("firma ningún pedido.", (pageWidth / 2) + 34, y + imgHeight + 70, { align: "center" });
-
-                    doc.save("Orden de Elsilia Kitchen - " + document.getElementById('currentDateId').textContent + ".pdf");
-                }
-                else{
-                    //ENGLISH
-                    doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 40, { align: "center" });
-
-                    if(savedMessage == undefined){
-                        doc.setFontSize(24);
-                        doc.text("Thank you for choosing us!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
-                    }
-                    else{
-                        doc.setFontSize(12);
-                        doc.setFont("times", "italic");
-                        const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
-                        doc.text("Notes:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
-                        doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
-                    }
-
-                    doc.setFontSize(16);
-                    doc.setFont("times", "normal");
-
-                    doc.text("Please save and send this page to Elsa to get", pageWidth / 2, y + imgHeight + 34, { align: "center" });
-                    doc.text("confirmation on your order and set up an order date.", pageWidth / 2, y + imgHeight + 40, { align: "center" });
-
-                    doc.setFont("times", "bolditalic");
-                    doc.text("This page alone is not a confi", (pageWidth / 2) - 25, y + imgHeight + 70, { align: "center" });
-
-                    doc.setTextColor(255, 255, 255);
-                    doc.text("rmation of any order.", (pageWidth / 2) + 34.5, y + imgHeight + 70, { align: "center" });
-
-                    doc.save("Elsilia Kitchen Order - " + document.getElementById('currentDateId').textContent + ".pdf");
-                }
-
-            }
-        </script>
-
     </div>
 
 

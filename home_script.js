@@ -1,6 +1,34 @@
 
-const translateArray = [];
+// LOADING SCREEN
+  let pathE, pathK;
+  function createLoadingScreen(){
+      const outer_vert_space = (window.innerHeight - window.innerWidth) / 2;
 
+      //path for E
+      let P1 = `M0 ${window.innerHeight - outer_vert_space} `;
+      let P2 = `C${window.innerWidth} ${window.innerHeight/2}, `;
+      let P3 = `${window.innerWidth/2} ${outer_vert_space}, `;
+      let P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
+      pathE = P1 + P2 + P3 + P4;
+
+      document.getElementById("loading_E_id").style.offsetPath=`path("${pathE}"`;
+      document.getElementById("loading_E_id").style.width=`${window.innerWidth * 0.15}px`;
+      document.getElementById("loading_E_id").style.height=`${window.innerWidth * 0.15}px`;
+
+      //path for K
+      P1 = `M${window.innerWidth} ${outer_vert_space} `;
+      P2 = `C0 ${window.innerHeight/2}, `;
+      P3 = `${window.innerWidth/2} ${window.innerHeight - outer_vert_space}, `;
+      P4 = `${window.innerWidth/2} ${window.innerHeight/2}`;
+      pathK= P1 + P2 + P3 + P4;
+
+      document.getElementById("loading_K_id").style.offsetPath=`path("${pathK}"`;
+      document.getElementById("loading_K_id").style.width=`${window.innerWidth * 0.15}px`;
+      document.getElementById("loading_K_id").style.height=`${window.innerWidth * 0.15}px`;
+  }
+
+
+const translateArray = [];
 function titlesFunc(titles) {
 
   titles.forEach(title => {
@@ -53,7 +81,8 @@ function updateLayout() {
   const menu_item = document.getElementsByClassName('menu-item');
 
   let index = 0;
-  if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
+  // if (document.getElementById('ball_id').classList.contains('changeToSpanish') || document.getElementById("usa_dr_ball").classList.contains("changeLang")) {
+  if (isSpanish) {
     document.getElementsByClassName('caveat')[0].innerHTML = `Comida deliciosa y Dominicana,<br> de mi casa a la suya`;
     document.getElementById('nothing_in_cart').textContent = 'El carrito está vacío';
     document.getElementById('size_disclaimerTextId').innerHTML = 'Cada bandeja entera es suficiente para aproximadamente 35-38 personas';
@@ -77,7 +106,10 @@ function updateLayout() {
       item.querySelector('h3').innerHTML = translateArray[index + 1];
       item.querySelector('p').textContent = translateArray[index + 3];
       let buttons = item.querySelectorAll('button');
-      buttons[1].innerHTML = 'ENTERA - $' + `${translateArray[index + 4]}`;
+      if(buttons[1].innerHTML[0]=='D')
+        buttons[1].innerHTML = 'DOCENA - $' + `${translateArray[index + 4]}`;
+      else
+        buttons[1].innerHTML = 'ENTERA - $' + `${translateArray[index + 4]}`;
       buttons[2].innerHTML = 'MEDIA - $' + `${translateArray[index + 5]}`;
       // buttons[2].innerHTML = 'AÑADIR AL CARRITO';
 
@@ -107,7 +139,10 @@ function updateLayout() {
       item.querySelector('h3').innerHTML = translateArray[index];
       item.querySelector('p').textContent = translateArray[index + 2];
       let buttons = item.querySelectorAll('button');
-      buttons[1].innerHTML = 'WHOLE - $' + `${translateArray[index + 4]}`;
+      if(buttons[1].innerHTML[0]=='D')
+        buttons[1].innerHTML = 'DOZEN - $' + `${translateArray[index + 4]}`;
+      else
+        buttons[1].innerHTML = 'WHOLE - $' + `${translateArray[index + 4]}`;
       buttons[2].innerHTML = 'HALF - $' + `${translateArray[index + 5]}`;
       // buttons[2].innerHTML = 'ADD TO CART';
 
@@ -167,7 +202,10 @@ function makeMenu(menuItems, menuContainerId, type) {
       const full_pan_button = document.createElement('button');
       full_pan_button.className = 'portionButton';
       full_pan_button.classList.add('active');
-      full_pan_button.innerHTML = 'WHOLE - $' + `${item.full_pan_cost}`;
+      if(item.size)
+        full_pan_button.innerHTML = 'DOZEN - $' + `${item.full_pan_cost}`;
+      else
+        full_pan_button.innerHTML = 'WHOLE - $' + `${item.full_pan_cost}`;
 
       const half_pan_button = document.createElement('button');
       half_pan_button.className = 'portionButton';
@@ -289,6 +327,7 @@ function getJsonData() {
       makeMenu(data, "menu-pasta", "pastas_and_salads");
       makeMenu(data, "menu-viveres", "root_vegetables");
       makeMenu(data, "menu-picadera", "finger_food");
+      makeMenu(data, "menu-pasteles", "pasteles");
       // updateLayout();
     })
     .catch(error => {
@@ -296,3 +335,122 @@ function getJsonData() {
     })
 
 }
+
+
+ function generatePdf() {
+                const doc = new jspdf.jsPDF();
+
+                const imgWidth = 80;  //desired width in PDF
+                const imgHeight = 80; //desired height in PDF
+
+                //page dimensions
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+
+                //center position
+                const x = (pageWidth - imgWidth) / 2;
+                const y = (pageHeight - imgHeight) / 2;
+
+                
+                //Browser with show (to devs) a 'deprecated feature used' warning for XMLHttpRequest when addImage is called.
+                //I believe this happens due to a jspdf library call for loading the image file synchronously. It's fine- it all still works 
+
+                //adds decorative images, sets date, logo, and QR code        
+                doc.addImage("par.png", "PNG", pageWidth * 0.04, pageHeight * 0.02, 50, 75);
+                doc.addImage("pep.png", "PNG", pageWidth * 0.7, pageHeight * 0.26, 40, 40);
+                doc.addImage("onion.png", "PNG", pageWidth * 0.06, pageHeight * 0.46, 50, 50);
+                doc.addImage("plan.png", "PNG", pageWidth * 0.503, pageHeight * 0.7, 100, 100);
+
+                doc.setFontSize(16);
+                doc.setFont("times", "normal");
+                doc.text(document.getElementById('currentDateId').textContent, 5, 8);
+
+                doc.addImage("logo_for_pdf.png", "PNG", pageWidth - 42, 0, 36, 26.7);
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 0);
+                doc.text("ELSILIA'S KITCHEN", pageWidth - 23.5, 26, { align: "center" });
+
+                let canvas = document.getElementById('qrcode').querySelector("canvas");
+
+                // Create an <img> element with it
+                let qr_img = new Image();
+                qr_img.src = canvas.toDataURL("image/png");
+
+                doc.addImage(qr_img, "PNG", x, y-20, imgWidth, imgHeight);
+
+                doc.setFillColor(0,0,0); //black
+                doc.setFillColor(255, 255, 255); //white
+                // doc.setFillColor(210, 90, 33); //orange
+               
+                const radius = 12;
+
+                doc.circle(pageWidth / 2 - 0.1, pageHeight /2 - 20.3, radius, 'F'); // 'F' = fill only
+
+                doc.addImage("logo_for_pdf.png", 'PNG', pageWidth / 2 - 11.5, pageHeight / 2 - 27.5, 22.5, 15);
+          
+                doc.setFont("times", "bold");
+                doc.setFontSize(36);
+
+                if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
+                    //SPANISH              
+                    doc.text("Orden de Elsilia's Kitchen", pageWidth / 2, y - 40, { align: "center" });
+
+                    if(savedMessage == undefined){
+                        doc.setFontSize(24);
+                        doc.text("¡Gracias por elegirnos!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
+                    }
+                    else{
+                        doc.setFontSize(12);
+                        doc.setFont("times", "italic");
+                        const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
+                        doc.text("Notas:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
+                        doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
+                    }
+
+                    doc.setFontSize(16);
+                    doc.setFont("times", "normal");
+
+                    doc.text("Por favor guarde y envíe esta página a Elsa para obtener", pageWidth / 2, y + imgHeight + 34, { align: "center" });
+                    doc.text("la confirmación de su pedido y establecer una fecha de pedido.", pageWidth / 2, y + imgHeight + 40, { align: "center" });
+
+                    doc.setFont("times", "bolditalic");
+                    doc.text("Esta página por sí sola no con", (pageWidth / 2) - 26, y + imgHeight + 70, { align: "center" });
+
+                    doc.setTextColor(255, 255, 255);
+                    doc.text("firma ningún pedido.", (pageWidth / 2) + 34, y + imgHeight + 70, { align: "center" });
+
+                    doc.save("Orden de Elsilia Kitchen - " + document.getElementById('currentDateId').textContent + ".pdf");
+                }
+                else{
+                    //ENGLISH
+                    doc.text("Elsilia's Kitchen Order", pageWidth / 2, y - 40, { align: "center" });
+
+                    if(savedMessage == undefined){
+                        doc.setFontSize(24);
+                        doc.text("Thank you for choosing us!", pageWidth / 2, y + imgHeight + 10, { align: "center" });
+                    }
+                    else{
+                        doc.setFontSize(12);
+                        doc.setFont("times", "italic");
+                        const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
+                        doc.text("Notes:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
+                        doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
+                    }
+
+                    doc.setFontSize(16);
+                    doc.setFont("times", "normal");
+
+                    doc.text("Please save and send this page to Elsa to get", pageWidth / 2, y + imgHeight + 34, { align: "center" });
+                    doc.text("confirmation on your order and set up an order date.", pageWidth / 2, y + imgHeight + 40, { align: "center" });
+
+                    doc.setFont("times", "bolditalic");
+                    doc.text("This page alone is not a confi", (pageWidth / 2) - 25, y + imgHeight + 70, { align: "center" });
+
+                    doc.setTextColor(255, 255, 255);
+                    doc.text("rmation of any order.", (pageWidth / 2) + 34.5, y + imgHeight + 70, { align: "center" });
+
+                    doc.save("Elsilia Kitchen Order - " + document.getElementById('currentDateId').textContent + ".pdf");
+                }
+
+            }
+

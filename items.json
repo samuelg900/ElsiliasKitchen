@@ -117,7 +117,7 @@
     "image_link": "main_food_images/macaroni_chicken_salad.png",
     "is_active": true,
     "full_pan_cost": 45,
-    "half_pan_cost": 23
+    "half_pan_cost": 25
   },
   {
     "id": 301,
@@ -129,19 +129,31 @@
     "image_link": "main_food_images/macaroni_ham_salad.png",
     "is_active": true,
     "full_pan_cost": 45,
-    "half_pan_cost": 23
+    "half_pan_cost": 25
   },
   {
     "id": 302,
     "name_english": "Spaghetti with Ham",
     "name_spanish": "Spaghetti con Jamón",
-    "description_english": "Pasta cooked al dente and served with a rich, flavorful sauce and ham.",
-    "description_spanish": "Pasta cocida al dente y servida con una salsa rica y llena de sabor y jamón.",
+    "description_english": "Spaghetti cooked al dente and served with a rich, flavorful sauce and ham.",
+    "description_spanish": "Spaghetti cocida al dente y servida con una salsa rica y llena de sabor y jamón.",
     "type_of_food": "pastas_and_salads",
     "image_link": "main_food_images/spaghetti_with_ham.png",
     "is_active": true,
     "full_pan_cost": 45,
-    "half_pan_cost": 23
+    "half_pan_cost": 25
+  },
+  {
+    "id": 303,
+    "name_english": "Russian Beet Potato Salad (half)",
+    "name_spanish": "Ensalada Rusa Con Remolacha (media)",
+    "description_english": "Chopped potatoes, beets, and carrots mixed with eggs and mayonnaise for a smooth, delicious flavor.",
+    "description_spanish": "Papas, remolachas y zanahorias picadas, mezcladas con huevos y mayonesa para un sabor delicioso.",
+    "type_of_food": "pastas_and_salads",
+    "image_link": "main_food_images/russian_potato_salad.png",
+    "is_active": true,
+    "full_pan_cost": 45,
+    "half_pan_cost": 25
   },
   {
     "id": 400,
@@ -153,7 +165,7 @@
     "image_link": "main_food_images/green_salad.png",
     "is_active": true,
     "full_pan_cost": 45,
-    "half_pan_cost": 23
+    "half_pan_cost": 25
   },
   {
     "id": 500,
@@ -202,5 +214,31 @@
     "is_active": true,
     "full_pan_cost": 100,
     "half_pan_cost": 50
+  },
+    {
+    "id": 700,
+    "name_english": "Dominican Pork Tamales",
+    "name_spanish": "Pasteles en Hoja de Cerdo",
+    "description_english": "A classic Dominican plantain tamale filled with tender, seasoned pork, wrapped in a banana leaf. Must be boiled before eating.",
+    "description_spanish": "Un clásico pastel dominicano de plátano relleno de cerdo tierno y sazonado, envuelto en hoja de plátano. Debe hervirse antes de comer.",
+    "type_of_food": "pasteles",
+    "image_link": "main_food_images/pasteles_rf.png",
+    "is_active": true,
+    "size":"d",
+    "full_pan_cost": 25,
+    "half_pan_cost": 13
+  },
+    {
+    "id": 701,
+    "name_english": "Dominican Chicken Tamales",
+    "name_spanish": "Pasteles en Hoja de Pollo",
+    "description_english": "A flavorful Dominican plantain tamale stuffed with juicy, seasoned chicken, wrapped in a banana leaf. Must be boiled before eating.",
+    "description_spanish": "Un delicioso pastel dominicano de plátano relleno de pollo jugoso y sazonado, envuelto en hoja de plátano. Debe hervirse antes de comer.",
+    "type_of_food": "pasteles",
+    "image_link": "main_food_images/pasteles_cf.png",
+    "is_active": true,
+    "size":"d",
+    "full_pan_cost": 25,
+    "half_pan_cost": 13
   }
 ]
