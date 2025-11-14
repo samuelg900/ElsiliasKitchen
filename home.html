@@ -78,75 +78,78 @@
             // NIGHT MODE
             if(night){
 
-                // side menu shadow for night
+                //side menu - night
                 document.getElementById('side_menu').classList.remove('side_menu_div_shadowDay');
                 document.getElementById('side_menu').classList.add('side_menu_div_shadowNight');
 
-                // border for cart number night
+                //cart number - night
                 document.getElementById('cart_num_id').style.border=`1px solid ${backDarkColor}`;
                 
-                //shadow for cir_nav night
-                window.dispatchEvent(new Event('scroll'));
-
-                //shadow for cartContent night
-                document.querySelector(".cartContent").style.boxShadow ='-1px 0px 20px rgba(255, 255, 255, 0.3)';
-
-                //titles for night
+                //titles - night
                 document.querySelectorAll(".text_dn").forEach(title =>{
                     title.style.color=textLightColor;
                 });
-
-                // container_slider
+                                
+                //container_slider
                 document.querySelectorAll(".switch_dn").forEach(container =>{
                     container.style.backgroundColor= switchDarkColor;
                 });
+                
+                
+                //cir_nav night
+                window.dispatchEvent(new Event('scroll'));
 
-                //backgrounds for day
+                //cartContent night
+                document.querySelector(".cartContent").style.boxShadow ='-1px 0px 20px rgba(255, 255, 255, 0.3)';
+          
+                //backgrounds - night
                 document.querySelectorAll(".back_dn").forEach(backgrounds =>{
                     backgrounds.style.backgroundColor=backDarkColor;
                 });
 
+                //cart icon - night
                  document.querySelector(".cart_icon").style.color=textLightColor;
                 
-                
+                //banner - night
                  document.querySelector(".banner").style.opacity="0.7";
                 
             }
             // DAY MODE
             else{
 
-                // side menu shadow for day
+                //side menu - day
                 document.getElementById('side_menu').classList.remove('side_menu_div_shadowNight');
                 document.getElementById('side_menu').classList.add('side_menu_div_shadowDay');
 
-                // border for cart number light
+                //cart number - day
                 document.getElementById('cart_num_id').style.border=`1px solid ${backLightColor}`;
 
-                //titles for day
+                //titles - day
                  document.querySelectorAll(".text_dn").forEach(title =>{
                     title.style.color="black";
                 });
 
-                // container_slider
+                //container_slider - day
                 document.querySelectorAll(".switch_dn").forEach(container =>{
                     container.style.backgroundColor=switchLightColor;
                 });
 
-                  //shadow for cir_nav day
+                  //cir_nav - day
                   window.dispatchEvent(new Event('scroll'));
 
-                   //shadow for cartContent night
+                   //cartContent - day
                 document.querySelector(".cartContent").style.boxShadow ='-1px 0px 20px rgba(0, 0, 0, 0.3)';
 
 
-                 //backgrounds for day
+                 //backgrounds - day
                 document.querySelectorAll(".back_dn").forEach(backgrounds =>{
                     backgrounds.style.backgroundColor=backLightColor;
                 });
 
+                 //cart icon - day
                  document.querySelector(".cart_icon").style.color="black";
 
-                 
+                //banner - day
                  document.querySelector(".banner").style.opacity="1";
                 
             }
