@@ -378,14 +378,13 @@ body {
     background-color: #ffad5067;
     color: orange;
     font-size: 15px;
-    border: none;
+    border: 3px solid transparent;
     border-radius: 80px;
-    /* transition: border 0.5s; */
+    transition: border-color 0.4s ease;
 }
 
 .portionButton.active{
-    border: 3px solid orange;
-    /* transition: border 2s; */
+    border-color: orange;
 }
 
 .cirButton{
