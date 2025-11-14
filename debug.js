@@ -5,7 +5,7 @@ const DEBUG = {
 };
 
 //Change DEBUG here mode when needed
-const DEBUG_MODE = DEBUG.YES;
+const DEBUG_MODE = DEBUG.NO;
 
 function setUpOnlyFor404Debug(){
      if(DEBUG_MODE === DEBUG.NO) {
