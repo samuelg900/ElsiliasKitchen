@@ -123,7 +123,10 @@
 
                 let pane_size = document.createElement('p');
                 pane_size.classList.add('pan_text');
-
+                
+            if(item.id >= 700 && item.id < 800)
+                pane_size.textContent = item.pan_size[0] === 'H' ? "Half Dozen" : "Dozen";
+            else
                 pane_size.textContent = item.pan_size[0] === 'H' ? "Half Pan" : "Full Pan";
 
                 let qtyP = document.createElement('p');
@@ -175,7 +178,7 @@ window.onload = function() {
    if(DEBUG_MODE === DEBUG.NO)
         hash = window.location.hash;
     else{
-        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00302f2/00601f1/@";  
+        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00700f2/10701h1/@";  
         // hash = "#2/00302f2/00601f1/@";  
     }
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
@@ -194,9 +197,11 @@ if (match) {
             if(id > 10000)
                 id -= 10000;
             let pan_size;
-            pan_size = item[5] === 'f' ? "Full Pan" : "Half Pan";
             if(id >= 700 && id < 800)
-                pan_size = item[5] === 'f' ? "Dozen" : "Half Dozen" ;
+                pan_size = item[5] === 'f' ? "Dozen" : "Half Dozen";
+            else
+                pan_size = item[5] === 'f' ? "Full Pan" : "Half Pan";
+            
 
             const quantity = item[6];           // "1"
             summaryHtml += `<li>Item ID: ${id}, Size: ${pan_size}, Qty: ${quantity}</li>`;
