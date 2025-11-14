@@ -193,7 +193,11 @@ if (match) {
             let id = parseInt(item.slice(0,5));    // "00100"
             if(id > 10000)
                 id -= 10000;
-            const pan_size = item[5] === 'f' ? "Full Pan" : "Half Pan";
+            let pan_size;
+            pan_size = item[5] === 'f' ? "Full Pan" : "Half Pan";
+            if(id >= 700 && id < 800)
+                pan_size = item[5] === 'f' ? "Dozen" : "Half Dozen" ;
+
             const quantity = item[6];           // "1"
             summaryHtml += `<li>Item ID: ${id}, Size: ${pan_size}, Qty: ${quantity}</li>`;
         cart.push({id, blank_name, pan_size, quantity, image_url});
