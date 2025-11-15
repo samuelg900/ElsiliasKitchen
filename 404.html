@@ -178,7 +178,7 @@ window.onload = function() {
    if(DEBUG_MODE === DEBUG.NO)
         hash = window.location.hash;
     else{
-        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00700f2/10701h1/@";  
+        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00700f2/10701nh1/@";  
         // hash = "#2/00302f2/00601f1/@";  
     }
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
@@ -229,10 +229,106 @@ if (match) {
         }
     } else {
         // Not a valid QR link --> show default 404
-        document.body.innerHTML = "<h2>Page not found</h2>";
+         document.body.innerHTML = `<style>
+
+    .container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:absolute;
+    top:50%;
+    transform: translate(0%,-50%);
+        text-align: center;
+         background: white;
+         border-radius:16px;
+         width: 300px;
+         height: 420px;
+         box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+
+    h1{
+    margin:10px 0 10px 0;
+        color: #D97706;
+        font-size: 80px;
+    }
+
+    h2{
+        color: black;
+    }
+
+    button{
+    text-decoration: none;
+    color:white;
+        background-color: orange;
+        padding:8px 16px;
+        border-radius: 50px;
+        width: fit-content;
+        height: 40px;
+        border:none;
+        cursor:pointer;
+        margin-block: 10px 30px;
+        text-align:center;
+        transition: transform 0.5s ease;
+        font-size:16px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+
+    button:hover{
+        transform:scale(1.1);
+     }
+
+     p{
+        margin-inline:20px;
+     }
+
+    .food{
+        width:fit-content;
+        font-size:70px;
+        transition: transform 1.5s ease-in-out;
+    }
+
+    .food:hover{
+        transform: rotate(360deg);
+    }
+
+
+</style>
+
+<div class="container">
+
+    <div class="food">🥐</div>
+
+            <h1>
+                404
+            </h1>
+
+            <h2>
+                Order Not Found!
+            </h2>
+
+            <p>Oh no! Oops! OMG! Seems like there's an issue with this order's URL</p>
+
+            <button href="/home.html">
+                Go Back to Homepage
+            </button>
+
+
+</div>`;
+        // document.body.innerHTML = `
+        // <div style="background-color:white; border-radius: 10px; position:absolute; top:50%; transform: translate(0%, -50%); text-algin:center; padding:40px;">
+        // <h2 style="margin:0;color:black;">👌Page not found</h2>
+        // </div>`;
     }
 }
 </script>
+
+<style>
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+</style>
+
 
 </body>
 
