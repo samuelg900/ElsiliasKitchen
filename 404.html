@@ -30,10 +30,8 @@
 
             switch(type){
                 case "v":
-// border: 2px solid blue;
                     document.getElementById("pay_text").innerHTML=`<a style="color: rgb(0, 140, 255);" id="pay_a" href="https://venmo.com/code?user_id=3229643071029248311" target="_blank">VENMO&#8599;</a><br><p id="pay_p">@ElsiliaKitchen</p><br>`;
                     document.getElementById("paymentQr_id").innerHTML='';
-                    // document.getElementById("pay_div_id").style.border=`2px solid blue`;
 
                     new QRCode(document.getElementById("paymentQr_id"), {
                             text: "https://venmo.com/code?user_id=3229643071029248311",
@@ -108,7 +106,7 @@
 
         <div id="pay_div_id">
             <div id="payment_menu_id">
-                <span class="backArrow" onclick='openPayment("x")'>&#10006</span>
+                <span class="closeIcon" onclick='openPayment("x")'>&times;</span>
                 <a id="pay_text"></a>
                 <div id="paymentQr_id"></div>
             </div>
