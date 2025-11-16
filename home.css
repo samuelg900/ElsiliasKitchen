@@ -186,6 +186,7 @@ body {
     border: 1px solid white;
     font-size: 10px;
     pointer-events: none;
+    transition: border 1s ease;
 }
 
 #cart_num_id.active {
@@ -760,16 +761,10 @@ p::after{
     min-width: 388px;
      top: -460px;
     width: 100%;
-    /* min-height: 300px; */
-    /* right: inherit;
-    left: inherit; */
-    /* max-width: 430px; */
     height: 0;
-    /* max-height: 450px; */
-    /* padding-top: 40px; */
-    /* background-color: #b3b3b3; */
-    /* border-radius: 0 0 20px 20px; */
-    background-color: #94cbe3;
+    /* background-color: #94cbe3; */
+    border-radius: 0px 0px 24px 24px  ;
+    background-color: #6d93af;
     z-index: 4;
     transition: height 0.6s ease;
     /* background-color 0s ease-in-out; */

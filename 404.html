@@ -22,11 +22,117 @@
 
 </head>
 
+
 <body>
+
+    <script>
+        function openPayment(type){
+
+            switch(type){
+                case "v":
+// border: 2px solid blue;
+                    document.getElementById("pay_text").innerHTML=`<a style="color: rgb(0, 140, 255);" id="pay_a" href="https://venmo.com/code?user_id=3229643071029248311" target="_blank">VENMO&#8599;</a><br><p id="pay_p">@ElsiliaKitchen</p><br>`;
+                    document.getElementById("paymentQr_id").innerHTML='';
+                    // document.getElementById("pay_div_id").style.border=`2px solid blue`;
+
+                    new QRCode(document.getElementById("paymentQr_id"), {
+                            text: "https://venmo.com/code?user_id=3229643071029248311",
+                            width:220,
+                            height: 220,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                            });
+                            
+                    document.getElementById("pay_div_id").classList.toggle("open");
+                                    
+                    break;
+                case "c":
+
+                    document.getElementById("pay_text").innerHTML=`<br><a style="color: #3fc04a" id="pay_a" href="https://cash.app/$Elsamorel1?qr=1" target="_blank">CASH APP&#8599;</a><br><p id="pay_p">$Elsamorel1</p><br>`;
+                    document.getElementById("paymentQr_id").innerHTML='';
+
+                    new QRCode(document.getElementById("paymentQr_id"), {
+                            text: "https://cash.app/$Elsamorel1?qr=1",
+                            width:220,
+                            height: 220,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                            });
+                            
+                    document.getElementById("pay_div_id").classList.toggle("open");
+
+                    break;
+                case "x":
+                    document.getElementById("pay_div_id").classList.toggle("open");
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    </script>
+
+    <style>
+
+        .payment_div{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            gap:20px;
+            margin-bottom: 10px;
+        }
+
+        .payment_div svg{
+            cursor: pointer;
+            transition: transform 0.6s ease;
+        }
+
+        .payment_div svg:hover{
+            transform: scale(1.1);
+        }
+
+        .svg_v{
+
+            width: 60px;
+        }
+
+        .svg_c{
+            width: 40px;
+        }
+
+      
+    </style>
+
+        <div id="pay_div_id">
+            <div id="payment_menu_id">
+                <span class="backArrow" onclick='openPayment("x")'>&#10006</span>
+                <a id="pay_text"></a>
+                <div id="paymentQr_id"></div>
+            </div>
+        </div>
+
+    </div>
+
 
     <div class="main_container">
         <div id="qrcode-div-id">
             <h2>Elsilia's Kitchen Order</h2>
+            <div class="payment_div">
+
+                <svg onclick='openPayment("v")' xmlns="http://www.w3.org/2000/svg" class="svg_v" viewBox="0 0 512 512">
+                <path d="M381.4 105.3c11 18.1 15.9 36.7 15.9 60.3 0 75.1-64.1 172.7-116.2 241.2H162.3l-47.6-285 104.1-9.9 25.3 202.8c23.5-38.4 52.6-98.7 52.6-139.7 0-22.5-3.9-37.8-9.9-50.4z" fill="#008CFF"></path>
+            </svg>
+
+            <svg onclick='openPayment("c")' xmlns="http://www.w3.org/2000/svg" class="svg_c" viewBox="0 0 210 210" fill="none">
+                <rect width="150" height="150" x="25" y="25" rx="7.81424" fill="#fff"></rect>
+                <path fill="#00E013" d="M206.398,30.286c-4.502-12.394-14.307-22.189-26.713-26.687C168.48,0,158.075,0,136.865,0h-63.63c-21.11,0-31.615,0-42.92,3.498C17.909,7.996,8.104,17.792,3.602,30.186C0,41.58,0,52.075,0,73.165v63.57c0,21.19,0,31.585,3.502,42.98c4.502,12.394,14.307,22.189,26.713,26.687C41.62,210,52.125,210,73.135,210h63.63c21.11,0,31.615,0,42.92-3.598c12.406-4.498,22.211-14.293,26.713-26.687C210,168.32,210,157.825,210,136.735v-63.47C210,52.175,210,41.68,206.398,30.286z M151.472,71.866l-12.106,9.895c-1.101,0.9-2.601,0.7-3.402-0.4c-6.203-7.596-15.807-11.894-26.312-11.894c-11.706,0-19.009,5.098-19.009,12.294c-0.2,6.097,5.503,9.196,23.011,12.994c22.111,4.698,32.215,13.893,32.215,29.386c0,19.391-15.808,33.684-40.519,35.283l-2.401,11.495c-0.2,1.099-1.201,1.899-2.401,1.899H81.539c-1.601,0-2.701-1.499-2.401-2.999l3.001-12.794c-12.206-3.498-22.111-10.295-27.813-18.591c-0.7-1.099-0.5-2.499,0.5-3.298l13.206-10.395c1.101-0.9,2.701-0.6,3.502,0.5c7.003,9.795,17.808,15.593,30.815,15.593c11.706,0,20.51-5.697,20.51-13.893c0-6.297-4.402-9.196-19.309-12.294c-25.412-5.497-35.517-14.793-35.517-30.286c0-17.991,15.107-31.485,37.918-33.284l2.501-11.894c0.2-1.099,1.201-1.899,2.401-1.899h18.709c1.501,0,2.701,1.399,2.401,2.899l-2.901,13.294c9.805,2.999,17.808,8.396,22.811,15.093C152.673,69.567,152.473,71.066,151.472,71.866z"></path>
+            </svg>
+                
+                <p id="total_id"></p>
+            </div>
             <div id="qrcode"></div>
         </div>
 
@@ -52,6 +158,7 @@
             // allItems = data;
 
             data.forEach(i =>{allItems.push(i);})
+            // console.log(allItems);
              getItemsNames();
              renderCart();
              getQRCode();
@@ -71,8 +178,8 @@
 
             let qrcode = new QRCode(document.getElementById("qrcode"), {
                 text: window.location.href,
-                width: 256,
-                height: 256,
+                width: 226,
+                height: 226,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
@@ -89,6 +196,7 @@
             const cartDiv = document.getElementById('cartItemsId');
             cartDiv.innerHTML = ''; // clear old items
 
+            // let total=0;
             cart.forEach(item => {
 
                 // Create the outer container
@@ -130,8 +238,8 @@
                 pane_size.textContent = item.pan_size[0] === 'H' ? "Half Pan" : "Full Pan";
 
                 let qtyP = document.createElement('p');
-                qtyP.textContent = `Qty: ${item.quantity}`;
-                qtyP.style.fontSize = "14px";
+                qtyP.textContent = `Quantity: ${item.quantity}`;
+                qtyP.style.fontSize = "13px";
                 qtyP.style.position = "absolute";
                 qtyP.style.bottom = "0";
 
@@ -145,14 +253,34 @@
 
                 // Add to cart div
                 cartDiv.appendChild(container);
+
+                // console.log(item);
+                // console.log(item.full_pan_cost);
+
+                // console.log(item.pan_size[0]);
+
+                if((item.pan_size=="Full Pan") || (item.pan_size=="Dozen")){
+                    total += item.quantity * item.full_cost;
+                }
+                else if((item.pan_size=="Half Pan") || (item.pan_size=="Half Dozen")){
+                    total += item.quantity * item.half_cost;
+                }
+                else{
+                    total="N/A";
+                    return;
+                }
+
+                // total += item.quantity * item.price;
             });
+
+            document.getElementById('total_id').innerHTML = `Total: $${total}`;
 
         }
 
     </script>
 
     <script>
-
+let total=0;
 function getItemsNames(){
     cart.forEach(item =>{
 
@@ -161,12 +289,20 @@ function getItemsNames(){
         if(it){
                 item.name = it.name_english;
                 item.image_url = "https://samuelg900.github.io/ElsiliasKitchen/" + it.image_link;
+                item.full_cost = it.full_pan_cost;
+                item.half_cost = it.half_pan_cost;
+
+                // console.log(item);
+                // total += i.quantity * item.price;
+            
+
         }else{//not found
                 return false;
         }
 
     });
 
+            // document.getElementById('total_id').innerHTML = `Total: $${total}`;
     return true;
 }
 
@@ -182,7 +318,7 @@ window.onload = function() {
    if(DEBUG_MODE === DEBUG.NO)
         hash = window.location.hash;
     else{
-        hash = "#9/00100f1/10101h1/00200f1/10202h3/00204f1/10300h1/10301h1/00700f2/10701nh1/@";  
+        hash = "#4/00102f1/10102h1/00700f1/10700h1/@";  
         // hash = "#2/00302f2/00601f1/@";  
     }
     const regex = /^#(\d+)\/((?:\d{5}[fh]\d\/)+)@$/;
@@ -194,6 +330,8 @@ if (match) {
         const items = itemsStr.split('/').filter(Boolean); // ["00100f1", "00101f1", "10101h1"]
     const blank_name = "";
     const image_url = "";
+    const full_cost ="";
+    const half_cost="";
         // ✅ Build summary
         let summaryHtml = `<h2>Order Summary</h2><ul>`;
         items.forEach(item => {
@@ -209,7 +347,7 @@ if (match) {
 
             const quantity = item[6];           // "1"
             summaryHtml += `<li>Item ID: ${id}, Size: ${pan_size}, Qty: ${quantity}</li>`;
-        cart.push({id, blank_name, pan_size, quantity, image_url});
+        cart.push({id, blank_name, pan_size, quantity, image_url, full_cost, half_cost});
         
         });
         summaryHtml += `</ul>`;
@@ -231,7 +369,7 @@ if (match) {
         if (items.length !== count) {
             document.body.innerHTML = "<h2>Invalid order link.</h2>";
         }
-    } else {
+    } else { 
         // Not a valid QR link --> show default 404
          document.body.innerHTML = `<style>
 

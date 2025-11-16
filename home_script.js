@@ -81,7 +81,7 @@ function updateLayout() {
   const menu_item = document.getElementsByClassName('menu-item');
 
   let index = 0;
-  // if (document.getElementById('ball_id').classList.contains('changeToSpanish') || document.getElementById("usa_dr_ball").classList.contains("changeLang")) {
+  
   if (isSpanish) {
     document.getElementsByClassName('caveat')[0].innerHTML = `Comida deliciosa y Dominicana,<br> de mi casa a la suya`;
     document.getElementById('nothing_in_cart').textContent = 'El carrito está vacío';
