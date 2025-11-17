@@ -391,7 +391,7 @@ function getJsonData() {
                 doc.setFont("times", "bold");
                 doc.setFontSize(36);
 
-                if (document.getElementById('ball_id').classList.contains('changeToSpanish')) {
+                if (isSpanish) {
                     //SPANISH              
                     doc.text("Orden de Elsilia's Kitchen", pageWidth / 2, y - 40, { align: "center" });
 

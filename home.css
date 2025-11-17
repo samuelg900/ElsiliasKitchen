@@ -572,7 +572,7 @@ transform: translateX(100%);
     bottom: 0;
     width: 90%;
     height: 90%;
-    min-height: 630px;
+    min-height: 700px;
     max-height: 680px;
     max-width: 400px;
     margin: 10px auto;
@@ -584,6 +584,8 @@ transform: translateX(100%);
     justify-content: center;    /* center horizontally */
     align-items: center;  
     align-content: center;
+
+    /* transition: background-color 1s ease; */
     
     /* justify-self: center; */
 } 
@@ -646,7 +648,7 @@ p::after{
     position: absolute;
     top: 20px;
     left: 20px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #save-qr-button{
