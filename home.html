@@ -166,16 +166,21 @@
 
 
     window.addEventListener('resize', function (e) {
-        if(document.getElementById('side_menu').classList.contains('showMenu'))
+        // try{
+        if(document.getElementById('side_menu') && document.getElementById('side_menu').classList.contains('showMenu'))
             document.getElementById('side_menu').classList.remove('showMenu');
 
-        if(document.getElementById('payment_menu_id').classList.contains('showMenu'))
+        if(document.getElementById('payment_menu_id') && document.getElementById('payment_menu_id').classList.contains('showMenu'))
             document.getElementById('payment_menu_id').classList.remove('showMenu');
 
-        if(document.getElementById('payment_id').classList.contains('showPayment'))
+        if(document.getElementById('payment_id') && document.getElementById('payment_id').classList.contains('showPayment'))
             document.getElementById('payment_id').classList.remove('showPayment');
         
             document.body.style.overflow = "";
+        // }
+        // catch(e){
+        //     console.log(e);
+        // }
     });
 
 
@@ -511,8 +516,8 @@
 
             new QRCode(document.getElementById("qrcode"), {
                 text: createQRLink(),
-                width: 256,
-                height: 256,
+                width: 216,
+                height: 216,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
@@ -777,7 +782,7 @@
             z-index: 10;
             background-color: white;
             overflow: hidden;
-            transition: height 0.6s ease, padding-top 0.6s ease;
+            transition: height 0.6s ease, padding-top 0.6s ease, background-color 1s ease;
             /* border-left: 1px solid grey;
             border-bottom: 1px solid grey; */
     border-radius: 0px 0px 16px 16px;

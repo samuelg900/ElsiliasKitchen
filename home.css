@@ -41,14 +41,14 @@ html { scroll-behavior: smooth; }
 
 #loading_E_id {
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   animation: bezier_curve_move 2s ease-out forwards, rot_e 1.5s ease-out forwards;
   animation-delay: 0s, 2.1s;
 }
 
 #loading_K_id {
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   animation: bezier_curve_move 2s ease-out forwards, rot_k 1.5s ease-out forwards;
   animation-delay: 0s, 2.1s;
 }
@@ -566,13 +566,16 @@ transform: translateX(100%);
     /* align-content: center; */
     flex-direction: column;
     position: fixed;
+    /* top:50%;
+    left:50%;
+    transform: translate(-50%,-50%); */
     top: 54px;
     left: 0;
     right:0;
     bottom: 0;
     width: 90%;
     height: 90%;
-    min-height: 700px;
+    min-height: 620px;
     max-height: 680px;
     max-width: 400px;
     margin: 10px auto;
@@ -580,14 +583,13 @@ transform: translateX(100%);
     border-radius: 20px;
     /* box-shadow: 0 14px 16px -4px rgba(0, 0, 0, 0.3); */
 
-    /* display: flex;           */
     justify-content: center;    /* center horizontally */
     align-items: center;  
     align-content: center;
+    /* overflow: scroll; */
 
-    /* transition: background-color 1s ease; */
+    /* transition: background-color 10s ease; */
     
-    /* justify-self: center; */
 } 
 
 p{
@@ -614,13 +616,13 @@ p::after{
 #qrTitleId{
     text-align: center;
     margin-top: 0;
-    margin-bottom:40px;
+    margin-bottom:20px;
     margin-inline: 10px;
 }
 
 #qrTextId{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 0px;
     margin-inline: 10px;
 }
