@@ -546,7 +546,7 @@
                         document.getElementById('p_for_saved_message').innerHTML = `Note:<br>${savedMessage}`;
                 }
 
-                document.getElementById('p_for_saved_message').style="display:block; font-size:12px; font-style: italic; text-align: center; margin: 20px; overflow-wrap: break-word; word-break: break-all";
+                document.getElementById('p_for_saved_message').style="display:block; font-size:12px; font-style: italic; text-align: center; margin: 10px 20px; overflow-wrap: break-word; word-break: break-all";
             }
             else
                 document.getElementById('p_for_saved_message').style.display='none';
@@ -1927,8 +1927,9 @@ document.getElementById("pie_container").appendChild(pie);
                 <span class="text_dn close_qrcode_window" onclick="closeQRWindow()">&times;</span>
                 <h1 id="qrTitleId">Elsilia's Kitchen Order</h1>
                 <div style="border: 4px solid white;" id="qrcode"></div>
-                <p id="qrTextId">Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order
-                    date</p>
+                <p id="qrTextId">Por favor copia el enlace del pedido abajo o guarda este código QR y envíaselo a Elsa para recibir la confirmación del pedido y programar una fecha</p>
+                    <!-- Copy link below or save QR code and send to <strong>Elsa</strong> for confirm your order and set up order
+                    date -->
                 <p id="p_for_saved_message" style="display:none"></p>
                 <button id="save-qr-button" onclick="generatePdf()">Save QR Code</button>
                 <button id="save-order-link-button" onclick="copyToClipboard()">Copy Order Link</button>
