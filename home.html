@@ -491,7 +491,7 @@
                 qr_str += String(item.id).padStart(5,'0') + pansize + item.quantity + '/';
 
             });
-        console.log(qr_str + '@');
+        // console.log(qr_str + '@');
             return qr_str += '@';
 
         }
@@ -516,8 +516,8 @@
 
             new QRCode(document.getElementById("qrcode"), {
                 text: createQRLink(),
-                width: 216,
-                height: 216,
+                width: 200,
+                height: 200,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
@@ -528,10 +528,24 @@
             getQRDateTime();
 
             if(savedMessage != undefined){
-                if (isSpanish)
-                    document.getElementById('p_for_saved_message').innerHTML = `Notas:<br>${savedMessage}`;
-                else
-                    document.getElementById('p_for_saved_message').innerHTML = `Notes:<br>${savedMessage}`;
+
+                // const noteString = document.getElementById('p_for_saved_message').value;
+
+                if (isSpanish){
+                    if(savedMessage.length > 20){
+                        document.getElementById('p_for_saved_message').innerHTML = `Nota:<br>${savedMessage.slice(0, 20)}...`;
+                    }
+                    else
+                        document.getElementById('p_for_saved_message').innerHTML = `Nota:<br>${savedMessage}`;
+                }
+                else{
+                    if(savedMessage.length > 20){
+                        document.getElementById('p_for_saved_message').innerHTML = `Note:<br>${savedMessage.slice(0, 20)}...`;
+                    }
+                    else
+                        document.getElementById('p_for_saved_message').innerHTML = `Note:<br>${savedMessage}`;
+                }
+
                 document.getElementById('p_for_saved_message').style="display:block; font-size:12px; font-style: italic; text-align: center; margin: 20px; overflow-wrap: break-word; word-break: break-all";
             }
             else
@@ -1359,7 +1373,9 @@
             flex-direction: row;
             align-items: center;
             position: absolute;
-            font-size: 8px;
+            padding-inline: 2px;
+            padding-block: 2px;
+            /* font-size: 8px; */
             right:5px;
             bottom: 6px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -1369,8 +1385,8 @@
 
         .location p{
             margin: 1px 2px;
-            color: black;
-            font-size: 0.7rem;
+            /* color: black; */
+            font-size: 0.9rem;
         }   
 
         .location span{
@@ -1853,6 +1869,52 @@ document.getElementById("pie_container").appendChild(pie);
 
         <script>
             getJsonData();
+
+
+
+            let copyTimeout;
+
+            function copyToClipboard(){
+                
+                let linkText="";
+                let str = ""; 
+                if (isSpanish){
+                    if(savedMessage != undefined)
+                        linkText = savedMessage.length > 0 ? "\nNota: " + savedMessage : "";
+
+                    str ="Enlace de pedido: " + createQRLink() + linkText;
+                }
+                else{
+                    
+                    if(savedMessage != undefined)
+                        linkText = savedMessage.length > 0 ? "\nNote: " + savedMessage : "";
+                    
+                        str ="Order link: " + createQRLink() + linkText;
+                }
+                // createQRLink() + linkText;
+                
+                console.log(str);
+                
+                // item.pan_size == 2 ? "Half Dozen" : "Dozen";
+                navigator.clipboard.writeText(str)
+                .then(() => {
+                // alert("Copied the text: " + str);
+                document.getElementById("copyNotificationId").classList.add('opac');
+
+                clearTimeout(copyTimeout);
+                // TODO: set timer to some variable and check if copy button is clicked again
+                  // Hide the notification after 2 seconds
+                copyTimeout = setTimeout(() => {
+                    document.getElementById("copyNotificationId").classList.remove('opac');
+
+                }, 2000);
+                
+            })
+                .catch(err => {
+                console.error('Failed to copy text: ', err);
+                });
+
+            }
         </script>
 
         <p  class="text_dn disclaimerText" id="size_disclaimerTextId">Each whole pan is enough for approximately 35-38 people</p>
@@ -1869,6 +1931,8 @@ document.getElementById("pie_container").appendChild(pie);
                     date</p>
                 <p id="p_for_saved_message" style="display:none"></p>
                 <button id="save-qr-button" onclick="generatePdf()">Save QR Code</button>
+                <button id="save-order-link-button" onclick="copyToClipboard()">Copy Order Link</button>
+                <div id="copyNotificationId">Link copied successfully!</div>
             </div>
         </div>
     </div>

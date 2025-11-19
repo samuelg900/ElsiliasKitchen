@@ -95,7 +95,17 @@ function updateLayout() {
     document.getElementById('save-qr-button').textContent = 'Guardar código QR';
     document.getElementById('qrTitleId').textContent = "Orden de Elsilia's Kitchen";
     document.getElementById('qrTextId').innerHTML= `Por favor guarde y envíe este código QR a <strong>Elsa</strong> para confirmar su pedido y establecer una fecha de orden`;
-    document.getElementById('p_for_saved_message').innerHTML= `Notas:<br>${savedMessage}`;
+    document.getElementById('save-order-link-button').textContent = "Copiar Enlace de Pedido";
+    document.getElementById('copyNotificationId').textContent = "Enlace copiado!";
+    
+
+    if(savedMessage!= undefined)
+      if(savedMessage.length > 20)
+          document.getElementById('p_for_saved_message').innerHTML = `Nota:<br>${savedMessage.slice(0, 20)}...`;
+      else
+          document.getElementById('p_for_saved_message').innerHTML = `Nota:<br>${savedMessage}`;
+              
+    // document.getElementById('p_for_saved_message').innerHTML= `Nota:<br>${savedMessage}`;
     
     titlesFunc(document.querySelectorAll('h1'));
     titlesFunc(document.getElementById('pie_container').querySelectorAll('.pie_group'));  
@@ -129,7 +139,16 @@ function updateLayout() {
     document.getElementById('save-qr-button').textContent = 'Save QR Code';
     document.getElementById('qrTitleId').textContent = "Elsilia's Kitchen Order";
     document.getElementById('qrTextId').innerHTML = `Please Save and Send this QR Code to <strong>Elsa</strong> to confirm your order and set up an order`;
-    document.getElementById('p_for_saved_message').innerHTML= `Notes:<br>${savedMessage}`;
+    document.getElementById('save-order-link-button').textContent = "Copy Order Link";
+    document.getElementById('copyNotificationId').textContent = "Link copied successfully!";
+
+    if(savedMessage!= undefined)
+      if(savedMessage.length > 20)
+          document.getElementById('p_for_saved_message').innerHTML = `Note:<br>${savedMessage.slice(0, 20)}...`;
+      else
+          document.getElementById('p_for_saved_message').innerHTML = `Note:<br>${savedMessage}`;
+      
+    // document.getElementById('p_for_saved_message').innerHTML= `Note:<br>${savedMessage}`;
     
     titlesFunc(document.querySelectorAll('h1'));
     titlesFunc(document.getElementById('pie_container').querySelectorAll('.pie_group'));  
@@ -403,7 +422,7 @@ function getJsonData() {
                         doc.setFontSize(12);
                         doc.setFont("times", "italic");
                         const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
-                        doc.text("Notas:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
+                        doc.text("Nota:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
                         doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
                     }
 
@@ -433,7 +452,7 @@ function getJsonData() {
                         doc.setFontSize(12);
                         doc.setFont("times", "italic");
                         const wrappedText = doc.splitTextToSize(savedMessage, pageWidth - 100);
-                        doc.text("Notes:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
+                        doc.text("Note:", pageWidth / 2, y + imgHeight - 4, { align: "center" });
                         doc.text(wrappedText, pageWidth / 2, y + imgHeight + 4, { align: "center" });
                     }
 
