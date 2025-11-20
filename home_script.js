@@ -95,7 +95,7 @@ function updateLayout() {
     document.getElementById('save-qr-button').textContent = 'Guardar código QR';
     document.getElementById('qrTitleId').textContent = "Orden de Elsilia's Kitchen";
     document.getElementById('qrTextId').innerHTML= `Por favor copia el enlace del pedido abajo o guarda este código QR y envíaselo a <strong>Elsa</strong> para recibir la confirmación del pedido y programar una fecha`;
-    document.getElementById('save-order-link-button').textContent = "Copiar Enlace de Pedido";
+    document.getElementById('save-order-link-button').textContent = "Copiar Enlace";
     document.getElementById('copyNotificationId').textContent = "Enlace copiado!";
     
 
@@ -139,7 +139,7 @@ function updateLayout() {
     document.getElementById('save-qr-button').textContent = 'Save QR Code';
     document.getElementById('qrTitleId').textContent = "Elsilia's Kitchen Order";
     document.getElementById('qrTextId').innerHTML = `Please copy order link below or save this QR code and send it to <strong>Elsa</strong> to get order confirmation and set up an order date`;
-    document.getElementById('save-order-link-button').textContent = "Copy Order Link";
+    document.getElementById('save-order-link-button').textContent = "Copy Link";
     document.getElementById('copyNotificationId').textContent = "Link copied successfully!";
 
     if(savedMessage!= undefined)

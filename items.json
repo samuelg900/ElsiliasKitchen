@@ -8,8 +8,8 @@
     "type_of_food": "rice",
     "image_link": "main_food_images/white_rice.png",
     "is_active": true,
-    "full_pan_cost": 50,
-    "half_pan_cost": 25
+    "full_pan_cost": 48,
+    "half_pan_cost": 24
   },
   {
     "id": 101,
@@ -20,8 +20,8 @@
     "type_of_food": "rice",
     "image_link": "main_food_images/rice_and_peas.png",
     "is_active": true,
-    "full_pan_cost": 50,
-    "half_pan_cost": 25
+    "full_pan_cost": 55,
+    "half_pan_cost": 28
   },
   {
     "id": 102,
