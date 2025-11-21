@@ -1981,7 +1981,10 @@ document.getElementById("pie_container").appendChild(pie);
             }
             else{
                 savedMessage = undefined;
-                document.getElementById("add_message").style.color="black";
+                if(night)
+                    document.getElementById("add_message").style.color="rgba( 255, 255, 255,0.8)";
+                else
+                    document.getElementById("add_message").style.color="black";
             }
             openAddMessage(1);
         }
