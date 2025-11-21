@@ -156,7 +156,10 @@
                  document.querySelector(".banner").style.opacity="1";
                 
             }
-
+            
+            if(savedMessage != undefined){
+                document.getElementById("add_message").style.color="#4091ee";
+            }
 
         }
     </script>
@@ -1447,9 +1450,7 @@
         const header = document.getElementById('cir_nav');
         const headerTop = header.offsetTop; // original top position
         window.addEventListener('scroll', () => {
-            // console.log(window.scrollY);
-            // console.log(headerTop);
-
+            
         if (window.scrollY > headerTop) {
             if(night){
                 header.classList.remove('cir_nav_shadowDay');

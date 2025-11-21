@@ -127,6 +127,7 @@ function updateLayout() {
     }
   }
   else { //english
+    //TODO: I think the spanish portion could be replaced with some ::after property in the future...research later
     document.getElementsByClassName('caveat')[0].innerHTML = `Delicious Dominican food,<br> from our home to yours`;
     document.getElementById('nothing_in_cart').innerHTML = 'Cart is empty';
     document.getElementById('size_disclaimerTextId').innerHTML = 'Each whole pan is enough for approximately 35-38 people';
