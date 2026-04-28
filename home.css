@@ -430,7 +430,7 @@ body {
     display: grid;
 
     /* grid-template-columns: auto auto auto; */
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(323px, 1fr));
     gap: 30px;
 }
 
@@ -890,6 +890,20 @@ p::after{
     position: relative;
 }
 
+.copyright {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    font-size: 16px;
+    transform: translateX(-50%);
+    color: white;
+    opacity: 0.6;
+    text-decoration: none;
+    cursor: pointer;}
+
+.copyright:hover{
+    opacity: 1;
+}
 
 .footer {
     height: 200px;
@@ -899,6 +913,7 @@ p::after{
     padding: 20px 0px;
     position: relative;
     background-color: #000000eb;
+    overflow: hidden;
     /* background-image: linear-gradient(rgb(42, 42, 42), rgba(62, 37, 16, 0.925)); */
 }
 

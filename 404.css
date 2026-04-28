@@ -10,7 +10,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-width: 400px;
-    justify-items: center;
 }
 
 #qrcode {
