@@ -364,15 +364,17 @@
                         pane_size.textContent = item.pan_size == 2 ? "Media Dozena" : "Dozena";
                     else
                         pane_size.textContent = item.pan_size == 2 ? "Media Bandeja" : "Bandeja Entera";
+                    
+                    nameP.textContent = item.sp_name;
                 }
                 else{//ENGLISH
                     if((item.id >= 700 && item.id < 800) || (item.id >= 10700 && item.id < 10800 ))
                         pane_size.textContent = item.pan_size == 2 ? "Half Dozen" : "Dozen";
                     else
                         pane_size.textContent = item.pan_size == 2 ? "Half Pan" : "Full Pan";
+                    
+                    nameP.textContent = item.name;
                 }
-                nameP.textContent = item.sp_name;
-
 
                 let qtyP = document.createElement('p');
                 qtyP.style.fontSize = "14px";
@@ -382,6 +384,8 @@
                     qtyP.textContent = `Cantidad: ${item.quantity}`;
                 else
                     qtyP.textContent = `Quantity: ${item.quantity}`;
+
+                    console.log(item);
 
                 const cartMinusSign = document.createElement('span');
                 cartMinusSign.className = 'cartMinusSign text_dn';
